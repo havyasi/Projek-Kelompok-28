@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+// import java.util.ArrayList;
 
 public class App extends Application {
     private static String jadwal;
@@ -45,24 +46,24 @@ public class App extends Application {
             "-fx-font-weight: bold;" +
             "-fx-font-size: 10px;" +
             "-fx-background-color: rgba(255, 255, 255, 255);");
-            searchbar.setMaxWidth(470);
-            searchbar.setMinHeight(30);
+        searchbar.setMaxWidth(470);
+        searchbar.setMinHeight(30);
             
-            StackPane stackPane1 = new StackPane(searchbar);
-            stackPane1.setAlignment(Pos.TOP_CENTER);
-            stackPane1.setPadding(new javafx.geometry.Insets(20));
+        StackPane stackPane1 = new StackPane(searchbar);
+        stackPane1.setAlignment(Pos.TOP_CENTER);
+        stackPane1.setPadding(new javafx.geometry.Insets(20));
             
-            try {
-                FileInputStream iconStream = new FileInputStream("src/main/resources/image/search.png");
-                Image icon = new Image(iconStream);
+        try {
+            FileInputStream iconStream = new FileInputStream("src/main/resources/image/search.png");
+            Image icon = new Image(iconStream);
         
-                ImageView imageView = new ImageView(icon);
-                imageView.setFitHeight(10);
-                imageView.setFitWidth(10);
-                searchbar.setGraphic(imageView);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+            ImageView imageView = new ImageView(icon);
+            imageView.setFitHeight(10);
+            imageView.setFitWidth(10);
+            searchbar.setGraphic(imageView);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         Button button2 = new Button("");
         button2.setMaxWidth(130);
@@ -98,25 +99,7 @@ public class App extends Application {
             "-fx-background-color: rgba(128, 128, 128, 255);" + 
             "-fx-text-fill: black;" + 
             "-fx-font-family: 'Arial';");
-
-            StackPane stackPane3 = new StackPane(jadwalButton);
-            stackPane3.setAlignment(Pos.BOTTOM_LEFT);
-            stackPane3.setPadding(new javafx.geometry.Insets(350, 0, 0, 360));
-
-            try {
-                FileInputStream iconStream = new FileInputStream("src/main/resources/image/plus.png");
-                Image icon = new Image(iconStream);
-    
-                ImageView imageView = new ImageView(icon);
-                imageView.setFitHeight(10);
-                imageView.setFitWidth(10);
-                jadwalButton.setGraphic(imageView);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-       
-
-       
+            
         jadwalButton.setOnAction(e -> {
             try {
                 primaryStage.setScene(InputJadwal.createScene(primaryStage, appInstance));
@@ -124,6 +107,22 @@ public class App extends Application {
                 ex.printStackTrace();
             }
         });
+        
+        StackPane stackPane3 = new StackPane(jadwalButton);
+        stackPane3.setAlignment(Pos.BOTTOM_LEFT);
+        stackPane3.setPadding(new javafx.geometry.Insets(350, 0, 0, 360));
+        
+        try {
+            FileInputStream iconStream = new FileInputStream("src/main/resources/image/plus.png");
+            Image icon = new Image(iconStream);
+            ImageView imageView = new ImageView(icon);
+            imageView.setFitHeight(10);
+            imageView.setFitWidth(10);
+            jadwalButton.setGraphic(imageView);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        
 
 
         VBox root = new VBox();
