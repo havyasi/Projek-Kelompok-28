@@ -49,9 +49,21 @@ public class App extends Application {
         searchbar.setMaxWidth(470);
         searchbar.setMinHeight(30);
 
+
+        //Action untuk Search
+        searchbar.setOnAction(e -> {
+            try {
+                primaryStage.setScene(SearchScene.createScene(primaryStage, appInstance));
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+
         StackPane stackPane1 = new StackPane(searchbar);
         stackPane1.setAlignment(Pos.TOP_CENTER);
         stackPane1.setPadding(new javafx.geometry.Insets(20));
+
+
 
         try {
             FileInputStream iconStream = new FileInputStream("src/main/resources/image/search.png");
@@ -73,6 +85,15 @@ public class App extends Application {
                 "-fx-font-weight: bold;" +
                 "-fx-background-color: rgba(128, 128, 128, 255);" +
                 "-fx-background-radius: 20");
+
+        // Action untuk Calendar Button
+        calendarButton.setOnAction(e -> {
+            try {
+                primaryStage.setScene(CalendarScene.createScene(primaryStage, appInstance));
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
 
         try {
             FileInputStream iconStream = new FileInputStream("src/main/resources/image/calendar.png");
@@ -126,6 +147,8 @@ public class App extends Application {
                         "-fx-text-fill: black;" +
                         "-fx-font-family: 'Arial';");
 
+
+        //Action untuk jadwal
         jadwalButton.setOnAction(e -> {
             try {
                 primaryStage.setScene(InputJadwal.createScene(primaryStage, appInstance));
