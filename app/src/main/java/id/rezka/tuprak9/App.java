@@ -151,7 +151,7 @@ public class App extends Application {
         //Action untuk jadwal
         jadwalButton.setOnAction(e -> {
             try {
-                primaryStage.setScene(InputJadwal.createScene(primaryStage, appInstance));
+                primaryStage.setScene(InputJadwal.createScene(primaryStage, appInstance, createMainScene(primaryStage)));
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
