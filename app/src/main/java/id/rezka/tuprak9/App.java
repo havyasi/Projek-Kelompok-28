@@ -156,7 +156,7 @@ public class App extends Application {
         Scene scene = new Scene(root, 500, 600);
 
         try {
-            FileInputStream iconStream = new FileInputStream("src/main/resources/image/iconApp.png");
+            FileInputStream iconStream = new FileInputStream("src/main/resources/image/IMG_1146.JPG");
             Image icon = new Image(iconStream);
             primaryStage.getIcons().add(icon);
         } catch (FileNotFoundException e) {
