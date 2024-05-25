@@ -86,10 +86,10 @@ public class App extends Application {
                 "-fx-background-color: rgba(128, 128, 128, 255);" +
                 "-fx-background-radius: 20");
 
-        // Action untuk Calendar Button
+        // Action untuk gambar Calendar(Daftar List) Button
         calendarButton.setOnAction(e -> {
             try {
-                primaryStage.setScene(CalendarScene.createScene(primaryStage, appInstance));
+                primaryStage.setScene(MyList.createScene(primaryStage, appInstance));
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -182,7 +182,7 @@ public class App extends Application {
         }
 
         VBox root = new VBox();
-        root.setStyle("-fx-background-color: #0C0C0C;");
+        root.setStyle("-fx-background-color: #7296a4;");
         root.getChildren().addAll(stackPane1, buttonPane, jadwalPane);
 
         Scene scene = new Scene(root, 500, 600);

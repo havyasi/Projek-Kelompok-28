@@ -19,10 +19,10 @@ public class InputJadwal {
     public static Scene createScene(Stage primaryStage, App app, Scene sceneSebelumnya) {
         
         Label catatanLabel = new Label("Tambahkan Jadwal Baru");
-        catatanLabel.setStyle("-fx-text-fill: white; -fx-font-size: 20px;");
+        catatanLabel.setStyle("-fx-text-fill: black; -fx-font-size: 20px;");
         
         Label judulLabel = new Label("Judul");
-        judulLabel.setStyle("-fx-text-fill: white; -fx-font-size: 17;");
+        judulLabel.setStyle("-fx-text-fill: black; -fx-font-size: 17;");
         
         TextField jadwalField = new TextField();
         jadwalField.setPromptText("Masukkan judul");
@@ -31,7 +31,7 @@ public class InputJadwal {
         jadwalField.setPrefHeight(10);
 
         Label jPLabel = new Label("Jenis Prioritas");
-        jPLabel.setStyle("-fx-text-fill: white; -fx-font-size: 17;");
+        jPLabel.setStyle("-fx-text-fill: black; -fx-font-size: 17;");
 
         VBox labelBox = new VBox(5, catatanLabel, judulLabel, jadwalField, jPLabel);
         labelBox.setAlignment(Pos.CENTER_LEFT);
@@ -53,19 +53,21 @@ public class InputJadwal {
         jPbutton.setSpacing(10);
 
         Label detailLabel = new Label("Detail");
-        detailLabel.setStyle("-fx-text-fill: white; -fx-font-size: 17;");
+        detailLabel.setStyle("-fx-text-fill: black; -fx-font-size: 17;");
 
         Button tambahWaktu = new Button("Tambahkan waktu");
-        tambahWaktu.setPrefWidth(200);
+        tambahWaktu.setPrefWidth(500);
         tambahWaktu.setStyle("-fx-font-size: 12px;");
-        tambahWaktu.setOnAction(e ->{
 
+        tambahWaktu.setOnAction(e -> {
+            TambahWaktu.tambahWaktuTanggal(primaryStage).showAndWait();
         });
+
         Button tambahDeskrip = new Button("Tambahkan Deskripsi");
-        tambahDeskrip.setPrefWidth(200);
+        tambahDeskrip.setPrefWidth(500);
         tambahDeskrip.setStyle("-fx-font-size: 12px;");
         tambahDeskrip.setOnAction(e ->{
-            // dlm proses
+            TambahDeskripsi.tambahDeskrip(primaryStage).showAndWait();
         });        
 
         VBox detailVBox = new VBox(10, detailLabel,tambahWaktu ,tambahDeskrip);
@@ -84,7 +86,7 @@ public class InputJadwal {
         VBox layout = new VBox(10, labelBox, jPbutton, detailVBox, tombol);
         layout.setPadding(new Insets(20));
         layout.setAlignment(Pos.TOP_LEFT);
-        layout.setStyle("-fx-background-color: #888a8e ; -fx-font-weight: bold; -fx-font-size: 25px");
+        layout.setStyle("-fx-background-color: #9ebecb ; -fx-font-weight: bold; -fx-font-size: 25px");
         layout.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
         
         VBox notifBox = new VBox( layout);
