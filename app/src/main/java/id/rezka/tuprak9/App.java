@@ -116,6 +116,15 @@ public class App extends Application {
                 "-fx-background-color: rgba(128, 128, 128, 255);" +
                 "-fx-background-radius: 20");
 
+        // Action Untuk Completed Button
+        completedButton.setOnAction(e -> {
+            try {
+                primaryStage.setScene(CompletedScene.createScene(primaryStage, appInstance));
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+
         try {
             FileInputStream iconStream = new FileInputStream("src/main/resources/image/completed.png");
             Image icon = new Image(iconStream);
