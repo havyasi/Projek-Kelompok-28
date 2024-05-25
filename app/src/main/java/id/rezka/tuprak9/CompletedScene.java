@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -18,14 +19,22 @@ public class CompletedScene {
         backButton.setStyle("-fx-font-size: 15px; -fx-font-weight: bold;");
         backButton.setOnAction(e -> primaryStage.setScene(app.createMainScene(primaryStage)));
 
-        VBox centerLayout = new VBox(30, completedLabel);
-        centerLayout.setAlignment(Pos.TOP_CENTER);
+        Button saveButton = new Button("Save");
+        saveButton.setStyle("-fx-font-size: 15px; -fx-font-weight: bold;");
+        // Tambahkan action untuk saveButton disini, e.g. saveButton.setOnAction(e -> saveAction());
+
+        // Layout untuk tombol dibawah
+        HBox bottomLayout = new HBox(10);
+        bottomLayout.setPadding(new Insets(20));
+        bottomLayout.setAlignment(Pos.BOTTOM_LEFT);
+        bottomLayout.getChildren().addAll(backButton, saveButton);
 
         BorderPane layout = new BorderPane();
-        layout.setCenter(centerLayout);
-        layout.setBottom(backButton);
-        BorderPane.setAlignment(backButton, Pos.BOTTOM_LEFT);
-        BorderPane.setMargin(backButton, new Insets(0, 0, 20, 20));
+        layout.setTop(completedLabel);
+        layout.setBottom(bottomLayout);
+        BorderPane.setAlignment(completedLabel, Pos.TOP_CENTER);
+        BorderPane.setMargin(completedLabel, new Insets(20, 0, 20, 0));
+        BorderPane.setMargin(bottomLayout, new Insets(0, 20, 20, 20));
         layout.setStyle("-fx-background-color: black;");
 
         return new Scene(layout, 500, 600);
