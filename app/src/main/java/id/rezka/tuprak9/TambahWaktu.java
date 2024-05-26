@@ -19,8 +19,8 @@ import javafx.stage.StageStyle;
 
 public class TambahWaktu {
     private static DatePicker datePicker;
-    private static Spinner<Integer> jamSpinner;
-    private static Spinner<Integer> menitSpinner;
+    private static LocalDate tanggal;
+    private static LocalTime waktu;
 
     public static Stage tambahWaktuTanggal(Stage primaryStage){
 
@@ -33,8 +33,8 @@ public class TambahWaktu {
         datePicker = new DatePicker();
         datePicker.setValue(LocalDate.now());
 
-        jamSpinner = new Spinner<>();
-        menitSpinner = new Spinner<>();
+        Spinner<Integer> jamSpinner = new Spinner<>();
+        Spinner<Integer> menitSpinner = new Spinner<>();
 
         jamSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, LocalTime.now().getHour()));
         menitSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, LocalTime.now().getMinute()));
@@ -51,7 +51,9 @@ public class TambahWaktu {
         simpan.setStyle("-fx-font-size: 12px;");
         simpan.setPrefWidth(100);
         simpan.setOnAction(e->{
-            //sql
+            tanggal = datePicker.getValue();
+            waktu = LocalTime.of(jamSpinner.getValue(), menitSpinner.getValue());
+
             popUpStage.close();
         });
 
@@ -66,12 +68,19 @@ public class TambahWaktu {
         VBox tambahTglWkt = new VBox(10, pilihTgl,datePicker, pilihwktu, jam, tombolWkt);
         tambahTglWkt.setSpacing(10);
         tambahTglWkt.setPadding(new Insets(10));
-        tambahTglWkt.setStyle("-fx-background-color: #cddee5 ;");
-
+        tambahTglWkt.setStyle("-fx-background-color: #e3f2fd ;");
 
         Scene tambahWaktuScene = new Scene(tambahTglWkt, 300, 180);
         popUpStage.setScene(tambahWaktuScene);
 
         return popUpStage ;
+    }
+    
+    public static LocalDate getTanggal() {
+        return tanggal;
+    }
+    
+    public static LocalTime getWaktu() {
+        return waktu;
     }
 }

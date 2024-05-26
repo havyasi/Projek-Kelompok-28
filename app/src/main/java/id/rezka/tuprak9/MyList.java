@@ -17,15 +17,15 @@ public class MyList {
         // pke sql
 
         ScrollPane scroll= new ScrollPane();
-        scroll.setContent(myListLabel);
+        // scroll.setContent();
         scroll.setFitToWidth(false);
-        scroll.setStyle("-fx-background: #7296a4;");
+        scroll.setStyle("-fx-background: #CAF4FF;");
 
         Button backButton = new Button("Back");
         backButton.setStyle("-fx-font-size: 15px; -fx-font-weight: bold;");
         backButton.setOnAction(e -> primaryStage.setScene(app.createMainScene(primaryStage)));
 
-        VBox layout = new VBox(20, myListLabel, backButton);
+        VBox layout = new VBox(20, myListLabel, scroll, backButton);
         layout.setAlignment(Pos.BASELINE_CENTER);
         layout.setStyle("-fx-background-color: #CAF4FF;");
 

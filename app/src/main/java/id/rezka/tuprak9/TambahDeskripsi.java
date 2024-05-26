@@ -11,9 +11,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-// masih dlm proses blm bisa jln
-
 public class TambahDeskripsi {
+    private static String deskripsi;
+    
     
     public static Stage tambahDeskrip(Stage primaryStage){
         Stage popUpDescribe = new Stage();
@@ -32,7 +32,8 @@ public class TambahDeskripsi {
         saveButton.setStyle("-fx-font-size: 15px;");
         saveButton.setPrefWidth(100);
         saveButton.setOnAction(e -> {
-            //sql
+            deskripsi = desArea.getText();
+
             popUpDescribe.close();
         });
 
@@ -49,11 +50,15 @@ public class TambahDeskripsi {
         VBox layout = new VBox(10, desArea, tombolDesc);
         layout.setPadding(new Insets(20));
         layout.setAlignment(Pos.CENTER);
-        layout.setStyle("-fx-background-color: #cddee5 ; -fx-font-weight: bold; -fx-font-size: 25px");
+        layout.setStyle("-fx-background-color: #e3f2fd ; -fx-font-weight: bold; -fx-font-size: 25px");
 
         Scene popupScene = new Scene(layout, 400, 200);
         popUpDescribe.setScene(popupScene);
 
         return popUpDescribe;
+    }
+
+    public static String getDeskripsi() {
+        return deskripsi;
     }
 }

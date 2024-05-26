@@ -3,6 +3,7 @@ package id.rezka.tuprak9;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -19,7 +20,12 @@ public class SearchScene {
         searchField.setStyle("-fx-background-color: white; -fx-text-fill: black; -fx-font-size: 13px;");
         searchField.setPrefWidth(400);
 
-        VBox layout2 = new VBox(10,backButton ,searchField);
+        ScrollPane scroll= new ScrollPane();
+        // scroll.setContent();
+        scroll.setFitToWidth(false);
+        scroll.setStyle("-fx-background: #CAF4FF;");
+
+        VBox layout2 = new VBox(10,backButton ,searchField, scroll);
         layout2.setPadding(new javafx.geometry.Insets(20));
         layout2.setAlignment(Pos.TOP_LEFT);
         layout2.setStyle("-fx-background-color: #CAF4FF; -fx-font-weight: bold; -fx-font-size: 25px");

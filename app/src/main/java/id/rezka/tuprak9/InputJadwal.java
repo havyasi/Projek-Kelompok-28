@@ -1,5 +1,8 @@
 package id.rezka.tuprak9;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -16,6 +19,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class InputJadwal {
+    private static String jenisPrioritas;
+
     public static Scene createScene(Stage primaryStage, App app, Scene sceneSebelumnya) {
         
         Label catatanLabel = new Label("Tambahkan Jadwal Baru");
@@ -39,14 +44,23 @@ public class InputJadwal {
         Button rendahPrio = new Button("Rendah");
         rendahPrio.setPrefWidth(100);
         rendahPrio.setStyle("-fx-font-size: 12px;");
+        rendahPrio.setOnAction(e -> {
+            jenisPrioritas = "rendah";
+        });
 
         Button sedangPrio = new Button("Sedang");
         sedangPrio.setPrefWidth(100);
         sedangPrio.setStyle("-fx-font-size: 12px;");
+        sedangPrio.setOnAction(e -> {
+            jenisPrioritas = "sedang";
+        });
 
         Button tinggiPrio = new Button("Tinggi");
         tinggiPrio.setPrefWidth(100);
         tinggiPrio.setStyle("-fx-font-size: 12px;");
+        tinggiPrio.setOnAction(e -> {
+            jenisPrioritas = "tinggi";
+        });
 
         HBox jPbutton = new HBox(10,rendahPrio, sedangPrio, tinggiPrio);
         jPbutton.setAlignment(Pos.CENTER);
@@ -83,10 +97,10 @@ public class InputJadwal {
         HBox tombol = new HBox(340, backButton, saveButton);
         tombol.setAlignment(Pos.CENTER);
 
-        VBox layout = new VBox(10, labelBox, jPbutton, detailVBox, tombol);
+        VBox layout = new VBox(12, labelBox, jPbutton, detailVBox, tombol);
         layout.setPadding(new Insets(20));
         layout.setAlignment(Pos.TOP_LEFT);
-        layout.setStyle("-fx-background-color: #9ebecb ; -fx-font-weight: bold; -fx-font-size: 25px");
+        layout.setStyle("-fx-background-color: #90caf9 ; -fx-font-weight: bold; -fx-font-size: 25px");
         layout.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
         
         VBox notifBox = new VBox( layout);
@@ -94,7 +108,15 @@ public class InputJadwal {
         NotifInputJadwal.slideAtas(notifBox);
 
         saveButton.setOnAction(e -> {
-            App.setJadwal(jadwalField.getText()); // otw sql
+            App.setJadwal(jadwalField.getText());
+
+            String judul = jadwalField.getText();
+            LocalDate tanggal = TambahWaktu.getTanggal();
+            LocalTime waktu = TambahWaktu.getWaktu();
+            String deskripsi = TambahDeskripsi.getDeskripsi();
+
+            //nanti manggil method dri controller buat masukin ke sql
+
             NotifInputJadwal.slidekeBawah(notifBox);
         });
         
