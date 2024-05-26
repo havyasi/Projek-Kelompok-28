@@ -1,6 +1,7 @@
 package id.rezka.tuprak9;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,15 +18,34 @@ import java.io.FileNotFoundException;
 public class App extends Application {
     private static String jadwal;
     private App appInstance;
-
+    
     @Override
     public void start(Stage primaryStage) {
         appInstance = this;
         primaryStage.setTitle("Reminder's");
         primaryStage.setResizable(false);
-
-        primaryStage.setScene(createMainScene(primaryStage));
+        try {
+            FileInputStream iconStream = new FileInputStream("src/main/resources/image/IMG_1326.PNG");
+            Image icon = new Image(iconStream);
+            primaryStage.getIcons().add(icon);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        
+        // Create and set loading scene
+        Scene loadingScene = createLoadingScene(primaryStage);
+        primaryStage.setScene(loadingScene);
         primaryStage.show();
+
+        // Run loading thread
+        new Thread(() -> {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Platform.runLater(() -> primaryStage.setScene(createMainScene(primaryStage)));
+        }).start();
     }
 
     public static void main(String[] args) {
@@ -38,6 +58,29 @@ public class App extends Application {
 
     public static void setJadwal(String jadwal) {
         App.jadwal = jadwal;
+    }
+
+    private Scene createLoadingScene(Stage primaryStage) {
+        // Load the loading image
+        ImageView loadingImageView = null;
+        try {
+            FileInputStream loadingImageStream = new FileInputStream("src/main/resources/image/IMG_1327(1).JPG");
+            Image loadingImage = new Image(loadingImageStream);
+            loadingImageView = new ImageView(loadingImage);
+            loadingImageView.setFitWidth(500);
+            loadingImageView.setFitHeight(600);
+            loadingImageView.setPreserveRatio(false);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        // Create layout for loading scene
+        StackPane loadingLayout = new StackPane();
+        if (loadingImageView != null) {
+            loadingLayout.getChildren().add(loadingImageView);
+        }
+
+        return new Scene(loadingLayout, 500, 600);
     }
 
     public Scene createMainScene(Stage primaryStage) {
@@ -197,13 +240,6 @@ public class App extends Application {
             root.getChildren().add(backgroundImageView);
         }
 
-        try {
-            FileInputStream iconStream = new FileInputStream("src/main/resources/image/IMG_1146.JPG");
-            Image icon = new Image(iconStream);
-            primaryStage.getIcons().add(icon);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
 
         // Menambahkan elemen-elemen ke StackPane
         VBox vBox = new VBox();
