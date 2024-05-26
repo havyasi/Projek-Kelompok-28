@@ -16,7 +16,7 @@ public class SearchScene {
 
         TextField searchField = new TextField();
         searchField.setPromptText("Search");
-        searchField.setStyle("-fx-background-color: white; -fx-text-fill: black; -fx-font-size: 15px;");
+        searchField.setStyle("-fx-background-color: white; -fx-text-fill: black; -fx-font-size: 13px;");
         searchField.setPrefWidth(400);
 
         VBox layout2 = new VBox(10,backButton ,searchField);
