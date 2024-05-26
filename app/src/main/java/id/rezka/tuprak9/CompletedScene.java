@@ -43,7 +43,7 @@ public class CompletedScene {
         BorderPane.setAlignment(completedLabel, Pos.TOP_CENTER);
         BorderPane.setMargin(completedLabel, new Insets(20, 0, 20, 0));
         BorderPane.setMargin(bottomLayout, new Insets(0, 20, 20, 20));
-        layout.setStyle("-fx-background-color: #7296a4;");
+        layout.setStyle("-fx-background-color: #CAF4FF;");
 
         return new Scene(layout, 500, 600);
     }

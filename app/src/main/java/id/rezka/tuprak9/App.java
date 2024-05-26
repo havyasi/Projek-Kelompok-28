@@ -45,12 +45,11 @@ public class App extends Application {
         searchbar.setStyle(
             "-fx-font-weight: bold;" +
             "-fx-font-size: 10px;" +
-            "-fx-background-color: rgba(255, 255, 255, 255);");
+            "-fx-background-color: #FFF7FC;");
         searchbar.setMaxWidth(470);
         searchbar.setMinHeight(30);
 
-
-        //Action untuk Search
+        // Action untuk Search
         searchbar.setOnAction(e -> {
             try {
                 primaryStage.setScene(SearchScene.createScene(primaryStage, appInstance));
@@ -62,8 +61,6 @@ public class App extends Application {
         StackPane stackPane1 = new StackPane(searchbar);
         stackPane1.setAlignment(Pos.TOP_CENTER);
         stackPane1.setPadding(new javafx.geometry.Insets(20));
-
-
 
         try {
             FileInputStream iconStream = new FileInputStream("src/main/resources/image/search.png");
@@ -83,7 +80,7 @@ public class App extends Application {
         calendarButton.setMinHeight(100);
         calendarButton.setStyle("-fx-font-size: 25px;" +
                 "-fx-font-weight: bold;" +
-                "-fx-background-color: rgba(128, 128, 128, 255);" +
+                "-fx-background-color: #5AB2FF;" +
                 "-fx-background-radius: 20");
 
         // Action untuk gambar Calendar(Daftar List) Button
@@ -113,7 +110,7 @@ public class App extends Application {
         completedButton.setMinHeight(100);
         completedButton.setStyle("-fx-font-size: 25px;" +
                 "-fx-font-weight: bold;" +
-                "-fx-background-color: rgba(128, 128, 128, 255);" +
+                "-fx-background-color: #5AB2FF;" +
                 "-fx-background-radius: 20");
 
         // Action Untuk Completed Button
@@ -152,12 +149,12 @@ public class App extends Application {
         jadwalButton.setStyle(
                 "-fx-font-size: 13px;" +
                         "-fx-font-weight: bold;" +
-                        "-fx-background-color: rgba(128, 128, 128, 255);" +
+                        "-fx-background-color: #FF9A00;" +
                         "-fx-text-fill: black;" +
                         "-fx-font-family: 'Arial';");
 
 
-        //Action untuk jadwal
+        // Action untuk jadwal
         jadwalButton.setOnAction(e -> {
             try {
                 primaryStage.setScene(InputJadwal.createScene(primaryStage, appInstance, createMainScene(primaryStage)));
@@ -181,11 +178,24 @@ public class App extends Application {
             e.printStackTrace();
         }
 
-        VBox root = new VBox();
-        root.setStyle("-fx-background-color: #7296a4;");
-        root.getChildren().addAll(stackPane1, buttonPane, jadwalPane);
+        // Menambahkan ImageView sebagai background
+        ImageView backgroundImageView = null;
+        try {
+            FileInputStream backgroundStream = new FileInputStream("src/main/resources/image/IMG_1281.JPG");
+            Image backgroundImage = new Image(backgroundStream);
+            backgroundImageView = new ImageView(backgroundImage);
+            backgroundImageView.setFitWidth(500);
+            backgroundImageView.setFitHeight(600);
+            backgroundImageView.setPreserveRatio(false);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
-        Scene scene = new Scene(root, 500, 600);
+        // Membuat StackPane untuk menampung background dan elemen lainnya
+        StackPane root = new StackPane();
+        if (backgroundImageView != null) {
+            root.getChildren().add(backgroundImageView);
+        }
 
         try {
             FileInputStream iconStream = new FileInputStream("src/main/resources/image/IMG_1146.JPG");
@@ -194,6 +204,14 @@ public class App extends Application {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
+        // Menambahkan elemen-elemen ke StackPane
+        VBox vBox = new VBox();
+        vBox.getChildren().addAll(stackPane1, buttonPane, jadwalPane);
+        root.getChildren().add(vBox);
+
+        Scene scene = new Scene(root, 500, 600);
+        primaryStage.setScene(scene);
 
         return scene;
     }

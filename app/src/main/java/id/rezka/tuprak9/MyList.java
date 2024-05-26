@@ -27,7 +27,7 @@ public class MyList {
 
         VBox layout = new VBox(20, myListLabel, backButton);
         layout.setAlignment(Pos.BASELINE_CENTER);
-        layout.setStyle("-fx-background-color: #7296a4;");
+        layout.setStyle("-fx-background-color: #CAF4FF;");
 
         return new Scene(layout, 500, 600);
     }
