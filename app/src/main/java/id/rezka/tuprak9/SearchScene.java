@@ -22,7 +22,7 @@ public class SearchScene {
         VBox layout2 = new VBox(10,backButton ,searchField);
         layout2.setPadding(new javafx.geometry.Insets(20));
         layout2.setAlignment(Pos.TOP_LEFT);
-        layout2.setStyle("-fx-background-color: #7296a4; -fx-font-weight: bold; -fx-font-size: 25px");
+        layout2.setStyle("-fx-background-color: #CAF4FF; -fx-font-weight: bold; -fx-font-size: 25px");
 
         return new Scene(layout2, 500, 600);
     }
