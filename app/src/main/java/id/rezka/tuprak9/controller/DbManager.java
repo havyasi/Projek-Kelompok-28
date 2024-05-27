@@ -13,10 +13,11 @@ public class DbManager {
 
     public static void buatTabel(){
         String tablesql = "CREATE TABLE IF NOT EXISTS Pengingat ("
-                + " Judul TEXT PRIMARY KEY,"
+                + " id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + " judul TEXT NOT NULL,"
                 + " jenis_prioritas TEXT NOT NULL,"
-                + " tanggal TEXT NOT NULL"
-                + " waktu TEXT NOT NULL"
+                + " tanggal TEXT NOT NULL,"
+                + " waktu TEXT NOT NULL,"
                 + " deskripsi TEXT"
                 + ");";
         try (Connection connection = DatabaseConnection.connect();

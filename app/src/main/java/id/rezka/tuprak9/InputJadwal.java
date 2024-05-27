@@ -3,6 +3,7 @@ package id.rezka.tuprak9;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import id.rezka.tuprak9.controller.DbManager;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -116,6 +117,7 @@ public class InputJadwal {
             String deskripsi = TambahDeskripsi.getDeskripsi();
 
             //nanti manggil method dri controller buat masukin ke sql
+            DbManager.saveData(judul,jenisPrioritas, tanggal, waktu, deskripsi);
 
             NotifInputJadwal.slidekeBawah(notifBox);
         });
