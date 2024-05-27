@@ -20,7 +20,10 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class InputJadwal {
-    private static String jenisPrioritas;
+    private static String jenisPrioritas = null;
+    private static Button rendahPrio;
+    private static Button sedangPrio;
+    private static Button tinggiPrio;
 
     public static Scene createScene(Stage primaryStage, App app, Scene sceneSebelumnya) {
         
@@ -42,23 +45,38 @@ public class InputJadwal {
         VBox labelBox = new VBox(5, catatanLabel, judulLabel, jadwalField, jPLabel);
         labelBox.setAlignment(Pos.CENTER_LEFT);
 
-        Button rendahPrio = new Button("Rendah");
+        rendahPrio = new Button("Rendah");
         rendahPrio.setPrefWidth(100);
-        rendahPrio.setStyle("-fx-font-size: 12px;");
+        rendahPrio.setStyle("-fx-font-size: 12px; -fx-background-color: #a5d6a7; -fx-text-fill: black; -fx-background-radius: 5;");
+        rendahPrio.setOnMouseClicked(e -> {
+            rendahPrio.setStyle("-fx-font-size: 12px; -fx-background-color: #66bb64; -fx-text-fill: white; -fx-background-radius: 5;");
+            sedangPrio.setStyle("-fx-font-size: 12px; -fx-background-color: #ffe082; -fx-text-fill: black; -fx-background-radius: 5;");
+            tinggiPrio.setStyle("-fx-font-size: 12px; -fx-background-color: #ffab91; -fx-text-fill: black; -fx-background-radius: 5;");
+        });
         rendahPrio.setOnAction(e -> {
             jenisPrioritas = "rendah";
         });
 
-        Button sedangPrio = new Button("Sedang");
+        sedangPrio = new Button("Sedang");
         sedangPrio.setPrefWidth(100);
-        sedangPrio.setStyle("-fx-font-size: 12px;");
+        sedangPrio.setStyle("-fx-font-size: 12px; -fx-background-color: #ffe082; -fx-text-fill: black; -fx-background-radius: 5;");
+        sedangPrio.setOnMouseClicked(e -> {
+            rendahPrio.setStyle("-fx-font-size: 12px; -fx-background-color: #a5d6a7; -fx-text-fill: black; -fx-background-radius: 5;");
+            sedangPrio.setStyle("-fx-font-size: 12px; -fx-background-color: #ffca28; -fx-text-fill: white; -fx-background-radius: 5;");
+            tinggiPrio.setStyle("-fx-font-size: 12px; -fx-background-color: #ffab91; -fx-text-fill: black; -fx-background-radius: 5;");
+        });
         sedangPrio.setOnAction(e -> {
             jenisPrioritas = "sedang";
         });
 
-        Button tinggiPrio = new Button("Tinggi");
+        tinggiPrio = new Button("Tinggi");
         tinggiPrio.setPrefWidth(100);
-        tinggiPrio.setStyle("-fx-font-size: 12px;");
+        tinggiPrio.setStyle("-fx-font-size: 12px; -fx-background-color: #ffab91; -fx-text-fill: black; -fx-background-radius: 5;");
+        tinggiPrio.setOnMouseClicked(e -> {
+            rendahPrio.setStyle("-fx-font-size: 12px; -fx-background-color: #a5d6a7; -fx-text-fill: black; -fx-background-radius: 5;");
+            sedangPrio.setStyle("-fx-font-size: 12px; -fx-background-color: #ffe082; -fx-text-fill: black; -fx-background-radius: 5;");
+            tinggiPrio.setStyle("-fx-font-size: 12px; -fx-background-color: #ff7043; -fx-text-fill: white; -fx-background-radius: 5;");
+        });
         tinggiPrio.setOnAction(e -> {
             jenisPrioritas = "tinggi";
         });
@@ -106,26 +124,39 @@ public class InputJadwal {
         
         VBox notifBox = new VBox( layout);
         notifBox.setTranslateY(NotifInputJadwal.NOTIFICATION_HEIGHT);
-        NotifInputJadwal.slideAtas(notifBox);
+        NotifInputJadwal.slideAtas(notifBox, sceneSebelumnya);
 
-        saveButton.setOnAction(e -> {
-            App.setJadwal(jadwalField.getText());
-
+        saveButton.setOnAction(e ->{
             String judul = jadwalField.getText();
             LocalDate tanggal = TambahWaktu.getTanggal();
             LocalTime waktu = TambahWaktu.getWaktu();
             String deskripsi = TambahDeskripsi.getDeskripsi();
 
-            //nanti manggil method dri controller buat masukin ke sql
-            DbManager.saveData(judul,jenisPrioritas, tanggal, waktu, deskripsi);
+            String pesanError = null;
+            if (judul.isEmpty() && jenisPrioritas == null && tanggal == null && waktu == null) {
+                pesanError = "Judul, Jenis Prioritas, Tanggal dan Waktu tidak boleh kosong.";
+            } else if (judul.isEmpty()) {
+                pesanError = "Judul tidak boleh kosong.";
+            } else if (jenisPrioritas == null) {
+                pesanError = "Jenis Prioritas tidak boleh kosong.";
+            } else if (tanggal == null && waktu == null) {
+                pesanError = "Tanggal dan Waktu tidak boleh kosong.";
+            }
 
-            NotifInputJadwal.slidekeBawah(notifBox);
+            if (pesanError != null) {
+                NotifInputJadwal.showErrorPopup(primaryStage, pesanError);
+            } else {
+                DbManager.saveData(judul, jenisPrioritas, tanggal, waktu, deskripsi);
+                NotifInputJadwal.slidekeBawah(notifBox, sceneSebelumnya);
+            }
         });
         
         backButton.setOnAction(e -> {
-            NotifInputJadwal.slidekeBawah(notifBox);
+            NotifInputJadwal.slidekeBawah(notifBox,sceneSebelumnya);
         });
 
+        StackPane rootSebelumnya = (StackPane) sceneSebelumnya.getRoot();
+        rootSebelumnya.getChildren().forEach(node -> node.setDisable(true));
 
         StackPane mainLayoutAddSch = new StackPane();
         mainLayoutAddSch.getChildren().addAll(sceneSebelumnya.getRoot(), notifBox);

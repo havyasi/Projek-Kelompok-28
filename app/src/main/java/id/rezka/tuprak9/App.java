@@ -16,7 +16,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class App extends Application {
-    private static String jadwal;
     private App appInstance;
     
     @Override
@@ -50,14 +49,6 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch(args);
-    }
-
-    public String getJadwal() {
-        return jadwal;
-    }
-
-    public static void setJadwal(String jadwal) {
-        App.jadwal = jadwal;
     }
 
     private Scene createLoadingScene(Stage primaryStage) {
@@ -184,7 +175,20 @@ public class App extends Application {
         StackPane buttonPane = new StackPane(hBoxButtons);
         buttonPane.setAlignment(Pos.TOP_CENTER);
         buttonPane.setPadding(new javafx.geometry.Insets(30, 0, 0, 0));
+        
+        // button menampilkan jadwal harian
+        Button jadwalHarian = new Button("Daftar Tugas Hari Ini");
+        jadwalHarian.setStyle("-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: black; -fx-background-color: #FF9A00; -fx-background-radius: 5;");
+        jadwalHarian.setPrefWidth(380);
+        jadwalHarian.setOnAction(e -> {
+            DaftarPengingatHarian.tampilkanDaftarHarian(primaryStage, jadwalHarian);
+        });
 
+        StackPane btnDaftarHarian = new StackPane(jadwalHarian);
+        btnDaftarHarian.setAlignment(Pos.CENTER);
+        buttonPane.setPadding(new javafx.geometry.Insets(0, 20, 0, 20));
+
+        //button add schedule
         Button jadwalButton = new Button(" Add Schedule ");
         jadwalButton.setMaxHeight(100);
         jadwalButton.setMinHeight(10);
@@ -194,7 +198,8 @@ public class App extends Application {
                         "-fx-font-weight: bold;" +
                         "-fx-background-color: #FF9A00;" +
                         "-fx-text-fill: black;" +
-                        "-fx-font-family: 'Arial';");
+                        "-fx-font-family: 'Arial';" +
+                        "-fx-background-radius: 5;");
 
 
         // Action untuk jadwal
@@ -208,7 +213,7 @@ public class App extends Application {
 
         StackPane jadwalPane = new StackPane(jadwalButton);
         jadwalPane.setAlignment(Pos.BOTTOM_LEFT);
-        jadwalPane.setPadding(new javafx.geometry.Insets(350, 0, 0, 360));
+        jadwalPane.setPadding(new javafx.geometry.Insets(330, 0, 0, 360));
 
         try {
             FileInputStream iconStream = new FileInputStream("src/main/resources/image/plus.png");
@@ -240,10 +245,9 @@ public class App extends Application {
             root.getChildren().add(backgroundImageView);
         }
 
-
         // Menambahkan elemen-elemen ke StackPane
-        VBox vBox = new VBox();
-        vBox.getChildren().addAll(stackPane1, buttonPane, jadwalPane);
+        VBox vBox = new VBox(10);
+        vBox.getChildren().addAll(stackPane1, buttonPane, btnDaftarHarian, jadwalPane);
         root.getChildren().add(vBox);
 
         Scene scene = new Scene(root, 500, 600);

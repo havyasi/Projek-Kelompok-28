@@ -2,10 +2,13 @@ package id.rezka.tuprak9.controller;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import id.rezka.tuprak9.config.DatabaseConnection;
 
@@ -45,8 +48,58 @@ public class DbManager {
         }
     }
 
-    public static void removeData(){
+    public static List<String[]> loadData() { // load data seluruhan
+        List<String[]> dataList = new ArrayList<>();
+        String sql = "SELECT * FROM Pengingat";
+        try (Connection connection = DatabaseConnection.connect();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery()) {
+            int columnCount = resultSet.getMetaData().getColumnCount();
+            while (resultSet.next()) {
+                String[] row = new String[columnCount];
+                for (int i = 0; i < columnCount; i++) {
+                    row[i] = resultSet.getString(i + 1);
+                }
+                dataList.add(row);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dataList;
     }
+    public static List<String[]> loadDataForDate(LocalDate tanggal) { //load data menurut tgl
+        List<String[]> dataList = new ArrayList<>();
+        String sql = "SELECT * FROM Pengingat WHERE tanggal = ?";
+        try (Connection connection = DatabaseConnection.connect();
+            PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, tanggal.toString());
+            try (ResultSet resultSet = statement.executeQuery()) {
+                int columnCount = resultSet.getMetaData().getColumnCount();
+                while (resultSet.next()) {
+                    String[] row = new String[columnCount];
+                    for (int i = 0; i < columnCount; i++) {
+                        row[i] = resultSet.getString(i + 1);
+                    }
+                    dataList.add(row);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dataList;
+    }
+
+    public static void removeData(int id) {
+        String sql = "DELETE FROM Pengingat WHERE id = ?";
+        try (Connection connection = DatabaseConnection.connect();
+            PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
 
     public static void cariData(String judul){
         
