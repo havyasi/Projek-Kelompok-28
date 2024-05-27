@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class CompletedScene {
@@ -27,15 +27,12 @@ public class CompletedScene {
         backButton.setStyle("-fx-font-size: 15px; -fx-font-weight: bold;");
         backButton.setOnAction(e -> primaryStage.setScene(app.createMainScene(primaryStage)));
 
-        Button saveButton = new Button("Save");
-        saveButton.setStyle("-fx-font-size: 15px; -fx-font-weight: bold;");
-        // Tambahkan action untuk saveButton disini, e.g. saveButton.setOnAction(e -> saveAction());
 
         // Layout untuk tombol dibawah
-        HBox bottomLayout = new HBox(300);
+        VBox bottomLayout = new VBox();
         bottomLayout.setPadding(new Insets(20));
-        bottomLayout.setAlignment(Pos.BOTTOM_LEFT);
-        bottomLayout.getChildren().addAll(backButton, saveButton);
+        bottomLayout.setAlignment(Pos.CENTER);
+        bottomLayout.getChildren().addAll(backButton);
 
         BorderPane layout = new BorderPane();
         layout.setTop(completedLabel);

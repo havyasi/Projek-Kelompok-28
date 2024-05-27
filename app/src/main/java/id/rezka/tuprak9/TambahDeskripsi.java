@@ -24,9 +24,10 @@ public class TambahDeskripsi {
 
         TextArea desArea = new TextArea();
         desArea.setPromptText("Masukkan Deskripsi");
-        desArea.setStyle("-fx-background-color: white; -fx-text-fill: black; -fx-font-size: 15px;");
+        desArea.setStyle("-fx-font-family: 'Cascadia Code'; -fx-background-color: white; -fx-text-fill: black; -fx-font-size: 15px;");
         desArea.setPrefWidth(300);
         desArea.setPrefHeight(100);
+        desArea.setWrapText(true);
 
         Button saveButton = new Button("Save");
         saveButton.setStyle("-fx-font-size: 15px;");
@@ -50,7 +51,7 @@ public class TambahDeskripsi {
         VBox layout = new VBox(10, desArea, tombolDesc);
         layout.setPadding(new Insets(20));
         layout.setAlignment(Pos.CENTER);
-        layout.setStyle("-fx-background-color: #e3f2fd ; -fx-font-weight: bold; -fx-font-size: 25px");
+        layout.setStyle("-fx-background-color: #e3f2fd ; -fx-font-size: 25px");
 
         Scene popupScene = new Scene(layout, 400, 200);
         popUpDescribe.setScene(popupScene);

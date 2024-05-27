@@ -42,10 +42,10 @@ public class TambahWaktu {
         HBox jam = new HBox(5, jamSpinner, menitSpinner);
 
         Label pilihTgl = new Label("Atur Tanggal: ");
-        pilihTgl.setStyle("-fx-font-size: 15px;");
+        pilihTgl.setStyle("-fx-font-size: 15px; ");
 
         Label pilihwktu = new Label("Atur Waktu: ");
-        pilihTgl.setStyle("-fx-font-size: 15px;");
+        pilihwktu.setStyle("-fx-font-size: 15px; ");
 
         Button simpan = new Button("Save");
         simpan.setStyle("-fx-font-size: 12px;");
