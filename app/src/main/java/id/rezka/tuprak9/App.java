@@ -22,10 +22,10 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) {
         appInstance = this;
-        primaryStage.setTitle("Reminder's");
+        primaryStage.setTitle("Evernote");
         primaryStage.setResizable(false);
         try {
-            FileInputStream iconStream = new FileInputStream("src/main/resources/image/IMG_1326.PNG");
+            FileInputStream iconStream = new FileInputStream("src/main/resources/image/IMG_1370.jpg");
             Image icon = new Image(iconStream);
             primaryStage.getIcons().add(icon);
         } catch (FileNotFoundException e) {
@@ -224,7 +224,7 @@ public class App extends Application {
         // Menambahkan ImageView sebagai background
         ImageView backgroundImageView = null;
         try {
-            FileInputStream backgroundStream = new FileInputStream("src/main/resources/image/IMG_1281.JPG");
+            FileInputStream backgroundStream = new FileInputStream("src/main/resources/image/IMG_1369.JPG");
             Image backgroundImage = new Image(backgroundStream);
             backgroundImageView = new ImageView(backgroundImage);
             backgroundImageView.setFitWidth(500);
