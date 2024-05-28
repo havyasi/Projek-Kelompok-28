@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import id.rezka.tuprak9.controller.DbManager;
+import javafx.animation.TranslateTransition;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,8 +19,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 public class DaftarPengingatHarian {
 
@@ -95,8 +99,10 @@ public class DaftarPengingatHarian {
     
     
     public static void tampilkanDaftarHarian(Stage primaryStage, Button triggerButton) {
-        Popup popup = new Popup();
-        popup.setAutoHide(true);
+        Stage popup = new Stage();
+        popup.initOwner(primaryStage);
+        popup.initModality(Modality.NONE);
+        popup.initStyle(StageStyle.TRANSPARENT);
     
         VBox daftar = new VBox(10);
         daftar.setPadding(new Insets(10));
@@ -114,7 +120,22 @@ public class DaftarPengingatHarian {
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setContent(daftar);
         scrollPane.setPrefSize(380, 300);
-        scrollPane.setFitToWidth(false); 
+        scrollPane.setFitToWidth(true); 
+
+        Scene popupScene = new Scene(scrollPane);
+        popupScene.setFill(null);
+        popup.setScene(popupScene);
+
+        // // Scene primaryScene = primaryStage.getScene();
+        // // primaryScene.getRoot().addEventFilter(javafx.scene.input.MouseEvent.MOUSE_PRESSED, event -> {
+        // //     if (popup.isShowing() && !popup.getScene().getRoot().contains(event.getSceneX(), event.getSceneY())) {
+        // //         popup.hide();
+        // //     }
+        // // });
+
+        // popup.show();
+
+        
 
         for (String[] jadwal : todaySchedules) {
             Label scheduleLabel = new Label(jadwal[4] + "\t" + jadwal[1]);
@@ -136,9 +157,27 @@ public class DaftarPengingatHarian {
             daftar.getChildren().add(scheduleLabel);
         }
     
-        popup.getContent().add(scrollPane);
-    
         Bounds bounds = triggerButton.localToScreen(triggerButton.getBoundsInLocal());
-        popup.show(primaryStage, bounds.getMinX(), bounds.getMaxY() + 5);
+        
+        
+        popup.setX(bounds.getMinX());
+        popup.setY(bounds.getMaxY() + 5);
+        popup.show();
+
+        scrollPane.setTranslateY(-300);
+        TranslateTransition slide = new TranslateTransition(Duration.millis(300), scrollPane);
+        slide.setFromY(-300);
+        slide.setToY(0);
+        slide.play();
+
+        
+        // popup.getContent().add(scrollPane);
+        // Scene popupscene = primaryStage.getScene();
+        primaryStage.getScene().addEventFilter(javafx.scene.input.MouseEvent.MOUSE_PRESSED, event -> {
+            if (popup.isShowing() && !bounds.contains(event.getScreenX(), event.getScreenY())) {
+                popup.hide();
+            }
+        });
+    
     }
 }
