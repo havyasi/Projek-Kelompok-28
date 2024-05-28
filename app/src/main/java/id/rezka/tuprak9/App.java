@@ -1,5 +1,6 @@
 package id.rezka.tuprak9;
 
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
@@ -157,7 +158,7 @@ public class App extends Application {
         });
 
         try {
-            FileInputStream iconStream = new FileInputStream("src/main/resources/image/completed.png");
+            FileInputStream iconStream = new FileInputStream("src/main/resources/image/completed(1).png");
             Image icon = new Image(iconStream);
 
             ImageView imageView = new ImageView(icon);
@@ -177,7 +178,7 @@ public class App extends Application {
         buttonPane.setPadding(new javafx.geometry.Insets(30, 0, 0, 0));
         
         // button menampilkan jadwal harian
-        Button jadwalHarian = new Button("Daftar Tugas Hari Ini");
+        Button jadwalHarian = new Button("Today's Task List");
         jadwalHarian.setStyle("-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: black; -fx-background-color: #FF9A00; -fx-background-radius: 5;");
         jadwalHarian.setPrefWidth(380);
         jadwalHarian.setOnAction(e -> {

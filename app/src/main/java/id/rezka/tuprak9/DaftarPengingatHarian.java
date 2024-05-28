@@ -104,7 +104,7 @@ public class DaftarPengingatHarian {
         daftar.setPrefSize(360, 300);
         daftar.setStyle("-fx-background-color: white;");
     
-        Label titleLabel = new Label("Jadwal Hari Ini");
+        Label titleLabel = new Label("Today's Schedule");
         titleLabel.setStyle("-fx-font-size: 20px; -fx-text-fill: black;");
         daftar.getChildren().addAll(titleLabel);
         
