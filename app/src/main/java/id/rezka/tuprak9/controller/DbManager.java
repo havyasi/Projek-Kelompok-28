@@ -12,6 +12,7 @@ import java.util.List;
 
 import id.rezka.tuprak9.config.DatabaseConnection;
 
+
 public class DbManager {
 
     public static void buatTabel(){
@@ -100,8 +101,30 @@ public class DbManager {
         }
     }
     
+    public static List<String[]> cariData(String keyword){
+    List<String[]> resultList = new ArrayList<>();
+    String sql = "SELECT * FROM Pengingat WHERE judul LIKE? OR deskripsi LIKE ? OR jenis_Prioritas LIKE ?";
+    try (Connection connection = DatabaseConnection.connect();
+        PreparedStatement statement = connection.prepareStatement(sql)) {
 
-    public static void cariData(String judul){
-        
+            String cariKeyword = "%" + keyword + "%";
+            statement.setString(1, cariKeyword);
+            statement.setString(2, cariKeyword);
+            statement.setString(3, cariKeyword);
+            ResultSet resultSet = statement.executeQuery();
+
+            int cekColumn =  resultSet.getMetaData().getColumnCount();
+            while (resultSet.next()) {
+                String[] baris = new String[cekColumn];
+                for (int i = 0; i < cekColumn; i++){
+                    baris[i] = resultSet.getString(i + 1);
+                }
+                resultList.add(baris);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return resultList;
     }
+    
 }

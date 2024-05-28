@@ -1,6 +1,6 @@
 package id.rezka.tuprak9;
 
-import javafx.animation.FadeTransition;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
