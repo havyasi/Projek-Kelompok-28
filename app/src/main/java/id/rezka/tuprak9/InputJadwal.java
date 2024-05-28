@@ -3,6 +3,8 @@ package id.rezka.tuprak9;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import org.checkerframework.checker.units.qual.s;
+
 import id.rezka.tuprak9.controller.DbManager;
 import id.rezka.tuprak9.utils.NotifInputJadwal;
 import id.rezka.tuprak9.utils.TambahDeskripsi;
@@ -31,30 +33,30 @@ public class InputJadwal {
     public static Scene createScene(Stage primaryStage, App app, Scene sceneSebelumnya) {
         
         Label catatanLabel = new Label("Tambahkan Jadwal Baru");
-        catatanLabel.setStyle("-fx-text-fill: black; -fx-font-size: 20px;");
+        catatanLabel.setId("cttn-label");
         
         Label judulLabel = new Label("Judul");
-        judulLabel.setStyle("-fx-text-fill: black; -fx-font-size: 17;");
+        judulLabel.setId("judul-label;");
         
         TextField jadwalField = new TextField();
         jadwalField.setPromptText("Masukkan judul");
-        jadwalField.setStyle("-fx-background-color: white; -fx-text-fill: black; -fx-font-size: 15;");
+        jadwalField.setId("jdwl-field");
         jadwalField.setPrefWidth(400);
         jadwalField.setPrefHeight(10);
 
         Label jPLabel = new Label("Jenis Prioritas");
-        jPLabel.setStyle("-fx-text-fill: black; -fx-font-size: 17;");
+        jPLabel.setId("prioritas-label");
 
         VBox labelBox = new VBox(5, catatanLabel, judulLabel, jadwalField, jPLabel);
         labelBox.setAlignment(Pos.CENTER_LEFT);
 
         rendahPrio = new Button("Rendah");
         rendahPrio.setPrefWidth(100);
-        rendahPrio.setStyle("-fx-font-size: 12px; -fx-background-color: #a5d6a7; -fx-text-fill: black; -fx-background-radius: 5;");
+        rendahPrio.setId("btn-rendah");
         rendahPrio.setOnMouseClicked(e -> {
-            rendahPrio.setStyle("-fx-font-size: 12px; -fx-background-color: #66bb64; -fx-text-fill: white; -fx-background-radius: 5;");
-            sedangPrio.setStyle("-fx-font-size: 12px; -fx-background-color: #ffe082; -fx-text-fill: black; -fx-background-radius: 5;");
-            tinggiPrio.setStyle("-fx-font-size: 12px; -fx-background-color: #ffab91; -fx-text-fill: black; -fx-background-radius: 5;");
+            rendahPrio.setId("click-rendah");
+            sedangPrio.setId("click-sedang");
+            tinggiPrio.setId("click-tinggi");
         });
         rendahPrio.setOnAction(e -> {
             jenisPrioritas = "rendah";
@@ -62,11 +64,11 @@ public class InputJadwal {
 
         sedangPrio = new Button("Sedang");
         sedangPrio.setPrefWidth(100);
-        sedangPrio.setStyle("-fx-font-size: 12px; -fx-background-color: #ffe082; -fx-text-fill: black; -fx-background-radius: 5;");
+        sedangPrio.setId("btn-sedang");
         sedangPrio.setOnMouseClicked(e -> {
-            rendahPrio.setStyle("-fx-font-size: 12px; -fx-background-color: #a5d6a7; -fx-text-fill: black; -fx-background-radius: 5;");
-            sedangPrio.setStyle("-fx-font-size: 12px; -fx-background-color: #ffca28; -fx-text-fill: white; -fx-background-radius: 5;");
-            tinggiPrio.setStyle("-fx-font-size: 12px; -fx-background-color: #ffab91; -fx-text-fill: black; -fx-background-radius: 5;");
+            rendahPrio.setId("click2-rendah");
+            sedangPrio.setId("click2-sedang");
+            tinggiPrio.setId("click2-tinggi");
         });
         sedangPrio.setOnAction(e -> {
             jenisPrioritas = "sedang";
@@ -74,11 +76,11 @@ public class InputJadwal {
 
         tinggiPrio = new Button("Tinggi");
         tinggiPrio.setPrefWidth(100);
-        tinggiPrio.setStyle("-fx-font-size: 12px; -fx-background-color: #ffab91; -fx-text-fill: black; -fx-background-radius: 5;");
+        tinggiPrio.setId("btn-tinggi");
         tinggiPrio.setOnMouseClicked(e -> {
-            rendahPrio.setStyle("-fx-font-size: 12px; -fx-background-color: #a5d6a7; -fx-text-fill: black; -fx-background-radius: 5;");
-            sedangPrio.setStyle("-fx-font-size: 12px; -fx-background-color: #ffe082; -fx-text-fill: black; -fx-background-radius: 5;");
-            tinggiPrio.setStyle("-fx-font-size: 12px; -fx-background-color: #ff7043; -fx-text-fill: white; -fx-background-radius: 5;");
+            rendahPrio.setId("click3-rendah");
+            sedangPrio.setId("click3-sedang");
+            tinggiPrio.setId("click3-tinggi");
         });
         tinggiPrio.setOnAction(e -> {
             jenisPrioritas = "tinggi";
@@ -89,11 +91,11 @@ public class InputJadwal {
         jPbutton.setSpacing(10);
 
         Label detailLabel = new Label("Detail");
-        detailLabel.setStyle("-fx-text-fill: black; -fx-font-size: 17;");
+        detailLabel.setId("detail-label");
 
         Button tambahWaktu = new Button("Tambahkan waktu");
         tambahWaktu.setPrefWidth(500);
-        tambahWaktu.setStyle("-fx-font-size: 12px;");
+        tambahWaktu.setId("btn-tmbhwkt");
 
         tambahWaktu.setOnAction(e -> {
             TambahWaktu.tambahWaktuTanggal(primaryStage).showAndWait();
@@ -101,7 +103,7 @@ public class InputJadwal {
 
         Button tambahDeskrip = new Button("Tambahkan Deskripsi");
         tambahDeskrip.setPrefWidth(500);
-        tambahDeskrip.setStyle("-fx-font-size: 12px;");
+        tambahDeskrip.setId("btn-deskripsi");
         tambahDeskrip.setOnAction(e ->{
             TambahDeskripsi.tambahDeskrip(primaryStage).showAndWait();
         });        
@@ -109,11 +111,11 @@ public class InputJadwal {
         VBox detailVBox = new VBox(10, detailLabel,tambahWaktu ,tambahDeskrip);
 
         Button saveButton = new Button("Save");
-        saveButton.setStyle("-fx-font-size: 12px;");
+        saveButton.setId("btn-save");
         saveButton.setPrefWidth(80);
 
         Button backButton = new Button("Back");
-        backButton.setStyle("-fx-font-size: 12px;");
+        backButton.setId("btn-back");
         backButton.setPrefWidth(80);
         
         HBox tombol = new HBox(340, backButton, saveButton);
@@ -122,7 +124,7 @@ public class InputJadwal {
         VBox layout = new VBox(12, labelBox, jPbutton, detailVBox, tombol);
         layout.setPadding(new Insets(20));
         layout.setAlignment(Pos.TOP_LEFT);
-        layout.setStyle("-fx-background-color: #90caf9 ; -fx-font-weight: bold; -fx-font-size: 25px");
+        layout.setId("lyt-jadwal");
         layout.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
         
         VBox notifBox = new VBox( layout);
@@ -165,6 +167,8 @@ public class InputJadwal {
         mainLayoutAddSch.getChildren().addAll(sceneSebelumnya.getRoot(), notifBox);
         
 
-        return new Scene(mainLayoutAddSch, 500, 600);
+        Scene scene = new Scene(mainLayoutAddSch, 500, 600);
+        scene.getStylesheets().add("/styles/stylesInputJadwal.css");
+        return scene;
     }
 }

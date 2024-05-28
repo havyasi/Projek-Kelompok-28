@@ -42,13 +42,13 @@ public class TambahWaktu {
         HBox jam = new HBox(5, jamSpinner, menitSpinner);
 
         Label pilihTgl = new Label("Atur Tanggal: ");
-        pilihTgl.setStyle("-fx-font-size: 15px; ");
+        pilihTgl.setId("tanggal-waktu");
 
         Label pilihwktu = new Label("Atur Waktu: ");
-        pilihwktu.setStyle("-fx-font-size: 15px; ");
+        pilihwktu.setId("tanggal-waktu");
 
         Button simpan = new Button("Save");
-        simpan.setStyle("-fx-font-size: 12px;");
+        simpan.setId("save-btn");
         simpan.setPrefWidth(100);
         simpan.setOnAction(e->{
             tanggal = datePicker.getValue();
@@ -58,7 +58,7 @@ public class TambahWaktu {
         });
 
         Button batalkan = new Button("Back");
-        batalkan.setStyle("-fx-font-size: 12px;");
+        batalkan.setId("back-btn");
         batalkan.setPrefWidth(100);
         batalkan.setOnAction(e-> popUpStage.close());
 
@@ -68,9 +68,10 @@ public class TambahWaktu {
         VBox tambahTglWkt = new VBox(10, pilihTgl,datePicker, pilihwktu, jam, tombolWkt);
         tambahTglWkt.setSpacing(10);
         tambahTglWkt.setPadding(new Insets(10));
-        tambahTglWkt.setStyle("-fx-background-color: #e3f2fd ;");
+        tambahTglWkt.setId("tambahTgl-wkt");
 
         Scene tambahWaktuScene = new Scene(tambahTglWkt, 300, 180);
+        tambahWaktuScene.getStylesheets().add("/styles/stylesTambahWaktu.css");
         popUpStage.setScene(tambahWaktuScene);
 
         return popUpStage ;
