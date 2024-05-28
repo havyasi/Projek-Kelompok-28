@@ -20,12 +20,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class DaftarPengingatHarian {
+
+    private static boolean popupmuncul = false;
 
     public static Scene detailScene(Stage primaryStage, String[] scheduleDetails, Scene previousScene) {
         VBox detailJadwal = new VBox(10);
@@ -99,6 +100,12 @@ public class DaftarPengingatHarian {
     
     
     public static void tampilkanDaftarHarian(Stage primaryStage, Button triggerButton) {
+        if (popupmuncul) {
+            return;
+        }
+        popupmuncul = true;
+        
+        
         Stage popup = new Stage();
         popup.initOwner(primaryStage);
         popup.initModality(Modality.NONE);
@@ -152,14 +159,13 @@ public class DaftarPengingatHarian {
                 Scene detailScene = detailScene(primaryStage, jadwal, primaryStage.getScene());
                 primaryStage.setScene(detailScene);
                 popup.hide();
+                popupmuncul = false;
             });
             
             daftar.getChildren().add(scheduleLabel);
         }
     
         Bounds bounds = triggerButton.localToScreen(triggerButton.getBoundsInLocal());
-        
-        
         popup.setX(bounds.getMinX());
         popup.setY(bounds.getMaxY() + 5);
         popup.show();
@@ -176,6 +182,7 @@ public class DaftarPengingatHarian {
         primaryStage.getScene().addEventFilter(javafx.scene.input.MouseEvent.MOUSE_PRESSED, event -> {
             if (popup.isShowing() && !bounds.contains(event.getScreenX(), event.getScreenY())) {
                 popup.hide();
+                popupmuncul = false;
             }
         });
     
