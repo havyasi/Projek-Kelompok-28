@@ -49,7 +49,7 @@ public class NotifInputJadwal {
         popUpError.setTitle("ERROR");
 
         Label errorLabel = new Label(message);
-        errorLabel.setStyle("-fx-text-fill: red; -fx-font-weight: bold; -fx-font-size: 10px");
+        errorLabel.setId("error-label");
         errorLabel.setWrapText(true);
 
         VBox popupLayout = new VBox(errorLabel);
@@ -57,6 +57,7 @@ public class NotifInputJadwal {
         VBox.setMargin(errorLabel, new Insets(10));
 
         Scene popupScene = new Scene(popupLayout, 300, 100);
+        popupScene.getStylesheets().add("/styles/stylesNotifInput.css");
         popUpError.setScene(popupScene);
         
         popUpError.show();

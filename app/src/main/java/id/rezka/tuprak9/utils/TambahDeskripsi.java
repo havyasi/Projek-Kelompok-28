@@ -24,13 +24,13 @@ public class TambahDeskripsi {
 
         TextArea desArea = new TextArea();
         desArea.setPromptText("Masukkan Deskripsi");
-        desArea.setStyle("-fx-font-family: 'Cascadia Code'; -fx-background-color: white; -fx-text-fill: black; -fx-font-size: 15px;");
+        desArea.setId("description-area");
         desArea.setPrefWidth(300);
         desArea.setPrefHeight(100);
         desArea.setWrapText(true);
 
         Button saveButton = new Button("Save");
-        saveButton.setStyle("-fx-font-size: 15px;");
+        saveButton.setId("save-button");
         saveButton.setPrefWidth(100);
         saveButton.setOnAction(e -> {
             deskripsi = desArea.getText();
@@ -39,7 +39,7 @@ public class TambahDeskripsi {
         });
 
         Button backButton = new Button("Back");
-        backButton.setStyle("-fx-font-size: 15px;");
+        backButton.setId("back-button");
         backButton.setPrefWidth(100);
         backButton.setOnAction(e -> {
             popUpDescribe.close();
@@ -51,9 +51,10 @@ public class TambahDeskripsi {
         VBox layout = new VBox(10, desArea, tombolDesc);
         layout.setPadding(new Insets(20));
         layout.setAlignment(Pos.CENTER);
-        layout.setStyle("-fx-background-color: #e3f2fd ; -fx-font-size: 25px");
+        layout.setId("popup-lyt");
 
         Scene popupScene = new Scene(layout, 400, 200);
+        popupScene.getStylesheets().add("/styles/stylesTambahDeskripsi.css");
         popUpDescribe.setScene(popupScene);
 
         return popUpDescribe;

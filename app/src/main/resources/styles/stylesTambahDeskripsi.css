@@ -1,0 +1,21 @@
+#popup-describe {
+    -fx-background-color: #e3f2fd;
+    -fx-font-size: 25px;
+}
+
+#description-area {
+    -fx-font-family: 'Cascadia Code';
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-font-size: 15px;
+}
+
+#save-button, #back-button {
+    -fx-font-size: 15px;
+}
+
+
+#popup-lyt{
+-fx-background-color: #e3f2fd ; 
+-fx-font-size: 25px
+}
