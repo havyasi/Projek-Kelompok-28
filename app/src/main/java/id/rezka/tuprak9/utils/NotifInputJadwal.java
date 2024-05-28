@@ -1,4 +1,4 @@
-package id.rezka.tuprak9;
+package id.rezka.tuprak9.utils;
 
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Insets;

@@ -1,4 +1,4 @@
-package id.rezka.tuprak9;
+package id.rezka.tuprak9.utils;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
