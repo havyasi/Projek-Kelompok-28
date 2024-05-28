@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 public class CompletedScene {
     public static Scene createScene(Stage primaryStage, App app) {
         Label completedLabel = new Label("Completed List");
-        completedLabel.setStyle("-fx-text-fill: black; -fx-font-size: 20px; -fx-font-weight: bold;");
+        completedLabel.setId("completed-Label");
 
         // menampilakan bnyk tugas yg sdh diselesaikan scroll panenya nanti berguna klau bnyk daftar
         // tugas yg diselesaikan (sql)
@@ -21,10 +21,10 @@ public class CompletedScene {
         ScrollPane scroll= new ScrollPane();
         scroll.setContent(completedLabel);
         scroll.setFitToWidth(false);
-        scroll.setStyle("-fx-background: #7296a4;");
+        scroll.setId("scrol-styl");
 
         Button backButton = new Button("Back");
-        backButton.setStyle("-fx-font-size: 15px; -fx-font-weight: bold;");
+        backButton.setId("back-btn");
         backButton.setOnAction(e -> primaryStage.setScene(app.createMainScene(primaryStage)));
 
 
@@ -40,8 +40,10 @@ public class CompletedScene {
         BorderPane.setAlignment(completedLabel, Pos.TOP_CENTER);
         BorderPane.setMargin(completedLabel, new Insets(20, 0, 20, 0));
         BorderPane.setMargin(bottomLayout, new Insets(0, 20, 20, 20));
-        layout.setStyle("-fx-background-color: #CAF4FF;");
+        layout.setId("completed-lyt");
 
-        return new Scene(layout, 500, 600);
+        Scene scene = new Scene(layout, 500, 600);
+        scene.getStylesheets().add("/styles/stylesCompleted.css");
+        return scene;
     }
 }
