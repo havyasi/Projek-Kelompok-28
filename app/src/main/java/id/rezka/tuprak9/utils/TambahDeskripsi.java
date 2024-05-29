@@ -20,10 +20,10 @@ public class TambahDeskripsi {
         popUpDescribe.initOwner(primaryStage);
         popUpDescribe.initModality(Modality.APPLICATION_MODAL);
         popUpDescribe.initStyle(StageStyle.UTILITY);
-        popUpDescribe.setTitle("Tambahkan Deskripsi");
+        popUpDescribe.setTitle("Add a description");
 
         TextArea desArea = new TextArea();
-        desArea.setPromptText("Masukkan Deskripsi");
+        desArea.setPromptText("Enter a description");
         desArea.setId("description-area");
         desArea.setPrefWidth(300);
         desArea.setPrefHeight(100);

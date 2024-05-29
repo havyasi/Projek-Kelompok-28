@@ -25,7 +25,7 @@ public class TambahWaktu {
     public static Stage tambahWaktuTanggal(Stage primaryStage){
 
         Stage popUpStage = new Stage();
-        popUpStage.setTitle("Tambahkan Waktu");
+        popUpStage.setTitle("Add Time");
         popUpStage.initOwner(primaryStage);
         popUpStage.initModality(Modality.APPLICATION_MODAL);
         popUpStage.initStyle(StageStyle.UTILITY);
@@ -41,10 +41,10 @@ public class TambahWaktu {
 
         HBox jam = new HBox(5, jamSpinner, menitSpinner);
 
-        Label pilihTgl = new Label("Atur Tanggal: ");
+        Label pilihTgl = new Label("Set the date: ");
         pilihTgl.setId("tanggal-waktu");
 
-        Label pilihwktu = new Label("Atur Waktu: ");
+        Label pilihwktu = new Label("Set the time: ");
         pilihwktu.setId("tanggal-waktu");
 
         Button simpan = new Button("Save");
