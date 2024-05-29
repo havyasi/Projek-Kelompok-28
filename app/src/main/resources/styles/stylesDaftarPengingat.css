@@ -1,0 +1,59 @@
+/* stylesDaftarPengingat */
+/* 
+#box-detail{
+    -fx-background-color: #90caf9;
+}
+
+#label-detail{
+    -fx-font-size: 20px; 
+    -fx-text-fill: black; 
+    -fx-font-weight: bold;
+    -fx-background-color: #90caf9;
+}
+
+#label-schedule{
+    -fx-font-size: 15px; 
+    -fx-text-fill: black;
+    -fx-background-color: #88c9fd;
+}
+
+#bck-bttn{
+    -fx-background-color: white; 
+    -fx-background-radius: 20
+} */
+
+#delete-btn{
+    -fx-background-color: white; 
+    -fx-background-radius: 20
+}
+
+#box-daftar{
+    -fx-background-color: white;
+}
+
+#label-title{
+    -fx-font-size: 20px; 
+    -fx-text-fill: black;
+    
+}
+
+#rendah-label{
+    -fx-font-size: 15px; 
+    -fx-text-fill: black; 
+    -fx-background-color: #a5d6a7; 
+    -fx-background-radius: 5;
+}
+
+#sedang-label{
+    -fx-font-size: 15px; 
+    -fx-text-fill: black; 
+    -fx-background-color: #ffe082; 
+    -fx-background-radius: 5;
+}
+
+#tinggi-label{
+    -fx-font-size: 15px; 
+    -fx-text-fill: black; 
+    -fx-background-color: #ea8465; 
+    -fx-background-radius: 5;
+}

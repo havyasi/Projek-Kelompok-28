@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.List;
 
+
 import id.rezka.tuprak9.controller.DbManager;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Bounds;
@@ -31,19 +32,19 @@ public class DaftarPengingatHarian {
     public static Scene detailScene(Stage primaryStage, String[] scheduleDetails, Scene previousScene) {
         VBox detailJadwal = new VBox(10);
         detailJadwal.setAlignment(Pos.TOP_CENTER);
-        detailJadwal.setStyle("-fx-background-color: #90caf9;");
+        detailJadwal.setId("box-detail");
     
-        Label titleLabel = new Label("Detail Jadwal");
-        titleLabel.setStyle("-fx-font-size: 20px; -fx-text-fill: black; -fx-font-weight: bold;");
+        Label titleLabel = new Label("Schedule Details");
+        titleLabel.setId("label-detail");
 
-        Label scheduleLabel = new Label(scheduleDetails[4] + "\tTanggal: " + scheduleDetails[3]+ "\nJudul: " + scheduleDetails[1] + "\nJenis Prioritas: " + scheduleDetails[2] +
+        Label scheduleLabel = new Label(scheduleDetails[4] + "\tDate : " + scheduleDetails[3]+ "\nTitle : " + scheduleDetails[1] + "\nType Of Priority: " + scheduleDetails[2] +
                 "\nDeskripsi: " + scheduleDetails[5]);
-        scheduleLabel.setStyle("-fx-font-size: 15px; -fx-text-fill: black;");
+        scheduleLabel.setId("label-schedule");
 
         Button backButton = new Button();
         backButton.setMaxWidth(40);
         backButton.setMaxHeight(40);
-        backButton.setStyle("-fx-background-color: white; -fx-background-radius: 20");
+        backButton.setId("bck-bttn");
         backButton.setOnAction(e -> primaryStage.setScene(previousScene));
         try {
             FileInputStream iconStream = new FileInputStream("src/main/resources/image/back.png");
@@ -60,7 +61,7 @@ public class DaftarPengingatHarian {
         Button deleteButton = new Button("");
         deleteButton.setMaxWidth(40);
         deleteButton.setMaxHeight(40);
-        deleteButton.setStyle("-fx-background-color: white; -fx-background-radius: 20");
+        deleteButton.setId("delete-btn");
         deleteButton.setOnAction(e -> {
             int id = Integer.parseInt(scheduleDetails[0]);
             DbManager.removeData(id);
@@ -95,9 +96,10 @@ public class DaftarPengingatHarian {
         BorderPane.setMargin(buttonBox, new Insets(20, 20, 20, 20));
         detailJadwal.getChildren().add(layout);
     
-        return new Scene(detailJadwal, 500, 600);
+        Scene scene = new Scene(detailJadwal, 500, 600);
+        scene.getStylesheets().add("styles/stylesDetail.css");
+        return scene;
     }
-    
     
     public static void tampilkanDaftarHarian(Stage primaryStage, Button triggerButton) {
         if (popupmuncul) {
@@ -115,10 +117,10 @@ public class DaftarPengingatHarian {
         daftar.setPadding(new Insets(10));
         daftar.setAlignment(Pos.TOP_LEFT);
         daftar.setPrefSize(360, 300);
-        daftar.setStyle("-fx-background-color: white;");
+        daftar.setId("box-daftar");
     
         Label titleLabel = new Label("Today's Schedule");
-        titleLabel.setStyle("-fx-font-size: 20px; -fx-text-fill: black;");
+        titleLabel.setId("label-title");
         daftar.getChildren().addAll(titleLabel);
         
         LocalDate today = LocalDate.now();
@@ -131,7 +133,11 @@ public class DaftarPengingatHarian {
 
         Scene popupScene = new Scene(scrollPane);
         popupScene.setFill(null);
+        popupScene.getStylesheets().add("/styles/stylesDaftarPengingat.css");
         popup.setScene(popupScene);
+        
+        
+    
 
         // // Scene primaryScene = primaryStage.getScene();
         // // primaryScene.getRoot().addEventFilter(javafx.scene.input.MouseEvent.MOUSE_PRESSED, event -> {
@@ -148,11 +154,11 @@ public class DaftarPengingatHarian {
             Label scheduleLabel = new Label(jadwal[4] + "\t" + jadwal[1]);
             scheduleLabel.setPrefWidth(340);
             if ("rendah".equals(jadwal[2])) {
-                scheduleLabel.setStyle("-fx-font-size: 15px; -fx-text-fill: black; -fx-background-color: #a5d6a7; -fx-background-radius: 5;");
+                scheduleLabel.setId("rendah-label");
             } else if ("sedang".equals(jadwal[2])) {
-                scheduleLabel.setStyle("-fx-font-size: 15px; -fx-text-fill: black; -fx-background-color: #ffe082; -fx-background-radius: 5;");
+                scheduleLabel.setId("sedang-label");
             } else if ("tinggi".equals(jadwal[2])) {
-                scheduleLabel.setStyle("-fx-font-size: 15px; -fx-text-fill: black; -fx-background-color: #ffab91; -fx-background-radius: 5;");
+                scheduleLabel.setId("tinggi-label");
             }
 
             scheduleLabel.setOnMouseClicked(e -> {
@@ -163,6 +169,10 @@ public class DaftarPengingatHarian {
             });
             
             daftar.getChildren().add(scheduleLabel);
+
+            // Scene scene = new Scene(scheduleLabel);
+            // scene.getStylesheets().add("/styles/stylesDaftarPengingat.css");
+            // return;
         }
     
         Bounds bounds = triggerButton.localToScreen(triggerButton.getBoundsInLocal());
@@ -185,6 +195,6 @@ public class DaftarPengingatHarian {
                 popupmuncul = false;
             }
         });
-    
     }
+    
 }
