@@ -32,25 +32,31 @@ public class InputJadwal {
 
     public static Scene createScene(Stage primaryStage, App app, Scene sceneSebelumnya) {
         
-        Label catatanLabel = new Label("Tambahkan Jadwal Baru");
+        Label catatanLabel = new Label("Add New Schedule");
         catatanLabel.setId("cttn-label");
         
-        Label judulLabel = new Label("Judul");
+        Label judulLabel = new Label("Title");
         judulLabel.setId("judul-label;");
         
         TextField jadwalField = new TextField();
-        jadwalField.setPromptText("Masukkan judul");
+        jadwalField.setPromptText("Enter The Title");
         jadwalField.setId("jdwl-field");
         jadwalField.setPrefWidth(400);
         jadwalField.setPrefHeight(10);
 
-        Label jPLabel = new Label("Jenis Prioritas");
+        jadwalField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.length() > 50) {
+                jadwalField.setText(oldValue);
+            }
+        });
+
+        Label jPLabel = new Label("Type Of Priority");
         jPLabel.setId("prioritas-label");
 
         VBox labelBox = new VBox(5, catatanLabel, judulLabel, jadwalField, jPLabel);
         labelBox.setAlignment(Pos.CENTER_LEFT);
 
-        rendahPrio = new Button("Rendah");
+        rendahPrio = new Button("Low");
         rendahPrio.setPrefWidth(100);
         rendahPrio.setId("btn-rendah");
         rendahPrio.setOnMouseClicked(e -> {
@@ -62,7 +68,7 @@ public class InputJadwal {
             jenisPrioritas = "rendah";
         });
 
-        sedangPrio = new Button("Sedang");
+        sedangPrio = new Button("Medium");
         sedangPrio.setPrefWidth(100);
         sedangPrio.setId("btn-sedang");
         sedangPrio.setOnMouseClicked(e -> {
@@ -74,7 +80,7 @@ public class InputJadwal {
             jenisPrioritas = "sedang";
         });
 
-        tinggiPrio = new Button("Tinggi");
+        tinggiPrio = new Button("High");
         tinggiPrio.setPrefWidth(100);
         tinggiPrio.setId("btn-tinggi");
         tinggiPrio.setOnMouseClicked(e -> {
@@ -90,10 +96,10 @@ public class InputJadwal {
         jPbutton.setAlignment(Pos.CENTER);
         jPbutton.setSpacing(10);
 
-        Label detailLabel = new Label("Detail");
+        Label detailLabel = new Label("Details");
         detailLabel.setId("detail-label");
 
-        Button tambahWaktu = new Button("Tambahkan waktu");
+        Button tambahWaktu = new Button("Add Time");
         tambahWaktu.setPrefWidth(500);
         tambahWaktu.setId("btn-tmbhwkt");
 
@@ -101,7 +107,7 @@ public class InputJadwal {
             TambahWaktu.tambahWaktuTanggal(primaryStage).showAndWait();
         });
 
-        Button tambahDeskrip = new Button("Tambahkan Deskripsi");
+        Button tambahDeskrip = new Button("Add a description");
         tambahDeskrip.setPrefWidth(500);
         tambahDeskrip.setId("btn-deskripsi");
         tambahDeskrip.setOnAction(e ->{
@@ -132,20 +138,20 @@ public class InputJadwal {
         NotifInputJadwal.slideAtas(notifBox, sceneSebelumnya);
 
         saveButton.setOnAction(e ->{
-            String judul = jadwalField.getText();
+            String judul = jadwalField.getText().trim();
             LocalDate tanggal = TambahWaktu.getTanggal();
             LocalTime waktu = TambahWaktu.getWaktu();
             String deskripsi = TambahDeskripsi.getDeskripsi();
 
             String pesanError = null;
             if (judul.isEmpty() && jenisPrioritas == null && tanggal == null && waktu == null) {
-                pesanError = "Judul, Jenis Prioritas, Tanggal dan Waktu tidak boleh kosong.";
+                pesanError = "Title, Priority Type, Date and Time must not be empty.";
             } else if (judul.isEmpty()) {
-                pesanError = "Judul tidak boleh kosong.";
+                pesanError = "The Title cannot be empty.";
             } else if (jenisPrioritas == null) {
-                pesanError = "Jenis Prioritas tidak boleh kosong.";
+                pesanError = "Priority type cannot be empty.";
             } else if (tanggal == null && waktu == null) {
-                pesanError = "Tanggal dan Waktu tidak boleh kosong.";
+                pesanError = "Date and Time cannot be empty.";
             }
 
             if (pesanError != null) {
