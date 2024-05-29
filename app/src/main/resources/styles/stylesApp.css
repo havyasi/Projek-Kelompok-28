@@ -1,0 +1,36 @@
+#btn-search{
+    -fx-font-weight: bold;
+    -fx-font-size: 10px;
+    -fx-background-color: #FFF7FC;
+}
+
+#btn-calendar{
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-background-color: #5AB2FF;
+    -fx-background-radius: 20;
+}
+
+#btn-completed{
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-background-color: #5AB2FF;
+    -fx-background-radius: 20;
+}
+
+#btn-jadwalHari{
+    -fx-font-size: 13px; 
+    -fx-font-weight: bold; 
+    -fx-text-fill: black; 
+    -fx-background-color: #FF9A00; 
+    -fx-background-radius: 5;
+}
+
+#btn-jadwal{
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-background-color: #FF9A00;
+    -fx-text-fill: black;
+    -fx-font-family: 'Arial';
+    -fx-background-radius: 5;
+}
