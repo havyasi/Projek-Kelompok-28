@@ -206,18 +206,18 @@ public class DaftarPengingatHarian {
         //Menetukan posisi popup yang berisi daftar jadwal.
         popup.setX(bounds.getMinX());
         popup.setY(bounds.getMaxY() + 5);
-        popup.show(); //Menampilkan popup.
+        popup.show();////Menampilkan popup.
 
 
-        //Membuat scroll pane bergeser ke atas sebelum ditampilkan.
+        ////Membuat scroll pane bergeser ke atas sebelum ditampilkan.
         scrollPane.setTranslateY(-300);
-        //Membuat transisi bergeser untuk scroll pane.
+        ////Membuat transisi bergeser untuk scroll pane.
         TranslateTransition slide = new TranslateTransition(Duration.millis(300), scrollPane);
         slide.setFromY(-300);
         slide.setToY(0);
         slide.play();
 
-        //Menangani pergeseran jendela aplikasi dan menggeser popup sesuai dengan posisi trigger button.
+        // //Menangani pergeseran jendela aplikasi dan menggeser popup sesuai dengan posisi trigger button.
         primaryStage.xProperty().addListener((obs, oldVal, newVal) -> {
             Bounds newBounds = triggerButton.localToScreen(triggerButton.getBoundsInLocal());
             popup.setX(newBounds.getMinX());
@@ -228,7 +228,7 @@ public class DaftarPengingatHarian {
             popup.setY(newBounds.getMaxY() + 5);
         });
 
-        //Menyembunyikan popup ketika mouse ditekan di luar area popup.
+        ////Menyembunyikan popup ketika mouse ditekan di luar area popup.
         primaryStage.getScene().addEventFilter(javafx.scene.input.MouseEvent.MOUSE_PRESSED, event -> {
             if (popup.isShowing() && !bounds.contains(event.getScreenX(), event.getScreenY())) {
                 popup.hide();

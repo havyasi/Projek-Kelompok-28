@@ -15,7 +15,10 @@ import id.rezka.tuprak9.config.DatabaseConnection;
 
 public class DbManager {
 
+    //Metode ini membuat tabel bernama Pengingat di database jika belum ada.
     public static void buatTabel(){
+
+        //Deklarasi variabel tablesql yang berisi query SQL untuk membuat tabel Pengingat.
         String tablesql = "CREATE TABLE IF NOT EXISTS Pengingat ("
                 + " id INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + " judul TEXT NOT NULL,"
@@ -33,22 +36,29 @@ public class DbManager {
 		}
     }
     
+
+    //Metode statis saveData() yang digunakan untuk menyimpan data ke tabel Pengingat.
     public static void saveData(String judul, String jenisPrioritas, LocalDate tanggal, LocalTime waktu, String deskripsi) {
         buatTabel();
+
+        //Deklarasi variabel sql yang berisi query SQL untuk menyimpan data ke tabel Pengingat.
         String sql = "INSERT INTO Pengingat (judul, jenis_prioritas, tanggal, waktu, deskripsi) VALUES (?, ?, ?, ?, ?)";
         try (Connection connection = DatabaseConnection.connect();
             PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, judul);
-            statement.setString(2, jenisPrioritas);
-            statement.setString(3, tanggal.toString());
+            statement.setString(1, judul); //Atur nilai parameter pertama dengan nilai judul.
+            statement.setString(2, jenisPrioritas); //Atur nilai parameter kedua dengan nilai jenisPrioritas.
+            statement.setString(3, tanggal.toString()); //
             statement.setString(4, waktu.toString());
             statement.setString(5, deskripsi);
+            //Jalankan query SQL untuk menyimpan data ke tabel Pengingat.
             statement.executeUpdate();
+        //Blok kode untuk menangani pengecualian SQLException.
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+    //Definisikan metode static bernama loadData yang digunakan untuk memuat semua data dari tabel Pengingat.
     public static List<String[]> loadData() { // load data seluruhan
         List<String[]> dataList = new ArrayList<>();
         String sql = "SELECT * FROM Pengingat";
@@ -68,6 +78,8 @@ public class DbManager {
         }
         return dataList;
     }
+
+    //Metode statis loadDataForDate() yang digunakan untuk memuat data dari tabel Pengingat berdasarkan tanggal
     public static List<String[]> loadDataForDate(LocalDate tanggal) { //load data menurut tgl
         List<String[]> dataList = new ArrayList<>();
         String sql = "SELECT * FROM Pengingat WHERE tanggal = ?";
@@ -90,6 +102,7 @@ public class DbManager {
         return dataList;
     }
 
+    //Metode ini menghapus catatan dari tabel Pengingat di database berdasarkan ID-nya.
     public static void removeData(int id) {
         String sql = "DELETE FROM Pengingat WHERE id = ?";
         try (Connection connection = DatabaseConnection.connect();
@@ -101,8 +114,11 @@ public class DbManager {
         }
     }
     
+    //Metode ini mencari catatan di tabel Pengingat di database berdasarkan kata kunci dan mengembalikannya sebagai daftar array.
     public static List<String[]> cariData(String keyword){
     List<String[]> resultList = new ArrayList<>();
+
+    //Definisikan variabel sql dengan query SQL untuk memuat semua data dari tabel Pengingat.
     String sql = "SELECT * FROM Pengingat WHERE judul LIKE? OR deskripsi LIKE ? OR jenis_Prioritas LIKE ?";
     try (Connection connection = DatabaseConnection.connect();
         PreparedStatement statement = connection.prepareStatement(sql)) {
