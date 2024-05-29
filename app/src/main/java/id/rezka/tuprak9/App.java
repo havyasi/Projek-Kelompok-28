@@ -3,6 +3,7 @@ package id.rezka.tuprak9;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -80,6 +81,7 @@ public class App extends Application {
         searchbar.setId("btn-search");
         searchbar.setMaxWidth(470);
         searchbar.setMinHeight(30);
+        
 
         // Action untuk Search
         searchbar.setOnAction(e -> {
@@ -215,11 +217,11 @@ public class App extends Application {
         // Menambahkan ImageView sebagai background
         ImageView backgroundImageView = null;
         try {
-            FileInputStream backgroundStream = new FileInputStream("src/main/resources/image/IMG_1369.JPG");
+            FileInputStream backgroundStream = new FileInputStream("src/main/resources/image/IMG_1458.PNG");
             Image backgroundImage = new Image(backgroundStream);
             backgroundImageView = new ImageView(backgroundImage);
-            backgroundImageView.setFitWidth(500);
-            backgroundImageView.setFitHeight(600);
+            backgroundImageView.setFitWidth(300);
+            backgroundImageView.setFitHeight(300);
             backgroundImageView.setPreserveRatio(false);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -229,15 +231,23 @@ public class App extends Application {
         StackPane root = new StackPane();
         if (backgroundImageView != null) {
             root.getChildren().add(backgroundImageView);
+            StackPane.setAlignment(backgroundImageView, Pos.CENTER);
+            StackPane.setMargin(backgroundImageView, new Insets(150, 0, 0, 25));
+            
+            
         }
 
         // Menambahkan elemen-elemen ke StackPane
         VBox vBox = new VBox(10);
         vBox.getChildren().addAll(stackPane1, buttonPane, btnDaftarHarian, jadwalPane);
         root.getChildren().add(vBox);
+        root.setId("lyt-list");
+        
+        
 
         Scene scene = new Scene(root, 500, 600);
         scene.getStylesheets().add("/styles/stylesInputJadwal&App.css");
+        scene.getStylesheets().add("/styles/stylesMyList.css");
         primaryStage.setScene(scene);
 
         return scene;

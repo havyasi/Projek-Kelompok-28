@@ -1,0 +1,21 @@
+
+/*stylesCompleted.css*/
+
+#completed-Label{
+    -fx-text-fill: black; 
+    -fx-font-size: 20px; 
+    -fx-font-weight: bold;
+}
+
+#scrol-styl{
+    -fx-background: #7296a4;
+}
+
+#back-btn{
+    -fx-font-size: 15px; 
+    -fx-font-weight: bold;
+}
+
+#completed-lyt{
+    -fx-background-color: #CAF4FF;
+}

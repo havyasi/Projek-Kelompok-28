@@ -1,0 +1,11 @@
+#tanggal-waktu{
+    -fx-font-size: 15px;
+}
+
+#save-btn, #back-btn{
+    -fx-font-size: 12px;
+}
+
+#tambahTgl-wkt{
+    -fx-background-color: #e3f2fd ;
+}

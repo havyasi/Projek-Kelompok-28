@@ -1,0 +1,151 @@
+#cttn-label{
+    -fx-text-fill: black; 
+    -fx-font-size: 20px;
+}
+
+#jdwl-field{
+    -fx-background-color: white; 
+    -fx-text-fill: black; 
+    -fx-font-size: 15px;
+}
+
+#prioritas-label, #judul-label{
+    -fx-text-fill: black; 
+    -fx-font-size: 15px;
+}
+
+#btn-rendah{
+    -fx-font-size: 12px; 
+    -fx-background-color: #a5d6a7; 
+    -fx-text-fill: black; 
+    -fx-background-radius: 5;
+}
+
+#click-rendah{
+    -fx-font-size: 12px; 
+    -fx-background-color: #66bb64; 
+    -fx-text-fill: white; 
+    -fx-background-radius: 5;
+}
+
+#click-sedang{
+    -fx-font-size: 12px; 
+    -fx-background-color: #ffe082; 
+    -fx-text-fill: black; 
+    -fx-background-radius: 5;
+}
+
+#click-tinggi{
+    -fx-font-size: 12px; 
+    -fx-background-color: #ffab91; 
+    -fx-text-fill: black; 
+    -fx-background-radius: 5;
+}
+
+#btn-sedang{
+    -fx-font-size: 12px; 
+    -fx-background-color: #ffe082; 
+    -fx-text-fill: black; 
+    -fx-background-radius: 5;
+}
+
+#click2-rendah{
+    -fx-font-size: 12px; 
+    -fx-background-color: #a5d6a7; 
+    -fx-text-fill: black; 
+    -fx-background-radius: 5;
+}
+
+#click2-sedang{
+    -fx-font-size: 12px; 
+    -fx-background-color: #ffca28; 
+    -fx-text-fill: white; 
+    -fx-background-radius: 5;
+}
+
+#click2-tinggi{
+    -fx-font-size: 12px; 
+    -fx-background-color: #ffab91; 
+    -fx-text-fill: black; 
+    -fx-background-radius: 5;
+}
+
+#btn-tinggi{
+    -fx-font-size: 12px; 
+    -fx-background-color: #ffab91; 
+    -fx-text-fill: black; 
+    -fx-background-radius: 5;
+}
+
+#click3-rendah{
+    -fx-font-size: 12px; 
+    -fx-background-color: #a5d6a7; 
+    -fx-text-fill: black; 
+    -fx-background-radius: 5;
+}
+
+#click3-sedang{
+    -fx-font-size: 12px; 
+    -fx-background-color: #ffe082; 
+    -fx-text-fill: black; 
+    -fx-background-radius: 5;
+}
+
+#click3-tinggi{
+    -fx-font-size: 12px; 
+    -fx-background-color: #ff7043; 
+    -fx-text-fill: white; 
+    -fx-background-radius: 5;
+}
+
+#detail-label{
+    -fx-text-fill: black; 
+    -fx-font-size: 17;
+}
+
+#btn-tmbhwkt, #btn-deskripsi, #btn-save, #btn-back{
+    -fx-font-size: 12px;
+}
+
+#lyt-jadwal{
+    -fx-background-color: #90caf9 ; 
+    -fx-font-weight: bold; 
+    -fx-font-size: 25px
+}
+
+#btn-search{
+    -fx-font-weight: bold;
+    -fx-font-size: 10px;
+    -fx-background-color: #FFF7FC;
+}
+
+#btn-calendar{
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-background-color: #5AB2FF;
+    -fx-background-radius: 20;
+}
+
+#btn-completed{
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-background-color: #5AB2FF;
+    -fx-background-radius: 20;
+}
+
+#btn-jadwalHari{
+    -fx-font-size: 13px; 
+    -fx-font-weight: bold; 
+    -fx-text-fill: black; 
+    -fx-background-color: #FF9A00; 
+    -fx-background-radius: 5;
+}
+
+#btn-jadwal{
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-background-color: #FF9A00;
+    -fx-text-fill: black;
+    -fx-font-family: 'Arial';
+    -fx-background-radius: 5;
+}
