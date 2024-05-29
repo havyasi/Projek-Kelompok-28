@@ -16,18 +16,18 @@ import javafx.stage.Stage;
 public class MyList {
     public static Scene createScene(Stage primaryStage, App app) {
         Label myListLabel = new Label("My List");
-        myListLabel.setStyle("-fx-text-fill: black; -fx-font-size: 20px; -fx-font-weight: bold; ");
+        myListLabel.setId("search-label");
     
 
         // nampilkan semua list schedule scroll panenya nanti tmpil kalau dtanya lewat dri ukuran stageny kita
         // pke sql
 
         ScrollPane scroll= new ScrollPane();
-        scroll.setStyle("-fx-background: #CAF4FF;");
+        scroll.setId("scroll-pane");
 
         VBox list = new VBox(10);
         list.setPadding(new Insets(10));
-        list.setStyle("-fx-background-color: #CAF4FF;");
+        list.setId("list-box");
 
         //ArrayList
         List<String[]> allSchedule = DbManager.loadData();
@@ -36,7 +36,7 @@ public class MyList {
             Label scheduLabel = new Label("\t" + schedule[3] + "\t\t" + schedule[1]);
             scheduLabel.setPrefWidth(460);
             scheduLabel.setPrefHeight(40);
-            scheduLabel.setStyle("-fx-font-family: 'Berlin Sans FB'; -fx-font-size: 15px; -fx-text-fiil: black; -fx-background-color: #90CAF9; -fx-background-radius: 5;");
+            scheduLabel.setId("schedule-label");
             scheduLabel.setOnMouseClicked(e -> {
                 Scene detailScene = DaftarPengingatHarian.detailScene(primaryStage, schedule, primaryStage.getScene());
                 primaryStage.setScene(detailScene);
@@ -48,7 +48,7 @@ public class MyList {
         scroll.setFitToWidth(true);
 
         Button backButton = new Button("Back");
-        backButton.setStyle("-fx-font-size: 15px; -fx-font-weight: bold;");
+        backButton.setId("back-btn");
         backButton.setOnAction(e -> primaryStage.setScene(app.createMainScene(primaryStage)));
 
         BorderPane layout = new BorderPane();
@@ -60,8 +60,12 @@ public class MyList {
         BorderPane.setMargin(myListLabel, new Insets(20, 0, 20, 0));
         BorderPane.setAlignment(backButton, Pos.CENTER);
         BorderPane.setMargin(backButton, new Insets(0, 20, 20, 20));
-        layout.setStyle("-fx-background-color: #CAF4FF;");
+        layout.setId("lyt-list");
 
-        return new Scene(layout, 500, 600);
+        Scene scene = new Scene(layout, 500, 600);
+        scene.getStylesheets().add("/styles/stylesMyList.css");
+
+        return scene;
+        
     }
 }

@@ -1,0 +1,32 @@
+/* stylesMyList */
+
+#search-label{
+    -fx-text-fill: black; 
+    -fx-font-size: 20px; 
+    -fx-font-weight: bold;
+}
+
+#scroll-pane{
+    -fx-background: #CAF4FF;
+}
+
+#list-box{
+    -fx-background: #CAF4FF;
+}
+
+#schedule-label{
+    -fx-font-family: 'Berlin Sans FB'; 
+    -fx-font-size: 15px; 
+    -fx-text-fiil: black; 
+    -fx-background-color: #90CAF9; 
+    -fx-background-radius: 5
+}
+
+#back-btn{
+    -fx-font-size: 15px; 
+    -fx-font-weight: bold;
+}
+
+#lyt-list{
+    -fx-background-color: #CAF4FF;
+}

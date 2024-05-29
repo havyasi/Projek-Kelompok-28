@@ -3,7 +3,6 @@ package id.rezka.tuprak9;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import org.checkerframework.checker.units.qual.s;
 
 import id.rezka.tuprak9.controller.DbManager;
 import id.rezka.tuprak9.utils.NotifInputJadwal;

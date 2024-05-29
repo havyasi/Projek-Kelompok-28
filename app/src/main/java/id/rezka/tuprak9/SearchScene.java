@@ -18,31 +18,31 @@ public class SearchScene {
 
         // Membuat tombol untuk kembali ke scene  dan Mengatur gaya tombol kembali
         Button backButton = new Button("Back");
-        backButton.setStyle("-fx-font-size: 13px; -fx-font-weight: bold;");
+        backButton.setId("back-button");
         backButton.setOnAction(e -> primaryStage.setScene(appInstance.createMainScene(primaryStage)));
 
         // Membuat kolom pencarian, Mengatur teks petunjuk dalam kolom pencarian, Mengatur gaya kolom pencarian, Mengatur lebar preferensi kolom pencarian
         TextField searchField = new TextField();
         searchField.setPromptText("Search");
-        searchField.setStyle("-fx-background-color: white; -fx-text-fill: black; -fx-font-size: 13px;");
+        searchField.setId("search-field");
         searchField.setPrefWidth(400);
 
         // Membuat ScrollPanel agar konten scroll menyesuaikan dengan lebar panel
         ScrollPane scroll = new ScrollPane();
         scroll.setFitToWidth(true);
-        scroll.setStyle("-fx-background: #DAF2FE;");
+        scroll.setId("scroll-pane");
 
         //Membuat kotak vertikal untuk menampung hasil pencarian, Mengatur padding (jarak dalam) kotak vertikal
         VBox searchBox = new VBox(10);
         searchBox.setPadding(new javafx.geometry.Insets(10));
-        searchBox.setStyle("-fx-background-color: #DAF2FE;");
+        searchBox.setId("main-layout");
         scroll.setContent(searchBox); //Menetapkan kotak vertikal sebagai konten panel scroll
 
         // Mengatur tata letak utama scene, Mengatur padding tata letak utama, 
         VBox layout2 = new VBox(10, backButton, searchField, scroll);
         layout2.setPadding(new javafx.geometry.Insets(20));
         layout2.setAlignment(Pos.TOP_LEFT); //Mengatur perataan elemen dalam tata letak utama
-        layout2.setStyle("-fx-background-color: #DAF2FE; -fx-font-weight: bold; -fx-font-size: 25px");
+        layout2.setId("search-box");
 
         // Memuat data awal
         updateSearchResults(searchBox, "", primaryStage);
@@ -53,7 +53,9 @@ public class SearchScene {
         });
 
         //Mengembalikan objek Scene yang telah dibuat
-        return new Scene(layout2, 500, 600);
+        Scene scene = new Scene(layout2, 500, 600);
+        scene.getStylesheets().add("/styles/stylesSearch.css");
+        return scene;
     }
 
 
@@ -70,7 +72,7 @@ public class SearchScene {
         for (String[] result : searchResults) {
             Label resultLabel = new Label(result[3] + " - " + result[1]);
             resultLabel.setPrefWidth(400);
-            resultLabel.setStyle("-fx-font-size: 15px; -fx-text-fill: black; -fx-background-color: #90caf9; -fx-background-radius: 5;");
+            resultLabel.setId("result-label");
             
             // Mengatur aksi ketika label diklik
             resultLabel.setOnMouseClicked(ev -> {
