@@ -30,6 +30,8 @@ public class InputJadwal {
     private static Button tinggiPrio;
 
     public static Scene createScene(Stage primaryStage, App app, Scene sceneSebelumnya) {
+        jenisPrioritas = null;
+        TambahWaktu.reset();
         
         // Label untuk judul form "Add New Schedule"
         Label catatanLabel = new Label("Add New Schedule");

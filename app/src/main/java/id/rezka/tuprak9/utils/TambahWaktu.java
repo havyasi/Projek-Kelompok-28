@@ -84,4 +84,9 @@ public class TambahWaktu {
     public static LocalTime getWaktu() {
         return waktu;
     }
+
+    public static void reset() {
+        tanggal = null;
+        waktu = null;
+    }
 }

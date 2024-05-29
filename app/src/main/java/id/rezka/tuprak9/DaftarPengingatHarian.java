@@ -82,7 +82,8 @@ public class DaftarPengingatHarian {
             MyList.upadateList(primaryStage);
 
             // Jika scene sebelumnya adalah scene pencarian, perbarui juga hasil pencarian
-            if (previousScene.getRoot().getId().equals("search-box")) {
+            String rootid = previousScene.getRoot().getId();
+            if (rootid != null && rootid.equals("search-box")) {
                 VBox searchBox = (VBox) ((ScrollPane) previousScene.lookup("#scroll-pane")).getContent();
                 SearchScene.updateSearchResults(searchBox, "", primaryStage);
             }
@@ -180,11 +181,11 @@ public class DaftarPengingatHarian {
             Label scheduleLabel = new Label(jadwal[4] + "\t" + jadwal[1]); // Membuat sebuah label dengan teks berisi waktu dan judul jadwal.
             scheduleLabel.setPrefWidth(340);
             //Menentukan warna label berdasarkan tingkat prioritas jadwal.
-            if ("rendah".equals(jadwal[2])) {
+            if ("Low".equals(jadwal[2])) {
                 scheduleLabel.setId("rendah-label");
-            } else if ("sedang".equals(jadwal[2])) {
+            } else if ("Medium".equals(jadwal[2])) {
                 scheduleLabel.setId("sedang-label");
-            } else if ("tinggi".equals(jadwal[2])) {
+            } else if ("High".equals(jadwal[2])) {
                 scheduleLabel.setId("tinggi-label");
             }
 

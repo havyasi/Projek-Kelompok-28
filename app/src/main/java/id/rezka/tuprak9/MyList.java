@@ -55,9 +55,10 @@ public class MyList {
         layout.setBottom(backButton); // Menetapkan tombol kembali di bagian bawah
         BorderPane.setAlignment(myListLabel, Pos.TOP_CENTER);
         BorderPane.setAlignment(scroll, Pos.TOP_CENTER);
-        BorderPane.setMargin(myListLabel, new Insets(20, 0, 20, 0));
+        BorderPane.setMargin(myListLabel, new Insets(10, 10, 10, 10));
+        BorderPane.setMargin(scroll, new Insets(0, 10, 0, 10));
         BorderPane.setAlignment(backButton, Pos.CENTER);
-        BorderPane.setMargin(backButton, new Insets(0, 20, 20, 20));
+        BorderPane.setMargin(backButton, new Insets(10, 10, 10, 20));
         layout.setId("lyt-list");// Menetapkan ID untuk keperluan styling dengan CSS
 
          // Membuat Scene baru dengan layout yang sudah dibuat, dan menetapkan ukuran serta stylesheet
