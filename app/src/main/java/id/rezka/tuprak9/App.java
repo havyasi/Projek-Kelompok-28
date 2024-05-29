@@ -77,10 +77,7 @@ public class App extends Application {
 
     public Scene createMainScene(Stage primaryStage) {
         Button searchbar = new Button("Search");
-        searchbar.setStyle(
-            "-fx-font-weight: bold;" +
-            "-fx-font-size: 10px;" +
-            "-fx-background-color: #FFF7FC;");
+        searchbar.setId("btn-search");
         searchbar.setMaxWidth(470);
         searchbar.setMinHeight(30);
 
@@ -113,10 +110,7 @@ public class App extends Application {
         Button calendarButton = new Button("");
         calendarButton.setMaxWidth(150);
         calendarButton.setMinHeight(100);
-        calendarButton.setStyle("-fx-font-size: 25px;" +
-                "-fx-font-weight: bold;" +
-                "-fx-background-color: #5AB2FF;" +
-                "-fx-background-radius: 20");
+        calendarButton.setId("btn-calendar");
 
         // Action untuk gambar Calendar(Daftar List) Button
         calendarButton.setOnAction(e -> {
@@ -143,10 +137,7 @@ public class App extends Application {
         Button completedButton = new Button("");
         completedButton.setMaxWidth(150);
         completedButton.setMinHeight(100);
-        completedButton.setStyle("-fx-font-size: 25px;" +
-                "-fx-font-weight: bold;" +
-                "-fx-background-color: #5AB2FF;" +
-                "-fx-background-radius: 20");
+        completedButton.setId("btn-completed");
 
         // Action Untuk Completed Button
         completedButton.setOnAction(e -> {
@@ -179,7 +170,7 @@ public class App extends Application {
         
         // button menampilkan jadwal harian
         Button jadwalHarian = new Button("Today's Task List");
-        jadwalHarian.setStyle("-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: black; -fx-background-color: #FF9A00; -fx-background-radius: 5;");
+        jadwalHarian.setId("btn-jadwalHari");
         jadwalHarian.setPrefWidth(380);
         jadwalHarian.setOnAction(e -> {
             DaftarPengingatHarian.tampilkanDaftarHarian(primaryStage, jadwalHarian);
@@ -194,13 +185,7 @@ public class App extends Application {
         jadwalButton.setMaxHeight(100);
         jadwalButton.setMinHeight(10);
         jadwalButton.setAlignment(Pos.BASELINE_RIGHT);
-        jadwalButton.setStyle(
-                "-fx-font-size: 13px;" +
-                        "-fx-font-weight: bold;" +
-                        "-fx-background-color: #FF9A00;" +
-                        "-fx-text-fill: black;" +
-                        "-fx-font-family: 'Arial';" +
-                        "-fx-background-radius: 5;");
+        jadwalButton.setId("btn-jadwal");
 
 
         // Action untuk jadwal
@@ -252,6 +237,7 @@ public class App extends Application {
         root.getChildren().add(vBox);
 
         Scene scene = new Scene(root, 500, 600);
+        scene.getStylesheets().add("/styles/stylesInputJadwal&App.css");
         primaryStage.setScene(scene);
 
         return scene;

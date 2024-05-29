@@ -201,7 +201,7 @@ public class InputJadwal {
 
         // Membuat scene baru dengan layout yang sudah diatur dan menambahkan stylesheet
         Scene scene = new Scene(mainLayoutAddSch, 500, 600);
-        scene.getStylesheets().add("/styles/stylesInputJadwal.css");
+        scene.getStylesheets().add("/styles/stylesInputJadwal&App.css");
         return scene;
     }
 }
