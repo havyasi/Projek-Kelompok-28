@@ -60,7 +60,7 @@ public class SearchScene {
 
 
     // Metode untuk memperbarui hasil pencarian
-    private static void updateSearchResults(VBox searchBox, String keyword, Stage primaryStage) {
+    public static void updateSearchResults(VBox searchBox, String keyword, Stage primaryStage) {
 
         // Mendapatkan hasil pencarian dari database
         List<String[]> searchResults = DbManager.cariData(keyword);

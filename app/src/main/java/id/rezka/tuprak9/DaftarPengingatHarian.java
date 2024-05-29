@@ -45,7 +45,10 @@ public class DaftarPengingatHarian {
         backButton.setMaxWidth(40);
         backButton.setMaxHeight(40);
         backButton.setId("bck-bttn");
-        backButton.setOnAction(e -> primaryStage.setScene(previousScene));
+        backButton.setOnAction(e -> {
+            primaryStage.setScene(previousScene);
+            MyList.upadateList(primaryStage);
+        });
         try {
             FileInputStream iconStream = new FileInputStream("src/main/resources/image/back.png");
             Image icon = new Image(iconStream);
@@ -66,6 +69,15 @@ public class DaftarPengingatHarian {
             int id = Integer.parseInt(scheduleDetails[0]);
             DbManager.removeData(id);
             primaryStage.setScene(previousScene);
+
+            //refresh di scene my list
+            MyList.upadateList(primaryStage);
+
+            //refresh di scene search
+            if (previousScene.getRoot().getId().equals("search-box")) {
+                VBox searchBox = (VBox) ((ScrollPane) previousScene.lookup("#scroll-pane")).getContent();
+                SearchScene.updateSearchResults(searchBox, "", primaryStage);
+            }
         });
 
         try {

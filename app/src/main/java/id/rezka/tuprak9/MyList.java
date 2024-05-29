@@ -14,7 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class MyList {
-
+    private static VBox list;
     // Metode createScene membuat dan mengembalikan sebuah Scene yang menampilkan daftar jadwal.
     public static Scene createScene(Stage primaryStage, App app) {
         
@@ -31,30 +31,13 @@ public class MyList {
         ScrollPane scroll= new ScrollPane();
         scroll.setId("scroll-pane");
 
-        
         // Membuat VBox untuk menampung Label yang berisi jadwal. VBox akan menampilkan komponen secara vertikal dengan jarak 10 piksel.
-        VBox list = new VBox(10);
+        list = new VBox(10);
         list.setPadding(new Insets(10)); // Menetapkan padding di sekitar VBox
         list.setId("list-box"); // Menetapkan ID untuk keperluan styling dengan CSS
 
-        // Mengambil semua jadwal dari database menggunakan DbManager
-        List<String[]> allSchedule = DbManager.loadData();
-
-        // Untuk setiap jadwal, buat Label yang menampilkan tanggal dan judul jadwal
-
-        for (String[] schedule : allSchedule){
-            Label scheduLabel = new Label("\t" + schedule[3] + "\t\t" + schedule[1]);
-            scheduLabel.setPrefWidth(460);
-            scheduLabel.setPrefHeight(40);
-            scheduLabel.setId("schedule-label");
-
-            // Menetapkan event handler untuk Label, ketika diklik, akan menampilkan detail dari jadwal tersebut
-            scheduLabel.setOnMouseClicked(e -> {
-                Scene detailScene = DaftarPengingatHarian.detailScene(primaryStage, schedule, primaryStage.getScene());
-                primaryStage.setScene(detailScene);
-            });
-            list.getChildren().add(scheduLabel); // Menambahkan Label ke dalam VBox
-        }
+        // upadate data terbaru
+        upadateList(primaryStage);
 
         // Menetapkan konten dari ScrollPane dengan VBox yang berisi daftar jadwal
         scroll.setContent(list);
@@ -83,5 +66,28 @@ public class MyList {
 
         return scene;
         
+    }
+
+    public static void upadateList(Stage primaryStage){
+        if (list != null) {
+            list.getChildren().clear();
+            // Mengambil semua jadwal dari database menggunakan DbManager
+            List<String[]> allSchedule = DbManager.loadData();
+
+            // Untuk setiap jadwal, buat Label yang menampilkan tanggal dan judul jadwal
+            for (String[] schedule : allSchedule){
+                Label scheduLabel = new Label("\t" + schedule[3] + "\t\t" + schedule[1]);
+                scheduLabel.setPrefWidth(460);
+                scheduLabel.setPrefHeight(40);
+                scheduLabel.setId("schedule-label");
+
+                // Menetapkan event handler untuk Label, ketika diklik, akan menampilkan detail dari jadwal tersebut
+                scheduLabel.setOnMouseClicked(e -> {
+                    Scene detailScene = DaftarPengingatHarian.detailScene(primaryStage, schedule, primaryStage.getScene());
+                    primaryStage.setScene(detailScene);
+                });
+                list.getChildren().add(scheduLabel); // Menambahkan Label ke dalam VBox
+            }
+        }
     }
 }
