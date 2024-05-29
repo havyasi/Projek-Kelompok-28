@@ -71,7 +71,7 @@ public class InputJadwal {
             tinggiPrio.setId("btn-tinggi");
         });
         rendahPrio.setOnAction(e -> {
-            jenisPrioritas = "rendah";
+            jenisPrioritas = "Low";
         });
 
         // Button untuk prioritas sedang
@@ -84,7 +84,7 @@ public class InputJadwal {
             tinggiPrio.setId("btn-tinggi");
         });
         sedangPrio.setOnAction(e -> {
-            jenisPrioritas = "sedang";
+            jenisPrioritas = "Medium";
         });
 
         // Button untuk prioritas tinggi        
@@ -97,7 +97,7 @@ public class InputJadwal {
             tinggiPrio.setId("click3-tinggi");
         });
         tinggiPrio.setOnAction(e -> {
-            jenisPrioritas = "tinggi";
+            jenisPrioritas = "High";
         });
 
         // HBox untuk menampung tombol prioritas

@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.List;
 
-
 import id.rezka.tuprak9.controller.DbManager;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Bounds;
@@ -28,16 +27,17 @@ import javafx.util.Duration;
 public class DaftarPengingatHarian {
 
     private static boolean popupmuncul = false;
+    private static Stage popup;
 
     public static Scene detailScene(Stage primaryStage, String[] scheduleDetails, Scene previousScene) {
         VBox detailJadwal = new VBox(10);
         detailJadwal.setAlignment(Pos.TOP_CENTER);
         detailJadwal.setId("box-detail");
-    
+
         Label titleLabel = new Label("Schedule Details");
         titleLabel.setId("label-detail");
 
-        Label scheduleLabel = new Label(scheduleDetails[4] + "\tDate : " + scheduleDetails[3]+ "\nTitle : " + scheduleDetails[1] + "\nType Of Priority: " + scheduleDetails[2] +
+        Label scheduleLabel = new Label(scheduleDetails[4] + "\tDate : " + scheduleDetails[3] + "\nTitle : " + scheduleDetails[1] + "\nType Of Priority: " + scheduleDetails[2] +
                 "\nDeskripsi: " + scheduleDetails[5]);
         scheduleLabel.setId("label-schedule");
 
@@ -50,12 +50,12 @@ public class DaftarPengingatHarian {
             MyList.upadateList(primaryStage);
         });
         try {
-            FileInputStream iconStream = new FileInputStream("src/main/resources/image/back.png");
+            FileInputStream iconStream = new FileInputStream("src/main/resources/image/back-arrow.png");
             Image icon = new Image(iconStream);
 
             ImageView imageView = new ImageView(icon);
             imageView.setFitHeight(20);
-            imageView.setFitWidth(30);
+            imageView.setFitWidth(20);
             backButton.setGraphic(imageView);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -70,10 +70,10 @@ public class DaftarPengingatHarian {
             DbManager.removeData(id);
             primaryStage.setScene(previousScene);
 
-            //refresh di scene my list
+            // Refresh di scene my list
             MyList.upadateList(primaryStage);
 
-            //refresh di scene search
+            // Refresh di scene search
             if (previousScene.getRoot().getId().equals("search-box")) {
                 VBox searchBox = (VBox) ((ScrollPane) previousScene.lookup("#scroll-pane")).getContent();
                 SearchScene.updateSearchResults(searchBox, "", primaryStage);
@@ -81,7 +81,7 @@ public class DaftarPengingatHarian {
         });
 
         try {
-            FileInputStream iconStream = new FileInputStream("src/main/resources/image/delete.png");
+            FileInputStream iconStream = new FileInputStream("src/main/resources/image/delete (2).png");
             Image icon = new Image(iconStream);
 
             ImageView imageView = new ImageView(icon);
@@ -107,60 +107,49 @@ public class DaftarPengingatHarian {
         BorderPane.setAlignment(buttonBox, Pos.TOP_CENTER);
         BorderPane.setMargin(buttonBox, new Insets(20, 20, 20, 20));
         detailJadwal.getChildren().add(layout);
-    
+
         Scene scene = new Scene(detailJadwal, 500, 600);
         scene.getStylesheets().add("styles/stylesDetail.css");
         return scene;
     }
-    
+
     public static void tampilkanDaftarHarian(Stage primaryStage, Button triggerButton) {
         if (popupmuncul) {
+            if (popup != null) {
+                popup.hide();
+                popupmuncul = false;
+            }
             return;
         }
+
         popupmuncul = true;
-        
-        
-        Stage popup = new Stage();
+        popup = new Stage();
         popup.initOwner(primaryStage);
         popup.initModality(Modality.NONE);
         popup.initStyle(StageStyle.TRANSPARENT);
-    
+
         VBox daftar = new VBox(10);
         daftar.setPadding(new Insets(10));
         daftar.setAlignment(Pos.TOP_LEFT);
         daftar.setPrefSize(360, 300);
         daftar.setId("box-daftar");
-    
+
         Label titleLabel = new Label("Today's Schedule");
         titleLabel.setId("label-title");
         daftar.getChildren().addAll(titleLabel);
-        
+
         LocalDate today = LocalDate.now();
         List<String[]> todaySchedules = DbManager.loadDataForDate(today);
-    
+
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setContent(daftar);
         scrollPane.setPrefSize(380, 300);
-        scrollPane.setFitToWidth(true); 
+        scrollPane.setFitToWidth(true);
 
         Scene popupScene = new Scene(scrollPane);
         popupScene.setFill(null);
         popupScene.getStylesheets().add("/styles/stylesDaftarPengingat.css");
         popup.setScene(popupScene);
-        
-        
-    
-
-        // // Scene primaryScene = primaryStage.getScene();
-        // // primaryScene.getRoot().addEventFilter(javafx.scene.input.MouseEvent.MOUSE_PRESSED, event -> {
-        // //     if (popup.isShowing() && !popup.getScene().getRoot().contains(event.getSceneX(), event.getSceneY())) {
-        // //         popup.hide();
-        // //     }
-        // // });
-
-        // popup.show();
-
-        
 
         for (String[] jadwal : todaySchedules) {
             Label scheduleLabel = new Label(jadwal[4] + "\t" + jadwal[1]);
@@ -179,14 +168,10 @@ public class DaftarPengingatHarian {
                 popup.hide();
                 popupmuncul = false;
             });
-            
-            daftar.getChildren().add(scheduleLabel);
 
-            // Scene scene = new Scene(scheduleLabel);
-            // scene.getStylesheets().add("/styles/stylesDaftarPengingat.css");
-            // return;
+            daftar.getChildren().add(scheduleLabel);
         }
-    
+
         Bounds bounds = triggerButton.localToScreen(triggerButton.getBoundsInLocal());
         popup.setX(bounds.getMinX());
         popup.setY(bounds.getMaxY() + 5);
@@ -198,9 +183,16 @@ public class DaftarPengingatHarian {
         slide.setToY(0);
         slide.play();
 
-        
-        // popup.getContent().add(scrollPane);
-        // Scene popupscene = primaryStage.getScene();
+        primaryStage.xProperty().addListener((obs, oldVal, newVal) -> {
+            Bounds newBounds = triggerButton.localToScreen(triggerButton.getBoundsInLocal());
+            popup.setX(newBounds.getMinX());
+        });
+
+        primaryStage.yProperty().addListener((obs, oldVal, newVal) -> {
+            Bounds newBounds = triggerButton.localToScreen(triggerButton.getBoundsInLocal());
+            popup.setY(newBounds.getMaxY() + 5);
+        });
+
         primaryStage.getScene().addEventFilter(javafx.scene.input.MouseEvent.MOUSE_PRESSED, event -> {
             if (popup.isShowing() && !bounds.contains(event.getScreenX(), event.getScreenY())) {
                 popup.hide();
@@ -208,5 +200,4 @@ public class DaftarPengingatHarian {
             }
         });
     }
-    
 }
