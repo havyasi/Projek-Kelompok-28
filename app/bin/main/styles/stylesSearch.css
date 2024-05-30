@@ -32,7 +32,11 @@
     -fx-background-color: #90caf9;
     -fx-background-radius: 5;
     -fx-font-family: 'Berlin Sans FB';
-    -fx-pref-width: 520px; /* Pastikan lebar label hasil sesuai */
+    -fx-pref-width: 520px;
     -fx-pref-heigth: 20px;
-    -fx-padding: 10px; /* Tambahkan padding untuk estetika */
+    -fx-padding: 10px;
+}
+
+#result-label:hover {
+    -fx-background-color: #7dafd8;
 }

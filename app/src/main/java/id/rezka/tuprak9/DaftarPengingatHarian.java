@@ -193,6 +193,7 @@ public class DaftarPengingatHarian {
         // Buat scene dengan VBox sebagai root
         Scene scene = new Scene(detailJadwal, 500, 600);
         scene.getStylesheets().add("styles/stylesDetail.css"); // Tambahkan CSS styling
+        scene.getStylesheets().add("styles/stylesDaftarPengingat.css"); // Tambahkan CSS styling
 
         return scene;
     }
@@ -314,7 +315,7 @@ public class DaftarPengingatHarian {
             if (newBounds != null) {
                 popup.setY(newBounds.getMaxY() + 5);
             } else {
-                
+
             }
         });
 

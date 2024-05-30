@@ -1,5 +1,7 @@
 package id.rezka.tuprak9;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -14,6 +16,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -59,9 +63,12 @@ public class InputJadwal {
         Label jPLabel = new Label("Type Of Priority");
         jPLabel.setId("prioritas-label");
 
+        HBox titlebox = new HBox(judulLabel);
+        titlebox.setAlignment(Pos.TOP_LEFT);
         // VBox untuk menampung label dan input judul
-        VBox labelBox = new VBox(5, catatanLabel, judulLabel, jadwalField, jPLabel);
-        labelBox.setAlignment(Pos.CENTER_LEFT);
+        VBox labelBox = new VBox(5, catatanLabel,titlebox, jadwalField, jPLabel);
+        
+        labelBox.setAlignment(Pos.TOP_CENTER);
 
         // Button untuk prioritas rendah
         rendahPrio = new Button("Low");
@@ -113,8 +120,9 @@ public class InputJadwal {
 
         // Button untuk menambahkan waktu
         Button tambahWaktu = new Button("Add Time");
+        tambahWaktu.setId("btn-addtimeanddesc");
         tambahWaktu.setPrefWidth(500);
-        tambahWaktu.setId("btn-tmbhwkt");
+        // tambahWaktu.setId("btn-tmbhwkt");
 
         tambahWaktu.setOnAction(e -> {
             TambahWaktu.tambahWaktuTanggal(primaryStage).showAndWait();
@@ -123,7 +131,7 @@ public class InputJadwal {
         // Button untuk menambahkan deskripsi
         Button tambahDeskrip = new Button("Add a description");
         tambahDeskrip.setPrefWidth(500);
-        tambahDeskrip.setId("btn-deskripsi");
+        tambahDeskrip.setId("btn-addtimeanddesc");
         tambahDeskrip.setOnAction(e ->{
             TambahDeskripsi.tambahDeskrip(primaryStage).showAndWait();
         });        
@@ -132,14 +140,45 @@ public class InputJadwal {
         VBox detailVBox = new VBox(10, detailLabel,tambahWaktu ,tambahDeskrip);
 
         // Button untuk menyimpan jadwal
-        Button saveButton = new Button("Save");
-        saveButton.setId("btn-save");
+        Button saveButton = new Button("");
+        saveButton.setId("sve-bttn");
         saveButton.setPrefWidth(80);
+        saveButton.setPrefSize(70, 20);
+        saveButton.setMinSize(70, 10);
+        saveButton.setMaxHeight(40);
+        saveButton.setMaxWidth(40);
+        try {
+            // Setel ikon tombol kembali
+           FileInputStream iconStream = new FileInputStream("src/main/resources/image/save.png");
+           Image icon = new Image(iconStream);
+
+           ImageView imageView = new ImageView(icon);
+           imageView.setFitHeight(20);
+           imageView.setFitWidth(20);
+           saveButton.setGraphic(imageView);
+       } catch (FileNotFoundException e) {
+           e.printStackTrace();
+       }
 
         // Button untuk kembali ke scene sebelumnya
-        Button backButton = new Button("Back");
-        backButton.setId("btn-back");
-        backButton.setPrefWidth(80);
+        Button backButton = new Button("");
+        backButton.setId("bck-bttn");
+        backButton.setMaxHeight(40);
+        backButton.setMaxWidth(40);
+        backButton.setPrefSize(70, 20);
+        backButton.setMinSize(70, 10);
+        try {
+             // Setel ikon tombol kembali
+            FileInputStream iconStream = new FileInputStream("src/main/resources/image/back-arrow.png");
+            Image icon = new Image(iconStream);
+
+            ImageView imageView = new ImageView(icon);
+            imageView.setFitHeight(20);
+            imageView.setFitWidth(20);
+            backButton.setGraphic(imageView);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         
         // HBox untuk menampung tombol kembali dan tombol simpan
         HBox tombol = new HBox(340, backButton, saveButton);
@@ -202,6 +241,8 @@ public class InputJadwal {
         // Membuat scene baru dengan layout yang sudah diatur dan menambahkan stylesheet
         Scene scene = new Scene(mainLayoutAddSch, 500, 600);
         scene.getStylesheets().add("/styles/stylesInputJadwal&App.css");
+        scene.getStylesheets().add("/styles/stylesDetail.css");
+        scene.getStylesheets().add("/styles/stylesMyList.css");
         return scene;
     }
 }

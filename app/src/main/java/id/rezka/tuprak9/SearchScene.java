@@ -7,9 +7,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 public class SearchScene {
@@ -17,9 +21,23 @@ public class SearchScene {
     public static Scene createScene(Stage primaryStage, App appInstance) {
 
         // Membuat tombol untuk kembali ke scene utama
-        Button backButton = new Button("Back");
-        backButton.setId("back-button");
+        Button backButton = new Button("");
+        backButton.setMaxWidth(40);
+        backButton.setMaxHeight(40);
+        backButton.setId("bck-bttn");
         backButton.setOnAction(e -> primaryStage.setScene(appInstance.createMainScene(primaryStage)));
+         try {
+             // Setel ikon tombol kembali
+            FileInputStream iconStream = new FileInputStream("src/main/resources/image/back-arrow.png");
+            Image icon = new Image(iconStream);
+
+            ImageView imageView = new ImageView(icon);
+            imageView.setFitHeight(20);
+            imageView.setFitWidth(20);
+            backButton.setGraphic(imageView);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         // Membuat kolom pencarian
         TextField searchField = new TextField();
@@ -53,6 +71,7 @@ public class SearchScene {
 
         Scene scene = new Scene(layout2, 500, 600);
         scene.getStylesheets().add("/styles/stylesSearch.css");
+        scene.getStylesheets().add("/styles/stylesDetail.css");
         return scene;
     }
 

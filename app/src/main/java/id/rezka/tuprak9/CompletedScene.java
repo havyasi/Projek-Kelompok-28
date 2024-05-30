@@ -1,5 +1,7 @@
 package id.rezka.tuprak9;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import id.rezka.tuprak9.controller.DbManager;
@@ -9,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -67,9 +71,23 @@ public class CompletedScene {
         completedLayout.setId("completed-lyt");
         
         // Tombol "Back" ditambahkan untuk kembali ke halaman utama.
-        Button backButton = new Button("Back");
-        backButton.setId("back-btn");
+        Button backButton = new Button("");
+        backButton.setMaxWidth(40);
+        backButton.setMaxHeight(40);
+        backButton.setId("bck-bttn");
         backButton.setOnAction(e -> primaryStage.setScene(app.createMainScene(primaryStage)));
+        try {
+             // Setel ikon tombol kembali
+            FileInputStream iconStream = new FileInputStream("src/main/resources/image/back-arrow.png");
+            Image icon = new Image(iconStream);
+
+            ImageView imageView = new ImageView(icon);
+            imageView.setFitHeight(20);
+            imageView.setFitWidth(20);
+            backButton.setGraphic(imageView);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         completedLayout.setBottom(backButton);
         BorderPane.setAlignment(backButton, Pos.CENTER);
@@ -77,6 +95,7 @@ public class CompletedScene {
 
         Scene scene = new Scene(completedLayout, 500, 600);
         scene.getStylesheets().add("/styles/stylesCompleted.css");
+        scene.getStylesheets().add("/styles/stylesDetail.css");
 
         return scene;
     }

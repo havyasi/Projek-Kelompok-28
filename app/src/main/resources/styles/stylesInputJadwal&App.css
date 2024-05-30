@@ -1,17 +1,20 @@
 #cttn-label{
     -fx-text-fill: black; 
     -fx-font-size: 20px;
+    -fx-font-family: 'Arial';
 }
 
 #jdwl-field{
     -fx-background-color: white; 
     -fx-text-fill: black; 
+    -fx-font-family: 'Arial';
     -fx-font-size: 15px;
 }
 
 #prioritas-label, #judul-label{
     -fx-text-fill: black; 
     -fx-font-size: 15px;
+    -fx-font-family: 'Arial';
 }
 
 #btn-rendah{
@@ -166,6 +169,7 @@
     -fx-text-fill: black; 
     -fx-background-color: #FF9A00; 
     -fx-background-radius: 20;
+    -fx-font-family: 'Arial';
     -fx-border-color: black;
     -fx-border-radius: 20;
 }
@@ -208,4 +212,14 @@
 #for-outer {
     -fx-border-color: black;
     -fx-background-color: white; 
+}
+#btn-addtimeanddesc{
+    -fx-font-size: 13px; 
+    -fx-font-weight: bold; 
+    -fx-text-fill: black; 
+    -fx-background-color: white; 
+    -fx-background-radius: 20;
+    -fx-font-family: 'Arial';
+    -fx-border-color: black;
+    -fx-border-radius: 20;
 }
