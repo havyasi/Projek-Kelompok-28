@@ -19,3 +19,8 @@
     -fx-background-color: white; 
     -fx-background-radius: 20
 }
+
+#bck-bttn:hover{
+    -fx-background-color: #ebebeb; 
+    -fx-background-radius: 20
+}

@@ -12,8 +12,13 @@
 }
 
 #back-btn{
+    -fx-background: #ffffff;
     -fx-font-size: 15px; 
     -fx-font-weight: bold;
+}
+
+#back-btn:hover{
+    -fx-background: #c2c0c0;
 }
 
 #completed-lyt{
@@ -30,6 +35,11 @@
     -fx-font-size: 15px; 
     -fx-text-fiil: black; 
     -fx-background-color: #90CAF9; 
+    -fx-background-radius: 5
+}
+
+#schedule-label:hover{
+    -fx-background-color: #7dafd8; 
     -fx-background-radius: 5
 }
 
