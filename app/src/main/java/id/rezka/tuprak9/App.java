@@ -81,7 +81,7 @@ public class App extends Application {
         searchbar.setId("btn-search");
         searchbar.setMaxWidth(470);
         searchbar.setMinHeight(30);
-        
+        searchbar.setId("for-outer");
         
 
         // Action untuk Search

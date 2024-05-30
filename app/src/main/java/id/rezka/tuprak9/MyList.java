@@ -1,5 +1,7 @@
 package id.rezka.tuprak9;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import id.rezka.tuprak9.controller.DbManager;
@@ -9,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -44,9 +48,28 @@ public class MyList {
         scroll.setFitToWidth(true); // Menetapkan agar konten sesuai dengan lebar ScrollPane
 
         // Membuat tombol kembali untuk kembali ke scene utama
-        Button backButton = new Button("Back");
-        backButton.setId("back-btn");
-        backButton.setOnAction(e -> primaryStage.setScene(app.createMainScene(primaryStage)));
+        Button backButton = new Button();
+         backButton.setMaxWidth(40);
+        backButton.setMaxHeight(40);
+        backButton.setId("bck-bttn");
+        backButton.setOnAction(e -> {
+            primaryStage.setScene(app.createMainScene(primaryStage)); ; // Kembali ke scene sebelumnya
+            // MyList.upadateList(primaryStage); // Perbarui daftar jadwal
+        });
+        try {
+             // Setel ikon tombol kembali
+            FileInputStream iconStream = new FileInputStream("src/main/resources/image/back-arrow.png");
+            Image icon = new Image(iconStream);
+
+            ImageView imageView = new ImageView(icon);
+            imageView.setFitHeight(20);
+            imageView.setFitWidth(20);
+            backButton.setGraphic(imageView);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        // backButton.setId("back-btn");
+        // backButton.setOnAction(e -> primaryStage.setScene(app.createMainScene(primaryStage)));
 
         // Mengatur layout menggunakan BorderPane
         BorderPane layout = new BorderPane(); 
@@ -64,6 +87,7 @@ public class MyList {
          // Membuat Scene baru dengan layout yang sudah dibuat, dan menetapkan ukuran serta stylesheet
         Scene scene = new Scene(layout, 500, 600);
         scene.getStylesheets().add("/styles/stylesMyList.css");
+        scene.getStylesheets().add("/styles/stylesDetail.css");
 
         return scene;
         
