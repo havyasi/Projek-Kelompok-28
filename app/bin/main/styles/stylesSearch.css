@@ -8,21 +8,22 @@
     -fx-text-fill: black;
     -fx-font-size: 13px;
     -fx-font-weight: bold;
+    -fx-pref-width: 400px; /* Pastikan lebar kolom pencarian sesuai */
 }
 
 #scroll-pane {
     -fx-background: #CAF4FF;
-    
+    -fx-pref-width: 400px; /* Pastikan lebar panel scroll sesuai */
 }
 
 #main-layout {
     -fx-background-color: #CAF4FF;
     -fx-font-size: 25px;
+    -fx-pref-width: 420px; /* Pastikan lebar layout utama sesuai */
 }
 
 #search-box {
     -fx-background-color: #CAF4FF;
-    
 }
 
 #result-label {
@@ -31,4 +32,7 @@
     -fx-background-color: #90caf9;
     -fx-background-radius: 5;
     -fx-font-family: 'Berlin Sans FB';
+    -fx-pref-width: 520px; /* Pastikan lebar label hasil sesuai */
+    -fx-pref-heigth: 20px;
+    -fx-padding: 10px; /* Tambahkan padding untuk estetika */
 }

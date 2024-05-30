@@ -275,17 +275,26 @@ public class DaftarPengingatHarian {
         // //Menangani pergeseran jendela aplikasi dan menggeser popup sesuai dengan posisi trigger button.
         primaryStage.xProperty().addListener((obs, oldVal, newVal) -> {
             Bounds newBounds = triggerButton.localToScreen(triggerButton.getBoundsInLocal());
-            popup.setX(newBounds.getMinX());
+            if (newBounds != null) {
+                popup.setX(newBounds.getMinX());
+            }else {
+
+            }
         });
 
         primaryStage.yProperty().addListener((obs, oldVal, newVal) -> {
             Bounds newBounds = triggerButton.localToScreen(triggerButton.getBoundsInLocal());
-            popup.setY(newBounds.getMaxY() + 5);
+            if (newBounds != null) {
+                popup.setY(newBounds.getMaxY() + 5);
+            } else {
+                
+            }
         });
 
         ////Menyembunyikan popup ketika mouse ditekan di luar area popup.
+        Bounds bounds3 = primaryStage.getScene().getRoot().getLayoutBounds();
         primaryStage.getScene().addEventFilter(javafx.scene.input.MouseEvent.MOUSE_PRESSED, event -> {
-            if (popup.isShowing() && !bounds.contains(event.getScreenX(), event.getScreenY())) {
+            if (popup.isShowing() && !bounds3.contains(event.getScreenX(), event.getScreenY())) {
                 popup.hide();
                 popupmuncul = false;
             }

@@ -82,6 +82,7 @@ public class App extends Application {
         searchbar.setMaxWidth(470);
         searchbar.setMinHeight(30);
         
+        
 
         // Action untuk Search
         searchbar.setOnAction(e -> {
@@ -241,13 +242,15 @@ public class App extends Application {
         VBox vBox = new VBox(10);
         vBox.getChildren().addAll(stackPane1, buttonPane, btnDaftarHarian, jadwalPane);
         root.getChildren().add(vBox);
-        root.setId("lyt-list");
+        root.setId("lyt-BG");
         
         
 
         Scene scene = new Scene(root, 500, 600);
         scene.getStylesheets().add("/styles/stylesInputJadwal&App.css");
         scene.getStylesheets().add("/styles/stylesMyList.css");
+        scene.getStylesheets().add("/styles/stylesInputJadwal&App.css");
+
         primaryStage.setScene(scene);
 
         return scene;

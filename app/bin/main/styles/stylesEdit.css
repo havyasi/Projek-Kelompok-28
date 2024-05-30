@@ -1,18 +1,22 @@
-#cttn-label{
+#edit-form{
+    -fx-background-color: #90caf9;
+    -fx-font-size: 15px; 
     -fx-text-fill: black; 
-    -fx-font-size: 20px;
+    -fx-font-weight: bold;
 }
 
-#jdwl-field{
+#label-edit{
+    -fx-font-size: 20px; 
+    -fx-text-fill: black; 
+    -fx-font-weight: bold;
+    -fx-background-color: #90caf9;
+}
+
+#btnback{
     -fx-background-color: white; 
-    -fx-text-fill: black; 
-    -fx-font-size: 15px;
+    -fx-background-radius: 20
 }
 
-#prioritas-label, #judul-label{
-    -fx-text-fill: black; 
-    -fx-font-size: 15px;
-}
 
 #btn-rendah{
     -fx-font-size: 12px; 
@@ -96,59 +100,4 @@
     -fx-background-color: #ff7043; 
     -fx-text-fill: white; 
     -fx-background-radius: 5;
-}
-
-#detail-label{
-    -fx-text-fill: black; 
-    -fx-font-size: 17;
-}
-
-#btn-tmbhwkt, #btn-deskripsi, #btn-save, #btn-back{
-    -fx-font-size: 12px;
-}
-
-#lyt-jadwal{
-    -fx-background-color: #90caf9 ; 
-    -fx-font-weight: bold; 
-    -fx-font-size: 25px
-}
-
-#btn-search{
-    -fx-font-weight: bold;
-    -fx-font-size: 10px;
-    -fx-background-color: #FFF7FC;
-}
-
-#btn-calendar{
-    -fx-font-size: 25px;
-    -fx-font-weight: bold;
-    -fx-background-color: #5AB2FF;
-    -fx-background-radius: 20;
-}
-
-#btn-completed{
-    -fx-font-size: 25px;
-    -fx-font-weight: bold;
-    -fx-background-color: #5AB2FF;
-    -fx-background-radius: 20;
-}
-
-#btn-jadwalHari{
-    -fx-font-size: 13px; 
-    -fx-font-weight: bold; 
-    -fx-text-fill: black; 
-    -fx-background-color: #FF9A00; 
-    -fx-background-radius: 5;
-}
-
-#btn-jadwal{
-    -fx-font-size: 13px;
-    -fx-font-weight: bold;
-    -fx-background-color: #FF9A00;
-    -fx-text-fill: black;
-    -fx-font-family: 'Arial';
-    -fx-background-radius: 5;
-}
-#lyt-BG {
-    -fx-background-color : #CAF4FF
 }

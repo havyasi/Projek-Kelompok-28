@@ -149,3 +149,6 @@
     -fx-font-family: 'Arial';
     -fx-background-radius: 5;
 }
+#lyt-BG {
+    -fx-background-color : #CAF4FF
+}
