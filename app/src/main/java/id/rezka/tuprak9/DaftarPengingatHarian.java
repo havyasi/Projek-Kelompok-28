@@ -6,12 +6,14 @@ import java.time.LocalDate;
 import java.util.List;
 
 import id.rezka.tuprak9.controller.DbManager;
+import id.rezka.tuprak9.utils.EditScene;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -28,6 +30,8 @@ public class DaftarPengingatHarian {
 
     private static boolean popupmuncul = false;
     private static Stage popup;
+    private static Label scheduleLabel;
+    private static String[] scheduleDetails;
 
     // Metode untuk membuat scene detail untuk sebuah jadwal
     public static Scene detailScene(Stage primaryStage, String[] scheduleDetails, Scene previousScene) {
@@ -42,8 +46,8 @@ public class DaftarPengingatHarian {
         titleLabel.setId("label-detail");
 
          // Informasi jadwal yang akan ditampilkan
-        Label scheduleLabel = new Label(scheduleDetails[4] + "\tDate : " + scheduleDetails[3] + "\nTitle : " + scheduleDetails[1] + "\nType Of Priority: " + scheduleDetails[2] +
-                "\nDeskripsi: " + scheduleDetails[5]);
+        scheduleLabel = new Label();
+        updateDetails(scheduleDetails);
         scheduleLabel.setId("label-schedule"); // Setel ID untuk CSS styling
 
         // Tombol kembali untuk kembali ke scene sebelumnya
@@ -102,8 +106,44 @@ public class DaftarPengingatHarian {
             e.printStackTrace();
         }
 
+        Button editButton = new Button("Edit");
+        editButton.setMaxWidth(40);
+        editButton.setMaxHeight(40);
+        editButton.setId("edit-btn");
+        editButton.setOnAction(e -> {
+            Scene editScene = EditScene.createEditScene(primaryStage, scheduleDetails, detailScene(primaryStage, scheduleDetails, previousScene));
+            primaryStage.setScene(editScene);
+        });
+
+        // Menambahkan ComboBox untuk tindakan delete dan edit
+        ComboBox<String> actionComboBox = new ComboBox<>();
+        actionComboBox.getItems().addAll("Edit", "Delete");
+        actionComboBox.setMaxWidth(100);
+        actionComboBox.setId("action-combo");
+
+        actionComboBox.setOnAction(e -> {
+            String action = actionComboBox.getValue();
+            if ("Delete".equals(action)) {
+                int id = Integer.parseInt(scheduleDetails[0]); // Ambil ID jadwal dari array
+                DbManager.removeData(id); // Hapus jadwal dari database
+                primaryStage.setScene(previousScene); // Kembali ke scene sebelumnya
+
+                // Perbarui daftar jadwal di scene sebelumnya
+                MyList.upadateList(primaryStage);
+
+                // Jika scene sebelumnya adalah scene pencarian, perbarui juga hasil pencarian
+                String rootid = previousScene.getRoot().getId();
+                if (rootid != null && rootid.equals("search-box")) {
+                    VBox searchBox = (VBox) ((ScrollPane) previousScene.lookup("#scroll-pane")).getContent();
+                    SearchScene.updateSearchResults(searchBox, "", primaryStage);
+                }
+            } else if ("Edit".equals(action)) {
+                Scene editScene = EditScene.createEditScene(primaryStage, scheduleDetails, DaftarPengingatHarian.detailScene(primaryStage, scheduleDetails, previousScene));
+                primaryStage.setScene(editScene);
+            }
+        });
           // Kotak untuk menempatkan tombol-tombol
-        HBox buttonBox = new HBox(400, backButton, deleteButton);
+        HBox buttonBox = new HBox(400, backButton, actionComboBox);
 
         // Kotak untuk menempatkan informasi jadwal
         HBox scheduleBox = new HBox(scheduleLabel);
@@ -128,6 +168,14 @@ public class DaftarPengingatHarian {
         scene.getStylesheets().add("styles/stylesDetail.css"); // Tambahkan CSS styling
 
         return scene;
+    }
+
+    public static void updateDetails(String[] updatedDetails) {
+        scheduleDetails = updatedDetails;
+        scheduleLabel.setText(
+            updatedDetails[4] + "\tDate : " + updatedDetails[3] + "\nTitle : " + updatedDetails[1] +
+            "\nType Of Priority: " + updatedDetails[2] + "\nDeskripsi: " + updatedDetails[5]
+        );
     }
 
     // Metode untuk menampilkan daftar jadwal harian dalam jendela popup

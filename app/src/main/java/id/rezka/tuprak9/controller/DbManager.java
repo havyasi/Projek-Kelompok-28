@@ -142,5 +142,22 @@ public class DbManager {
         }
         return resultList;
     }
+
+    //mengupdate informasi yang di edit
+    public static void updateData(int id, String judul, String jenisPrioritas, LocalDate tanggal, LocalTime waktu, String deskripsi) {
+        String sql = "UPDATE Pengingat SET judul = ?, jenis_prioritas = ?, tanggal = ?, waktu = ?, deskripsi = ? WHERE id = ?";
+        try (Connection connection = DatabaseConnection.connect();
+            PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, judul);
+            statement.setString(2, jenisPrioritas);
+            statement.setString(3, tanggal.toString());
+            statement.setString(4, waktu.toString());
+            statement.setString(5, deskripsi);
+            statement.setInt(6, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
 }
