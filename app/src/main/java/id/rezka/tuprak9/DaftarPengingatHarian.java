@@ -155,13 +155,40 @@ public class DaftarPengingatHarian {
         VBox.setMargin(titleLabel, new Insets(20, 20, 10, 20));
         VBox.setMargin(scheduleBox, new Insets(10, 20, 20, 20));
 
+        //menandai tugas selesai
+        String taskStatus = scheduleDetails[6]; 
+
+        Button completeButton = new Button("Mark as Completed");
+        completeButton.setMaxWidth(300);
+        completeButton.setMaxHeight(100);
+        completeButton.setId("complete-btn");
+        completeButton.setOnAction(e -> {
+            int id = Integer.parseInt(scheduleDetails[0]);
+            DbManager.tandaSelesai(id);
+            primaryStage.setScene(previousScene);
+            MyList.upadateList(primaryStage);
+
+            String rootid = previousScene.getRoot().getId();
+            if (rootid != null && rootid.equals("search-box")) {
+                VBox searchBox = (VBox) ((ScrollPane) previousScene.lookup("#scroll-pane")).getContent();
+                SearchScene.updateSearchResults(searchBox, "", primaryStage);
+            }
+        });
+
         // Layout BorderPane yang menempatkan semua komponen
         BorderPane layout = new BorderPane();
         layout.setTop(buttonBox);
         layout.setCenter(centerBox);
         BorderPane.setAlignment(buttonBox, Pos.TOP_CENTER);
         BorderPane.setMargin(buttonBox, new Insets(20, 20, 20, 20));
+
+        //kondisi untuk menampilkan button  meyelesaikan tugas
+        if (!"1".equals(taskStatus)) {
+            layout.setBottom(completeButton);
+            BorderPane.setAlignment(completeButton, Pos.BOTTOM_CENTER);
+        }
         detailJadwal.getChildren().add(layout); // Tambahkan layout ke VBox utama
+
 
         // Buat scene dengan VBox sebagai root
         Scene scene = new Scene(detailJadwal, 500, 600);

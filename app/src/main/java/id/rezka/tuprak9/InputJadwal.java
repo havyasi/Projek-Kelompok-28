@@ -180,7 +180,7 @@ public class InputJadwal {
             if (pesanError != null) {
                 NotifInputJadwal.showErrorPopup(primaryStage, pesanError);
             } else {
-                DbManager.saveData(judul, jenisPrioritas, tanggal, waktu, deskripsi);
+                DbManager.saveData(judul, jenisPrioritas, tanggal, waktu, deskripsi, false);
                 NotifInputJadwal.slidekeBawah(notifBox, sceneSebelumnya);
             }
         });

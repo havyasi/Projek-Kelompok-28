@@ -26,11 +26,6 @@ public class MyList {
         Label myListLabel = new Label("My List");
         myListLabel.setId("search-label");
     
-
-        // nampilkan semua list schedule scroll panenya nanti tmpil kalau dtanya lewat dri ukuran stageny kita
-        // pke sql
-
-
         // Membuat ScrollPane untuk menampung daftar jadwal. ScrollPane memungkinkan konten untuk digulir jika lebih besar dari ukuran tampilan.
         ScrollPane scroll= new ScrollPane();
         scroll.setId("scroll-pane");
@@ -49,13 +44,12 @@ public class MyList {
 
         // Membuat tombol kembali untuk kembali ke scene utama
         Button backButton = new Button();
-         backButton.setMaxWidth(40);
+        backButton.setMaxWidth(40);
         backButton.setMaxHeight(40);
         backButton.setId("bck-bttn");
         backButton.setOnAction(e -> {
-            primaryStage.setScene(app.createMainScene(primaryStage)); ; // Kembali ke scene sebelumnya
-            // MyList.upadateList(primaryStage); // Perbarui daftar jadwal
-        });
+            primaryStage.setScene(app.createMainScene(primaryStage)); ;
+        }); // Kembali ke scene sebelumnyn
         try {
              // Setel ikon tombol kembali
             FileInputStream iconStream = new FileInputStream("src/main/resources/image/back-arrow.png");
@@ -99,19 +93,28 @@ public class MyList {
             // Mengambil semua jadwal dari database menggunakan DbManager
             List<String[]> allSchedule = DbManager.loadData();
 
-            // Untuk setiap jadwal, buat Label yang menampilkan tanggal dan judul jadwal
-            for (String[] schedule : allSchedule){
-                Label scheduLabel = new Label("\t" + schedule[3] + "\t\t" + schedule[1]);
-                scheduLabel.setPrefWidth(460);
-                scheduLabel.setPrefHeight(40);
-                scheduLabel.setId("schedule-label");
-
-                // Menetapkan event handler untuk Label, ketika diklik, akan menampilkan detail dari jadwal tersebut
-                scheduLabel.setOnMouseClicked(e -> {
-                    Scene detailScene = DaftarPengingatHarian.detailScene(primaryStage, schedule, primaryStage.getScene());
-                    primaryStage.setScene(detailScene);
-                });
-                list.getChildren().add(scheduLabel); // Menambahkan Label ke dalam VBox
+            // // Untuk setiap jadwal, buat Label yang menampilkan tanggal dan judul jadwal
+            // if(allSchedule.isEmpty()){
+            //     Label noTugas = new Label("Tidak Ada Tugas Hari ini");
+            //     noTugas.setPrefHeight(500);
+            //     noTugas.setPrefWidth(400);
+            //     noTugas.setId("no-tugas");                               // ini sbnrnya buat tampilan kalau dia itu kosong bakal tmpil daftar kosong
+            //     list.getChildren().add(noTugas);                         // kek yg divideo yg digrub kalau kuaktifkan ini :(
+            // } else{
+                // Untuk setiap jadwal, buat Label yang menampilkan tanggal dan judul jadwal
+                for (String[] schedule : allSchedule){
+                    Label scheduLabel = new Label("\t" + schedule[3] + "\t\t" + schedule[1]);
+                    scheduLabel.setPrefWidth(460);
+                    scheduLabel.setPrefHeight(40);
+                    scheduLabel.setId("schedule-label");
+    
+                    // Menetapkan event handler untuk Label, ketika diklik, akan menampilkan detail dari jadwal tersebut
+                    scheduLabel.setOnMouseClicked(e -> {
+                        Scene detailScene = DaftarPengingatHarian.detailScene(primaryStage, schedule, primaryStage.getScene());
+                        primaryStage.setScene(detailScene);
+                    });
+                    list.getChildren().add(scheduLabel); // Menambahkan Label ke dalam VBox
+                // }
             }
         }
     }

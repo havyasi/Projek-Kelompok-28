@@ -19,3 +19,22 @@
 #completed-lyt{
     -fx-background-color: #CAF4FF;
 }
+
+
+#scroll-pane{
+    -fx-background: #CAF4FF;
+}
+
+#schedule-label{
+    -fx-font-family: 'Berlin Sans FB'; 
+    -fx-font-size: 15px; 
+    -fx-text-fiil: black; 
+    -fx-background-color: #90CAF9; 
+    -fx-background-radius: 5
+}
+
+#tidak-ada-tugas{
+    -fx-font-family: 'Berlin Sans FB'; 
+    -fx-font-size: 20px; 
+    -fx-text-fiil: black; 
+}

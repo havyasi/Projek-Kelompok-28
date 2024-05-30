@@ -34,3 +34,9 @@
 #lyt-list{
     -fx-background-color: #CAF4FF;
 }
+
+#no-tugas{
+    -fx-font-family: 'Berlin Sans FB'; 
+    -fx-font-size: 20px; 
+    -fx-text-fiil: black;
+}

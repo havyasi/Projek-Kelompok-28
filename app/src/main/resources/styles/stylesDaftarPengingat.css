@@ -57,3 +57,9 @@
     -fx-background-color: #ea8465; 
     -fx-background-radius: 5;
 }
+
+#no-tugas{
+    -fx-font-family: 'Berlin Sans FB'; 
+    -fx-font-size: 20px; 
+    -fx-text-fiil: black;
+}
