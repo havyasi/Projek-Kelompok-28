@@ -46,6 +46,8 @@ public class EditScene {
             }
         });
 
+        jenisPrioritas = scheduleDetails[2];
+
         Label priorityFieldLabel = new Label("Priority Type:");
         // Button untuk prioritas rendah
         rendahPrio = new Button("Low");
@@ -85,6 +87,16 @@ public class EditScene {
         tinggiPrio.setOnAction(e -> {
             jenisPrioritas = "High";
         });
+
+        // Sesuaikan id tombol prioritas sesuai dengan jenisPrioritas
+        if ("Low".equals(jenisPrioritas)) {
+            rendahPrio.setId("click-rendah");
+        } else if ("Medium".equals(jenisPrioritas)) {
+            sedangPrio.setId("click2-sedang");
+        } else if ("High".equals(jenisPrioritas)) {
+            tinggiPrio.setId("click3-tinggi");
+        }
+
 
         // HBox untuk menampung tombol prioritas
         HBox jPbutton = new HBox(10,rendahPrio, sedangPrio, tinggiPrio);

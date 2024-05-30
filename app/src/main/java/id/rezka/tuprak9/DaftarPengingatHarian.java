@@ -170,13 +170,19 @@ public class DaftarPengingatHarian {
         return scene;
     }
 
+    // buat tampilan isi detail
     public static void updateDetails(String[] updatedDetails) {
         scheduleDetails = updatedDetails;
+        String description = updatedDetails[5];
+        if (description == null || description.isEmpty()) {
+            description = "No Description";
+        }
         scheduleLabel.setText(
             updatedDetails[4] + "\tDate : " + updatedDetails[3] + "\nTitle : " + updatedDetails[1] +
-            "\nType Of Priority: " + updatedDetails[2] + "\nDeskripsi: " + updatedDetails[5]
+            "\nType Of Priority : " + updatedDetails[2] + "\nDescription : " + description
         );
     }
+    
 
     // Metode untuk menampilkan daftar jadwal harian dalam jendela popup
     public static void tampilkanDaftarHarian(Stage primaryStage, Button triggerButton) {
