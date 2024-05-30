@@ -22,6 +22,10 @@
     -fx-background-radius: 5
 }
 
+#schedule-label:hover{
+    -fx-background-color: #7dafd8; 
+}
+
 #back-btn{
     -fx-font-size: 15px; 
     -fx-font-weight: bold;

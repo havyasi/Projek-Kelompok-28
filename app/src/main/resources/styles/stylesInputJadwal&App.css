@@ -119,6 +119,12 @@
     -fx-background-color: #FFF7FC;
 }
 
+#btn-search:hover{
+    -fx-font-weight: bold;
+    -fx-font-size: 10px;
+    -fx-background-color: #dddddd;
+}
+
 #btn-calendar{
     -fx-font-size: 25px;
     -fx-font-weight: bold;
@@ -128,10 +134,27 @@
     -fx-border-radius: 20;
 }
 
+#btn-calendar:hover{
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-background-color: #2574b4;
+    -fx-background-radius: 20;
+    -fx-border-color: black;
+    -fx-border-radius: 20;
+}
+
 #btn-completed{
     -fx-font-size: 25px;
     -fx-font-weight: bold;
     -fx-background-color: #5AB2FF;
+    -fx-background-radius: 20;
+    -fx-border-color: black;
+    -fx-border-radius: 20;
+}
+#btn-completed:hover{
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-background-color: #2574b4;
     -fx-background-radius: 20;
     -fx-border-color: black;
     -fx-border-radius: 20;
@@ -147,6 +170,16 @@
     -fx-border-radius: 20;
 }
 
+#btn-jadwalHari:hover{
+    -fx-font-size: 13px; 
+    -fx-font-weight: bold; 
+    -fx-text-fill: black; 
+    -fx-background-color: #ec8003; 
+    -fx-background-radius: 20;
+    -fx-border-color: black;
+    -fx-border-radius: 20;
+}
+
 #btn-jadwal{
     -fx-font-size: 13px;
     -fx-font-weight: bold;
@@ -157,6 +190,18 @@
     -fx-border-color: black;
     -fx-border-radius: 5;
 }
+
+#btn-jadwal:hover{
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-background-color: #ec8003;
+    -fx-text-fill: black;
+    -fx-font-family: 'Arial';
+    -fx-background-radius: 5;
+    -fx-border-color: black;
+    -fx-border-radius: 5;
+}
+
 #lyt-BG {
     -fx-background-color : #CAF4FF
 }
