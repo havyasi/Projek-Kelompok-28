@@ -18,9 +18,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -48,7 +52,19 @@ public class DaftarPengingatHarian {
          // Informasi jadwal yang akan ditampilkan
         scheduleLabel = new Label();
         updateDetails(scheduleDetails);
-        scheduleLabel.setId("label-schedule"); // Setel ID untuk CSS styling
+        //.setId("label-schedule"); // Setel ID untuk CSS styling
+        scheduleLabel.setPrefWidth(400);
+        scheduleLabel.setPrefHeight(400);
+        scheduleLabel.setWrapText(true);
+        scheduleLabel.setAlignment(Pos.TOP_LEFT);
+        scheduleLabel.setPadding(new Insets(20));
+
+
+        BackgroundFill backgroundFill = new BackgroundFill(Color.WHITE, new CornerRadii(10), Insets.EMPTY);
+        Background background = new Background(backgroundFill);
+        scheduleLabel.setBackground(background);
+        scheduleLabel.setId("label-schedule");  // Setel ID untuk CSS styling
+
 
         // Tombol kembali untuk kembali ke scene sebelumnya
         Button backButton = new Button();
@@ -145,15 +161,13 @@ public class DaftarPengingatHarian {
           // Kotak untuk menempatkan tombol-tombol
         HBox buttonBox = new HBox(400, backButton, actionComboBox);
 
-        // Kotak untuk menempatkan informasi jadwal
-        HBox scheduleBox = new HBox(scheduleLabel);
-        scheduleBox.setAlignment(Pos.BASELINE_LEFT);
+
 
         // Kotak tengah yang berisi judul dan informasi jadwal
-        VBox centerBox = new VBox(10, titleLabel, scheduleBox);
+        VBox centerBox = new VBox(10, titleLabel, scheduleLabel);
         centerBox.setAlignment(Pos.TOP_CENTER);
         VBox.setMargin(titleLabel, new Insets(20, 20, 10, 20));
-        VBox.setMargin(scheduleBox, new Insets(10, 20, 20, 20));
+        VBox.setMargin(scheduleLabel, new Insets(10, 20, 20, 20));
 
         //menandai tugas selesai
         String taskStatus = scheduleDetails[6]; 
@@ -206,9 +220,15 @@ public class DaftarPengingatHarian {
             description = "No Description";
         }
         scheduleLabel.setText(
-            updatedDetails[4] + "\tDate : " + updatedDetails[3] + "\nTitle : " + updatedDetails[1] +
-            "\nType Of Priority : " + updatedDetails[2] + "\nDescription : " + description
+            "Details\n------------------------------------------------------------------------\n" +
+            "Date\t\t\t: " + updatedDetails[3] + "\n" + 
+            "Time\t\t\t: " + updatedDetails[4] + "\n" +
+            "Title\t\t\t: " + updatedDetails[1] + "\n" +
+            "Type Of Priority\t: " + updatedDetails[2] + "\n" + 
+            "Description\t\t:\n\t " + description
+            
         );
+        scheduleLabel.setId("label-schedule");
     }
     
 
