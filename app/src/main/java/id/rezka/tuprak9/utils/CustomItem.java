@@ -21,7 +21,7 @@ public class CustomItem {
 
     @Override
     public String toString() {
-        return text; // This is needed to display the text in the ComboBox selection area
+        return text; 
     }
 }
 

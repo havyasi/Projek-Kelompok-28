@@ -62,8 +62,7 @@ public class MyList {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        // backButton.setId("back-btn");
-        // backButton.setOnAction(e -> primaryStage.setScene(app.createMainScene(primaryStage)));
+        
 
         // Mengatur layout menggunakan BorderPane
         BorderPane layout = new BorderPane(); 
@@ -93,14 +92,6 @@ public class MyList {
             // Mengambil semua jadwal dari database menggunakan DbManager
             List<String[]> allSchedule = DbManager.loadData();
 
-            // // Untuk setiap jadwal, buat Label yang menampilkan tanggal dan judul jadwal
-            // if(allSchedule.isEmpty()){
-            //     Label noTugas = new Label("Tidak Ada Tugas Hari ini");
-            //     noTugas.setPrefHeight(500);
-            //     noTugas.setPrefWidth(400);
-            //     noTugas.setId("no-tugas");                               // ini sbnrnya buat tampilan kalau dia itu kosong bakal tmpil daftar kosong
-            //     list.getChildren().add(noTugas);                         // kek yg divideo yg digrub kalau kuaktifkan ini :(
-            // } else{
                 // Untuk setiap jadwal, buat Label yang menampilkan tanggal dan judul jadwal
                 for (String[] schedule : allSchedule){
                     Label scheduLabel = new Label("\t" + schedule[3] + "\t\t" + schedule[1]);
