@@ -350,7 +350,7 @@ public class DaftarPengingatHarian {
         primaryStage.getScene().addEventFilter(javafx.scene.input.MouseEvent.MOUSE_PRESSED, event -> {
             if (popup.isShowing() && !bounds3.contains(event.getScreenX(), event.getScreenY())) {
                 popup.hide();
-                popupmuncul = false;
+                popupmuncul = true;
             }
         });
     }
