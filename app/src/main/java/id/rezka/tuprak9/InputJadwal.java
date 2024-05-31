@@ -28,16 +28,49 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class InputJadwal {
-    public static String jenisPrioritas = null;
+    private static String jenisPrioritas = null;
+    
     public static Button rendahPrio;
     public static Button sedangPrio;
     public static Button tinggiPrio;
-    public static boolean isRendahPressed = false;
-    public static boolean isSedangPressed = false;
-    public static boolean isTinggiPressed = false;
+    private static boolean isRendahPressed = false;
+    private static boolean isSedangPressed = false;
+    private static boolean isTinggiPressed = false;
+    
+    public static String getJenisPrioritas() {
+        return jenisPrioritas;
+    }
+
+    public static void setJenisPrioritas(String jenisPrioritas) {
+        InputJadwal.jenisPrioritas = jenisPrioritas;
+    }
+
+    public static boolean isRendahPressed() {
+        return isRendahPressed;
+    }
+
+    public static void setRendahPressed(boolean isRendahPressed) {
+        InputJadwal.isRendahPressed = isRendahPressed;
+    }
+
+    public static boolean isSedangPressed() {
+        return isSedangPressed;
+    }
+
+    public static void setSedangPressed(boolean isSedangPressed) {
+        InputJadwal.isSedangPressed = isSedangPressed;
+    }
+
+    public static boolean isTinggiPressed() {
+        return isTinggiPressed;
+    }
+
+    public static void setTinggiPressed(boolean isTinggiPressed) {
+        InputJadwal.isTinggiPressed = isTinggiPressed;
+    }
 
     public static Scene createScene(Stage primaryStage, App app, Scene sceneSebelumnya) {
-        jenisPrioritas = null;
+        getJenisPrioritas();
         TambahWaktu.reset();
         
         // Label untuk judul form "Add New Schedule"
@@ -78,18 +111,18 @@ public class InputJadwal {
         rendahPrio.setPrefWidth(100);
         rendahPrio.setId("btn-rendah");
         rendahPrio.setOnMouseClicked(e -> {
-            if (isRendahPressed) {
+            if (isRendahPressed()) {
                 rendahPrio.setId("btn-rendah");
-                isRendahPressed = false;
-                jenisPrioritas = null;
+                setRendahPressed(false);
+                setJenisPrioritas(null);
             } else {
                 rendahPrio.setId("click-rendah");
                 sedangPrio.setId("btn-sedang");
                 tinggiPrio.setId("btn-tinggi");
-                isRendahPressed = true;
-                isSedangPressed = false;
-                isTinggiPressed = false;
-                jenisPrioritas = "Low";
+                setRendahPressed(true);
+                setSedangPressed(false);
+                setTinggiPressed(false);
+                setJenisPrioritas("Low");
             }
         });
             
@@ -98,18 +131,19 @@ public class InputJadwal {
         sedangPrio.setPrefWidth(100);
         sedangPrio.setId("btn-sedang");
         sedangPrio.setOnMouseClicked(e -> {
-            if (isSedangPressed) {
+            if (isSedangPressed()) {
                 sedangPrio.setId("btn-sedang");
-                isSedangPressed = false;
-                jenisPrioritas = null;
+                setSedangPressed(false);
+                setJenisPrioritas(null);
             } else {
                 rendahPrio.setId("btn-rendah");
                 sedangPrio.setId("click-sedang");
                 tinggiPrio.setId("btn-tinggi");
-                isRendahPressed = false;
-                isSedangPressed = true;
-                isTinggiPressed = false;
-                jenisPrioritas = "Medium";
+                setRendahPressed(false);
+                setSedangPressed(true);
+                setTinggiPressed(false);
+                setJenisPrioritas("Medium");
+
             }
         });
             
@@ -118,18 +152,18 @@ public class InputJadwal {
         tinggiPrio.setPrefWidth(100);
         tinggiPrio.setId("btn-tinggi");
         tinggiPrio.setOnMouseClicked(e -> {
-            if (isTinggiPressed) {
+            if (isTinggiPressed()) {
                 tinggiPrio.setId("btn-tinggi");
-                isTinggiPressed = false;
-                jenisPrioritas = null;
+                setTinggiPressed(false);
+                setJenisPrioritas(null);
             } else {
                 rendahPrio.setId("btn-rendah");
                 sedangPrio.setId("btn-sedang");
                 tinggiPrio.setId("click-tinggi");
-                isRendahPressed = false;
-                isSedangPressed = false;
-                isTinggiPressed = true;
-                jenisPrioritas = "High";
+                setRendahPressed(false);
+                setSedangPressed(false);
+                setTinggiPressed(true);
+                setJenisPrioritas("High");
             }
         });
 

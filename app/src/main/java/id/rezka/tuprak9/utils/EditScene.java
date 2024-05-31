@@ -19,7 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class EditScene extends InputJadwal{
+public class EditScene extends InputJadwal {
 
     public static Scene createEditScene(Stage primaryStage, String[] scheduleDetails, Scene previousScene) {
 
@@ -43,7 +43,7 @@ public class EditScene extends InputJadwal{
             }
         });
 
-        jenisPrioritas = scheduleDetails[2];
+        setJenisPrioritas(scheduleDetails[2]);
 
         Label priorityFieldLabel = new Label("Priority Type:");
         // Button untuk prioritas rendah
@@ -51,76 +51,75 @@ public class EditScene extends InputJadwal{
         rendahPrio.setPrefWidth(100);
         rendahPrio.setId("btn-rendah");
         rendahPrio.setOnMouseClicked(e -> {
-            if (isRendahPressed) {
+            if (isRendahPressed()) {
                 rendahPrio.setId("btn-rendah");
-                isRendahPressed = false;
-                jenisPrioritas = null;
+                setRendahPressed(false);
+                setJenisPrioritas(null);
             } else {
                 rendahPrio.setId("click-rendah");
                 sedangPrio.setId("btn-sedang");
                 tinggiPrio.setId("btn-tinggi");
-                isRendahPressed = true;
-                isSedangPressed = false;
-                isTinggiPressed = false;
-                jenisPrioritas = "Low";
+                setRendahPressed(true);
+                setSedangPressed(false);
+                setTinggiPressed(false);
+                setJenisPrioritas("Low");
             }
         });
-            
+
         // Button untuk prioritas sedang
         sedangPrio = new Button("Medium");
         sedangPrio.setPrefWidth(100);
         sedangPrio.setId("btn-sedang");
         sedangPrio.setOnMouseClicked(e -> {
-            if (isSedangPressed) {
+            if (isSedangPressed()) {
                 sedangPrio.setId("btn-sedang");
-                isSedangPressed = false;
-                jenisPrioritas = null;
+                setSedangPressed(false);
+                setJenisPrioritas(null);
             } else {
                 rendahPrio.setId("btn-rendah");
                 sedangPrio.setId("click-sedang");
                 tinggiPrio.setId("btn-tinggi");
-                isRendahPressed = false;
-                isSedangPressed = true;
-                isTinggiPressed = false;
-                jenisPrioritas = "Medium";
+                setRendahPressed(false);
+                setSedangPressed(true);
+                setTinggiPressed(false);
+                setJenisPrioritas("Medium");
+
             }
         });
-            
-        // Button untuk prioritas tinggi        
+
+        // Button untuk prioritas tinggi  
         tinggiPrio = new Button("High");
         tinggiPrio.setPrefWidth(100);
         tinggiPrio.setId("btn-tinggi");
         tinggiPrio.setOnMouseClicked(e -> {
-            if (isTinggiPressed) {
+            if (isTinggiPressed()) {
                 tinggiPrio.setId("btn-tinggi");
-                isTinggiPressed = false;
-                jenisPrioritas = null;
+                setTinggiPressed(false);
+                setJenisPrioritas(null);
             } else {
                 rendahPrio.setId("btn-rendah");
                 sedangPrio.setId("btn-sedang");
                 tinggiPrio.setId("click-tinggi");
-                isRendahPressed = false;
-                isSedangPressed = false;
-                isTinggiPressed = true;
-                jenisPrioritas = "High";
+                setRendahPressed(false);
+                setSedangPressed(false);
+                setTinggiPressed(true);
+                setJenisPrioritas("High");
             }
         });
 
         // Sesuaikan id tombol prioritas sesuai dengan jenisPrioritas
-        if ("Low".equals(jenisPrioritas)) {
+        if ("Low".equals(getJenisPrioritas())) {
             rendahPrio.setId("click-rendah");
-        } else if ("Medium".equals(jenisPrioritas)) {
+        } else if ("Medium".equals(getJenisPrioritas())) {
             sedangPrio.setId("click-sedang");
-        } else if ("High".equals(jenisPrioritas)) {
+        } else if ("High".equals(getJenisPrioritas())) {
             tinggiPrio.setId("click-tinggi");
         }
 
-
         // HBox untuk menampung tombol prioritas
-        HBox jPbutton = new HBox(10,rendahPrio, sedangPrio, tinggiPrio);
+        HBox jPbutton = new HBox(10, rendahPrio, sedangPrio, tinggiPrio);
         jPbutton.setAlignment(Pos.CENTER);
         jPbutton.setSpacing(10);
-
 
         VBox labelBox = new VBox(10, editLabel, judulLabel, isijudul, priorityFieldLabel, jPbutton);
         labelBox.setAlignment(Pos.CENTER_LEFT);
@@ -184,45 +183,38 @@ public class EditScene extends InputJadwal{
         saveButton.setPrefWidth(100);
         saveButton.setOnAction(e -> {
             String judul = isijudul.getText().trim();
-        
-            // Ambil tanggal dan waktu dari input atau gunakan nilai awal jika tidak diubah
-            LocalDate tanggal = TambahWaktu.getTanggal();
-            LocalTime waktu = TambahWaktu.getWaktu();
-            if (tanggal == null) {
-                tanggal = LocalDate.parse(scheduleDetails[3]);
-            }
-            if (waktu == null) {
-                waktu = LocalTime.parse(scheduleDetails[4]);
-            }
-        
-            // Ambil deskripsi dari input atau gunakan nilai awal jika tidak diubah
-            String deskripsi = TambahDeskripsi.getDeskripsi();
-            if (deskripsi == null || deskripsi.isEmpty()) {
-                deskripsi = scheduleDetails[5];
-            }
-        
+            String priority = getJenisPrioritas();
+
+            // menggunakan inisiasi tanggal dan waktu jika blm diubah user
+            String dateString = datePicker.getText().trim().isEmpty() ? scheduleDetails[3] : datePicker.getText().trim();
+            String timeString = timeField.getText().trim().isEmpty() ? scheduleDetails[4] : timeField.getText().trim();
+
+            // menggunakan inisiasi deskripsi yang sblmnya jika blm diubah oleh user
+            String deskripsi = descriptionArea.getText().trim().isEmpty() ? scheduleDetails[5] : descriptionArea.getText().trim();
+
             String pesanError = null;
-            if (judul.isEmpty() || jenisPrioritas == null || tanggal == null || waktu == null) {
+            if (judul.isEmpty() || priority == null || dateString.isEmpty() || timeString.isEmpty()) {
                 pesanError = "Title, Priority Type, Date and Time must not be empty.";
             } else if (judul.isEmpty()) {
                 pesanError = "The Title cannot be empty.";
-            } else if (jenisPrioritas == null) {
+            } else if (priority == null) {
                 pesanError = "Priority type cannot be empty.";
-            } else if (tanggal == null || waktu == null) {
+            } else if (dateString.isEmpty() || timeString.isEmpty()) {
                 pesanError = "Date and Time cannot be empty.";
             }
-        
+
             if (pesanError != null) {
                 NotifInputJadwal.showErrorPopup(primaryStage, pesanError);
             } else {
                 int id = Integer.parseInt(scheduleDetails[0]);
-                DbManager.updateData(id, judul, jenisPrioritas, tanggal, waktu, deskripsi);
+                LocalDate tanggal = LocalDate.parse(dateString);
+                LocalTime waktu = LocalTime.parse(timeString);
+                DbManager.updateData(id, judul, priority, tanggal, waktu, deskripsi);
                 MyList.upadateList(primaryStage);
-                DbManager.updateData(id, judul, jenisPrioritas, tanggal, waktu, deskripsi);
 
                 // Update scheduleDetails array
                 scheduleDetails[1] = judul;
-                scheduleDetails[2] = jenisPrioritas;
+                scheduleDetails[2] = priority;
                 scheduleDetails[3] = tanggal.toString();
                 scheduleDetails[4] = waktu.toString();
                 scheduleDetails[5] = deskripsi;
@@ -231,7 +223,6 @@ public class EditScene extends InputJadwal{
                 primaryStage.setScene(previousScene);
             }
         });
-        
 
         Button cancelButton = new Button("Cancel");
         cancelButton.setPrefWidth(100);

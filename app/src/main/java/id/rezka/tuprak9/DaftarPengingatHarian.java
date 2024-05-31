@@ -14,7 +14,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -106,7 +105,6 @@ public class DaftarPengingatHarian {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-      
 
         actionComboBox.setCellFactory(param  -> new ListCell<CustomItem>() {
             private final ImageView imageView = new ImageView();
@@ -117,13 +115,6 @@ public class DaftarPengingatHarian {
                     setGraphic(null);
                     setText(null);
                 }else {
-                    // imageView.setImage(item.getImage());
-                    // imageView.setFitHeight(13);
-                    // imageView.setFitWidth(13);
-                    // setMinHeight(10);
-                    // setMaxHeight(10);
-                    // setGraphic(imageView);
-                    // setText(null);
                     imageView.setImage(item.getImage());
                     imageView.setFitHeight(13);
                     imageView.setFitWidth(13);
@@ -232,7 +223,7 @@ public class DaftarPengingatHarian {
             "Time\t\t\t\t: " + updatedDetails[4] + "\n" +
             "Title\t\t\t\t: " + updatedDetails[1] + "\n" +
             "Type Of Priority\t: " + updatedDetails[2] + "\n" + 
-            "Description\t\t:\n\t " + description
+            "Description\t\t: " + description
             
         );
     }
@@ -331,8 +322,6 @@ public class DaftarPengingatHarian {
             Bounds newBounds = triggerButton.localToScreen(triggerButton.getBoundsInLocal());
             if (newBounds != null) {
                 popup.setX(newBounds.getMinX());
-            }else {
-
             }
         });
 
@@ -340,8 +329,6 @@ public class DaftarPengingatHarian {
             Bounds newBounds = triggerButton.localToScreen(triggerButton.getBoundsInLocal());
             if (newBounds != null) {
                 popup.setY(newBounds.getMaxY() + 5);
-            } else {
-
             }
         });
 
