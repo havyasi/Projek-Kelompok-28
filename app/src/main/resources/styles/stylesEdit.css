@@ -29,9 +29,18 @@
     -fx-border-radius: 20;
 }
 
+#btn-rendah:hover{
+    -fx-font-size: 12px; 
+    -fx-background-color: #60a162; 
+    -fx-text-fill: black; 
+    -fx-background-radius: 20;
+    -fx-border-color: black;
+    -fx-border-radius: 20;
+}
+
 #click-rendah{
     -fx-font-size: 12px; 
-    -fx-background-color: #66bb64; 
+    -fx-background-color: #4ab848;  
     -fx-text-fill: white; 
     -fx-background-radius: 20;
     -fx-border-color: black;
@@ -47,9 +56,18 @@
     -fx-border-radius: 20;
 }
 
+#btn-sedang:hover{
+    -fx-font-size: 12px; 
+    -fx-background-color: #bea148;
+    -fx-text-fill: black; 
+    -fx-background-radius: 20;
+    -fx-border-color: black;
+    -fx-border-radius: 20;
+}
+
 #click-sedang{
     -fx-font-size: 12px; 
-    -fx-background-color: #ffca28; 
+    -fx-background-color: #fac423; 
     -fx-text-fill: white; 
     -fx-background-radius: 20;
     -fx-border-color: black;

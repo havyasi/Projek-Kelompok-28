@@ -26,9 +26,18 @@
     -fx-border-radius: 20;
 }
 
+#btn-rendah:hover{
+    -fx-font-size: 12px; 
+    -fx-background-color: #60a162; 
+    -fx-text-fill: black; 
+    -fx-background-radius: 20;
+    -fx-border-color: black;
+    -fx-border-radius: 20;
+}
+
 #click-rendah{
     -fx-font-size: 12px; 
-    -fx-background-color: #66bb64; 
+    -fx-background-color: #4ab848; 
     -fx-text-fill: white; 
     -fx-background-radius: 20;
     -fx-border-color: black;
@@ -44,9 +53,18 @@
     -fx-border-radius: 20;
 }
 
+#btn-sedang:hover{
+    -fx-font-size: 12px; 
+    -fx-background-color: #bea148; 
+    -fx-text-fill: black; 
+    -fx-background-radius: 20;
+    -fx-border-color: black;
+    -fx-border-radius: 20;
+}
+
 #click-sedang{
     -fx-font-size: 12px; 
-    -fx-background-color: #ffca28; 
+    -fx-background-color: #fac423; 
     -fx-text-fill: white; 
     -fx-background-radius: 20;
     -fx-border-color: black;
@@ -63,9 +81,18 @@
     -fx-border-radius: 20;
 }
 
+#btn-tinggi:hover{
+    -fx-font-size: 12px; 
+    -fx-background-color: #e0573f; 
+    -fx-text-fill: black; 
+    -fx-background-radius: 20;
+    -fx-border-color: black;
+    -fx-border-radius: 20;
+}
+
 #click-tinggi{
     -fx-font-size: 12px; 
-    -fx-background-color: #ff7043; 
+    -fx-background-color: #ec2424; 
     -fx-text-fill: white; 
     -fx-background-radius: 20;
     -fx-border-color: black;
@@ -77,9 +104,18 @@
     -fx-font-size: 17;
 }
 
-#btn-tmbhwkt, #btn-deskripsi, #btn-save, #btn-back{
+#btn-tmbhwkt, #btn-deskripsi, #btn-back{
     -fx-font-size: 12px;
 }
+
+#btn-save{
+    -fx-background-color: #ffffff;
+}
+
+#btn-save:hover{
+    -fx-background-color: #868686;
+}
+
 
 #lyt-jadwal{
     -fx-background-color: #90caf9 ; 
@@ -111,7 +147,7 @@
 #btn-calendar:hover{
     -fx-font-size: 25px;
     -fx-font-weight: bold;
-    -fx-background-color: #2574b4;
+    -fx-background-color: #2e8ad4;
     -fx-background-radius: 20;
     -fx-border-color: black;
     -fx-border-radius: 20;
@@ -128,7 +164,7 @@
 #btn-completed:hover{
     -fx-font-size: 25px;
     -fx-font-weight: bold;
-    -fx-background-color: #2574b4;
+    -fx-background-color: #2e8ad4;
     -fx-background-radius: 20;
     -fx-border-color: black;
     -fx-border-radius: 20;
@@ -188,7 +224,18 @@
     -fx-font-size: 13px; 
     -fx-font-weight: bold; 
     -fx-text-fill: black; 
-    -fx-background-color: white; 
+    -fx-background-color: #ffff; 
+    -fx-background-radius: 20;
+    -fx-font-family: 'Arial';
+    -fx-border-color: black;
+    -fx-border-radius: 20;
+}
+
+#btn-addtimeanddesc:hover{
+    -fx-font-size: 13px; 
+    -fx-font-weight: bold; 
+    -fx-text-fill: black; 
+    -fx-background-color: #868686; 
     -fx-background-radius: 20;
     -fx-font-family: 'Arial';
     -fx-border-color: black;
