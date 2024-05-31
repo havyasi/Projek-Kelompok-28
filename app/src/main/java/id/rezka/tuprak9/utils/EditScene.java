@@ -129,7 +129,6 @@ public class EditScene extends InputJadwal {
         Label dateFieldLabel = new Label("Date:");
         TextField datePicker = new TextField(scheduleDetails[3]);
         TextField timeField = new TextField(scheduleDetails[4]);
-        datePicker.setPromptText("YYYY-MM-DD");
         datePicker.setPrefWidth(400);
         datePicker.setOnMouseClicked(e -> {
             Stage timePopup = TambahWaktu.tambahWaktuTanggal(primaryStage);
@@ -145,8 +144,7 @@ public class EditScene extends InputJadwal {
         });
 
         // TextField for Time
-        Label timeFieldLabel = new Label("Time (HH:MM):");
-        timeField.setPromptText("HH:MM");
+        Label timeFieldLabel = new Label("Time:");
         timeField.setPrefWidth(400);
         timeField.setOnMouseClicked(e -> {
             Stage timePopup = TambahWaktu.tambahWaktuTanggal(primaryStage);

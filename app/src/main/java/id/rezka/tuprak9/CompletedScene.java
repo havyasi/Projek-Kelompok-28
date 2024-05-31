@@ -76,34 +76,26 @@ public class CompletedScene {
 
         return scene;
     }
-    
+
     public static void updateCompletedSchedule(Stage primaryStage){
         completedList.getChildren().clear();
         // menampilkan semua tugas yang selesai
         List<String[]> completedTasks = DbManager.loadCompletedTasks();
-        if (completedTasks.isEmpty()) {
-            Label noTasksLabel = new Label("Tidak ada tugas");
-            noTasksLabel.setId("tidak-ada-tugas");
-            noTasksLabel.setPrefWidth(500);
-            noTasksLabel.setPrefHeight(500);
-            completedList.getChildren().add(noTasksLabel);
-        } else {
             // Untuk setiap jadwal, buat Label yang menampilkan tanggal dan judul jadwal
-            for (String[] schedule : completedTasks) {
-                Label scheduLabel = new Label("\t" + schedule[3] + "\t\t" + schedule[1]);
-                scheduLabel.setPrefWidth(460);
-                scheduLabel.setPrefHeight(40);
-                scheduLabel.setId("schedule-label");
+        for (String[] schedule : completedTasks) {
+            Label scheduLabel = new Label("\t" + schedule[3] + "\t\t" + schedule[1]);
+            scheduLabel.setPrefWidth(460);
+            scheduLabel.setPrefHeight(40);
+            scheduLabel.setId("schedule-label");
 
-                // Menetapkan event handler untuk Label, ketika diklik, akan menampilkan detail dari jadwal tersebut
-                scheduLabel.setOnMouseClicked(e -> {
-                    Scene detailScene = DaftarPengingatHarian.detailScene(primaryStage, schedule, primaryStage.getScene());
-                    primaryStage.setScene(detailScene);
-                });
+            // Menetapkan event handler untuk Label, ketika diklik, akan menampilkan detail dari jadwal tersebut
+            scheduLabel.setOnMouseClicked(e -> {
+                Scene detailScene = DaftarPengingatHarian.detailScene(primaryStage, schedule, primaryStage.getScene());
+                primaryStage.setScene(detailScene);
+            });
 
-                // Add the schedule label to the completed list
-                completedList.getChildren().add(scheduLabel);
-            }
+            // Add the schedule label to the completed list
+            completedList.getChildren().add(scheduLabel);
         }
     }
 }
