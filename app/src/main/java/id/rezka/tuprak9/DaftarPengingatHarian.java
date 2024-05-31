@@ -152,6 +152,7 @@ public class DaftarPengingatHarian {
 
                 // Perbarui daftar jadwal di scene sebelumnya
                 MyList.upadateList(primaryStage);
+                CompletedScene.updateCompletedSchedule(primaryStage);
 
                 // Jika scene sebelumnya adalah scene pencarian, perbarui juga hasil pencarian
                 String rootid = previousScene.getRoot().getId();

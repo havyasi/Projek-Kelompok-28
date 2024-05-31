@@ -18,41 +18,18 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class CompletedScene {
+    private static VBox completedList;
+
     public static Scene createScene(Stage primaryStage, App app) {
                 // Membuat scene yang menampilkan daftar tugas yang telah diselesaikan.
         Label completedLabel = new Label("Completed List");
         completedLabel.setId("completed-Label");
 
-        VBox completedList = new VBox(10);
+        completedList = new VBox(10);
         completedList.setPadding(new Insets(10));
         completedList.setAlignment(Pos.TOP_LEFT);
 
-        // menampilkan semua tugas yang selesai
-        List<String[]> completedTasks = DbManager.loadCompletedTasks();
-        if (completedTasks.isEmpty()) {
-            Label noTasksLabel = new Label("Tidak ada tugas");
-            noTasksLabel.setId("tidak-ada-tugas");
-            noTasksLabel.setPrefWidth(500);
-            noTasksLabel.setPrefHeight(500);
-            completedList.getChildren().add(noTasksLabel);
-        } else {
-            // Untuk setiap jadwal, buat Label yang menampilkan tanggal dan judul jadwal
-            for (String[] schedule : completedTasks) {
-                Label scheduLabel = new Label("\t" + schedule[3] + "\t\t" + schedule[1]);
-                scheduLabel.setPrefWidth(460);
-                scheduLabel.setPrefHeight(40);
-                scheduLabel.setId("schedule-label");
-
-                // Menetapkan event handler untuk Label, ketika diklik, akan menampilkan detail dari jadwal tersebut
-                scheduLabel.setOnMouseClicked(e -> {
-                    Scene detailScene = DaftarPengingatHarian.detailScene(primaryStage, schedule, primaryStage.getScene());
-                    primaryStage.setScene(detailScene);
-                });
-
-                // Add the schedule label to the completed list
-                completedList.getChildren().add(scheduLabel);
-            }
-        }
+        updateCompletedSchedule(primaryStage);
 
         // ScrollPane digunakan untuk menampung label "Completed List".
         // ScrollPane akan berguna jika daftar tugas yang diselesaikan panjang.
@@ -98,5 +75,35 @@ public class CompletedScene {
         scene.getStylesheets().add("/styles/stylesDetail.css");
 
         return scene;
+    }
+    
+    public static void updateCompletedSchedule(Stage primaryStage){
+        completedList.getChildren().clear();
+        // menampilkan semua tugas yang selesai
+        List<String[]> completedTasks = DbManager.loadCompletedTasks();
+        if (completedTasks.isEmpty()) {
+            Label noTasksLabel = new Label("Tidak ada tugas");
+            noTasksLabel.setId("tidak-ada-tugas");
+            noTasksLabel.setPrefWidth(500);
+            noTasksLabel.setPrefHeight(500);
+            completedList.getChildren().add(noTasksLabel);
+        } else {
+            // Untuk setiap jadwal, buat Label yang menampilkan tanggal dan judul jadwal
+            for (String[] schedule : completedTasks) {
+                Label scheduLabel = new Label("\t" + schedule[3] + "\t\t" + schedule[1]);
+                scheduLabel.setPrefWidth(460);
+                scheduLabel.setPrefHeight(40);
+                scheduLabel.setId("schedule-label");
+
+                // Menetapkan event handler untuk Label, ketika diklik, akan menampilkan detail dari jadwal tersebut
+                scheduLabel.setOnMouseClicked(e -> {
+                    Scene detailScene = DaftarPengingatHarian.detailScene(primaryStage, schedule, primaryStage.getScene());
+                    primaryStage.setScene(detailScene);
+                });
+
+                // Add the schedule label to the completed list
+                completedList.getChildren().add(scheduLabel);
+            }
+        }
     }
 }
