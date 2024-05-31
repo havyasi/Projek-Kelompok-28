@@ -90,6 +90,7 @@ public class DaftarPengingatHarian {
         
         // Menambahkan ComboBox untuk tindakan delete dan edit
         ComboBox<CustomItem> actionComboBox = new ComboBox<>();
+        actionComboBox.setId("for-combox");
         try {
             Image editImage = new Image(new FileInputStream("src/main/resources/image/edit.png"));
             Image deleteImage = new Image(new FileInputStream("src/main/resources/image/deletee.png"));
@@ -106,10 +107,6 @@ public class DaftarPengingatHarian {
             e.printStackTrace();
         }
       
-        actionComboBox.setPrefWidth(5);
-        actionComboBox.setPrefHeight(5);
-    
-        actionComboBox.setId("action-combo");
 
         actionComboBox.setCellFactory(param  -> new ListCell<CustomItem>() {
             private final ImageView imageView = new ImageView();
@@ -120,15 +117,18 @@ public class DaftarPengingatHarian {
                     setGraphic(null);
                     setText(null);
                 }else {
+                    // imageView.setImage(item.getImage());
+                    // imageView.setFitHeight(13);
+                    // imageView.setFitWidth(13);
+                    // setMinHeight(10);
+                    // setMaxHeight(10);
+                    // setGraphic(imageView);
+                    // setText(null);
                     imageView.setImage(item.getImage());
-                    imageView.setFitHeight(20);
-                    imageView.setFitWidth(20);
-                    setMinHeight(5);
-                    setMaxHeight(5);
+                    imageView.setFitHeight(13);
+                    imageView.setFitWidth(13);
+                    setAlignment(Pos.CENTER);
                     setGraphic(imageView);
-                    HBox hboxforimage = new HBox(imageView); // <<-- Tambahkan ini untuk mengatur posisi
-                    hboxforimage.setAlignment(Pos.CENTER);
-                    hboxforimage.setPrefHeight(10);
                     setText(null);
                 }
             }
@@ -145,11 +145,6 @@ public class DaftarPengingatHarian {
                         setText(null);
                     }else {
                         imageView.setImage(item.getImage());
-                        // imageView.setFitHeight(5);
-                        // imageView.setFitWidth(5);
-                        HBox hboxforimage = new HBox(imageView); // <<-- Tambahkan ini untuk mengatur posisi
-                        hboxforimage.setAlignment(Pos.CENTER);
-                        hboxforimage.setPrefHeight(10);
                         setGraphic(imageView);
                         setText(item.getText());
                     }
@@ -220,6 +215,7 @@ public class DaftarPengingatHarian {
         Scene scene = new Scene(detailJadwal, 500, 600);
         scene.getStylesheets().add("styles/stylesDetail.css"); // Tambahkan CSS styling
         scene.getStylesheets().add("styles/stylesDaftarPengingat.css"); // Tambahkan CSS styling
+        scene.getStylesheets().add("styles/stylesForComboBox.css"); // Tambahkan CSS styling
 
         return scene;
     }

@@ -1,0 +1,8 @@
+#for-combox{
+    -fx-background-color: #ffffff;
+    -fx-font-size: 15px; 
+    -fx-font-weight: bold;
+    -fx-pref-width: 30px; /* Ubah ukuran lebar tombol popup */
+    -fx-pref-height: 30px;
+    -fx-padding: 0;
+}
