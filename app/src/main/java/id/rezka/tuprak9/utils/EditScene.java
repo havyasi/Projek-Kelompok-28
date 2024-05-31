@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 
 import id.rezka.tuprak9.controller.DbManager;
 import id.rezka.tuprak9.DaftarPengingatHarian;
+import id.rezka.tuprak9.InputJadwal;
 import id.rezka.tuprak9.MyList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,11 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class EditScene {
-    private static String jenisPrioritas = null;
-    private static Button rendahPrio;
-    private static Button sedangPrio;
-    private static Button tinggiPrio;
+public class EditScene extends InputJadwal{
 
     public static Scene createEditScene(Stage primaryStage, String[] scheduleDetails, Scene previousScene) {
 
@@ -54,47 +51,68 @@ public class EditScene {
         rendahPrio.setPrefWidth(100);
         rendahPrio.setId("btn-rendah");
         rendahPrio.setOnMouseClicked(e -> {
-            rendahPrio.setId("click-rendah");
-            sedangPrio.setId("btn-sedang");
-            tinggiPrio.setId("btn-tinggi");
+            if (isRendahPressed) {
+                rendahPrio.setId("btn-rendah");
+                isRendahPressed = false;
+                jenisPrioritas = null;
+            } else {
+                rendahPrio.setId("click-rendah");
+                sedangPrio.setId("btn-sedang");
+                tinggiPrio.setId("btn-tinggi");
+                isRendahPressed = true;
+                isSedangPressed = false;
+                isTinggiPressed = false;
+                jenisPrioritas = "Low";
+            }
         });
-        rendahPrio.setOnAction(e -> {
-            jenisPrioritas = "Low";
-        });
-
+            
         // Button untuk prioritas sedang
         sedangPrio = new Button("Medium");
         sedangPrio.setPrefWidth(100);
         sedangPrio.setId("btn-sedang");
         sedangPrio.setOnMouseClicked(e -> {
-            rendahPrio.setId("btn-rendah");
-            sedangPrio.setId("click2-sedang");
-            tinggiPrio.setId("btn-tinggi");
+            if (isSedangPressed) {
+                sedangPrio.setId("btn-sedang");
+                isSedangPressed = false;
+                jenisPrioritas = null;
+            } else {
+                rendahPrio.setId("btn-rendah");
+                sedangPrio.setId("click-sedang");
+                tinggiPrio.setId("btn-tinggi");
+                isRendahPressed = false;
+                isSedangPressed = true;
+                isTinggiPressed = false;
+                jenisPrioritas = "Medium";
+            }
         });
-        sedangPrio.setOnAction(e -> {
-            jenisPrioritas = "Medium";
-        });
-
+            
         // Button untuk prioritas tinggi        
         tinggiPrio = new Button("High");
         tinggiPrio.setPrefWidth(100);
         tinggiPrio.setId("btn-tinggi");
         tinggiPrio.setOnMouseClicked(e -> {
-            rendahPrio.setId("btn-rendah");
-            sedangPrio.setId("btn-sedang");
-            tinggiPrio.setId("click3-tinggi");
-        });
-        tinggiPrio.setOnAction(e -> {
-            jenisPrioritas = "High";
+            if (isTinggiPressed) {
+                tinggiPrio.setId("btn-tinggi");
+                isTinggiPressed = false;
+                jenisPrioritas = null;
+            } else {
+                rendahPrio.setId("btn-rendah");
+                sedangPrio.setId("btn-sedang");
+                tinggiPrio.setId("click-tinggi");
+                isRendahPressed = false;
+                isSedangPressed = false;
+                isTinggiPressed = true;
+                jenisPrioritas = "High";
+            }
         });
 
         // Sesuaikan id tombol prioritas sesuai dengan jenisPrioritas
         if ("Low".equals(jenisPrioritas)) {
             rendahPrio.setId("click-rendah");
         } else if ("Medium".equals(jenisPrioritas)) {
-            sedangPrio.setId("click2-sedang");
+            sedangPrio.setId("click-sedang");
         } else if ("High".equals(jenisPrioritas)) {
-            tinggiPrio.setId("click3-tinggi");
+            tinggiPrio.setId("click-tinggi");
         }
 
 
@@ -151,6 +169,7 @@ public class EditScene {
         // TextArea for Description
         Label descriptionFieldLabel = new Label("Description:");
         TextArea descriptionArea = new TextArea(scheduleDetails[5]);
+        descriptionArea.setWrapText(true);
         descriptionArea.setOnMouseClicked(e -> {
             Stage descPopup = TambahDeskripsi.tambahDeskrip(primaryStage);
             descPopup.showAndWait();

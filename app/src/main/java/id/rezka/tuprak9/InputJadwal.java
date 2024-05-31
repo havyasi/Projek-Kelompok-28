@@ -28,10 +28,13 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class InputJadwal {
-    private static String jenisPrioritas = null;
-    private static Button rendahPrio;
-    private static Button sedangPrio;
-    private static Button tinggiPrio;
+    public static String jenisPrioritas = null;
+    public static Button rendahPrio;
+    public static Button sedangPrio;
+    public static Button tinggiPrio;
+    public static boolean isRendahPressed = false;
+    public static boolean isSedangPressed = false;
+    public static boolean isTinggiPressed = false;
 
     public static Scene createScene(Stage primaryStage, App app, Scene sceneSebelumnya) {
         jenisPrioritas = null;
@@ -43,7 +46,7 @@ public class InputJadwal {
         
         // Label untuk "Title"
         Label judulLabel = new Label("Title");
-        judulLabel.setId("judul-label;");
+        judulLabel.setId("judul-label");
         
         // TextField untuk memasukkan judul jadwal
         TextField jadwalField = new TextField();
@@ -66,7 +69,7 @@ public class InputJadwal {
         HBox titlebox = new HBox(judulLabel);
         titlebox.setAlignment(Pos.TOP_LEFT);
         // VBox untuk menampung label dan input judul
-        VBox labelBox = new VBox(5, catatanLabel,titlebox, jadwalField, jPLabel);
+        VBox labelBox = new VBox(10, catatanLabel,titlebox, jadwalField, jPLabel);
         
         labelBox.setAlignment(Pos.TOP_CENTER);
 
@@ -75,38 +78,59 @@ public class InputJadwal {
         rendahPrio.setPrefWidth(100);
         rendahPrio.setId("btn-rendah");
         rendahPrio.setOnMouseClicked(e -> {
-            rendahPrio.setId("click-rendah");
-            sedangPrio.setId("btn-sedang");
-            tinggiPrio.setId("btn-tinggi");
+            if (isRendahPressed) {
+                rendahPrio.setId("btn-rendah");
+                isRendahPressed = false;
+                jenisPrioritas = null;
+            } else {
+                rendahPrio.setId("click-rendah");
+                sedangPrio.setId("btn-sedang");
+                tinggiPrio.setId("btn-tinggi");
+                isRendahPressed = true;
+                isSedangPressed = false;
+                isTinggiPressed = false;
+                jenisPrioritas = "Low";
+            }
         });
-        rendahPrio.setOnAction(e -> {
-            jenisPrioritas = "Low";
-        });
-
+            
         // Button untuk prioritas sedang
         sedangPrio = new Button("Medium");
         sedangPrio.setPrefWidth(100);
         sedangPrio.setId("btn-sedang");
         sedangPrio.setOnMouseClicked(e -> {
-            rendahPrio.setId("btn-rendah");
-            sedangPrio.setId("click2-sedang");
-            tinggiPrio.setId("btn-tinggi");
+            if (isSedangPressed) {
+                sedangPrio.setId("btn-sedang");
+                isSedangPressed = false;
+                jenisPrioritas = null;
+            } else {
+                rendahPrio.setId("btn-rendah");
+                sedangPrio.setId("click-sedang");
+                tinggiPrio.setId("btn-tinggi");
+                isRendahPressed = false;
+                isSedangPressed = true;
+                isTinggiPressed = false;
+                jenisPrioritas = "Medium";
+            }
         });
-        sedangPrio.setOnAction(e -> {
-            jenisPrioritas = "Medium";
-        });
-
+            
         // Button untuk prioritas tinggi        
         tinggiPrio = new Button("High");
         tinggiPrio.setPrefWidth(100);
         tinggiPrio.setId("btn-tinggi");
         tinggiPrio.setOnMouseClicked(e -> {
-            rendahPrio.setId("btn-rendah");
-            sedangPrio.setId("btn-sedang");
-            tinggiPrio.setId("click3-tinggi");
-        });
-        tinggiPrio.setOnAction(e -> {
-            jenisPrioritas = "High";
+            if (isTinggiPressed) {
+                tinggiPrio.setId("btn-tinggi");
+                isTinggiPressed = false;
+                jenisPrioritas = null;
+            } else {
+                rendahPrio.setId("btn-rendah");
+                sedangPrio.setId("btn-sedang");
+                tinggiPrio.setId("click-tinggi");
+                isRendahPressed = false;
+                isSedangPressed = false;
+                isTinggiPressed = true;
+                jenisPrioritas = "High";
+            }
         });
 
         // HBox untuk menampung tombol prioritas
@@ -125,7 +149,7 @@ public class InputJadwal {
         // tambahWaktu.setId("btn-tmbhwkt");
 
         tambahWaktu.setOnAction(e -> {
-            TambahWaktu.tambahWaktuTanggal(primaryStage).showAndWait();
+        TambahWaktu.tambahWaktuTanggal(primaryStage).showAndWait();
         });
 
         // Button untuk menambahkan deskripsi
@@ -149,16 +173,16 @@ public class InputJadwal {
         saveButton.setMaxWidth(40);
         try {
             // Setel ikon tombol kembali
-           FileInputStream iconStream = new FileInputStream("src/main/resources/image/save.png");
-           Image icon = new Image(iconStream);
+            FileInputStream iconStream = new FileInputStream("src/main/resources/image/save.png");
+            Image icon = new Image(iconStream);
 
-           ImageView imageView = new ImageView(icon);
-           imageView.setFitHeight(20);
-           imageView.setFitWidth(20);
-           saveButton.setGraphic(imageView);
-       } catch (FileNotFoundException e) {
-           e.printStackTrace();
-       }
+            ImageView imageView = new ImageView(icon);
+            imageView.setFitHeight(20);
+            imageView.setFitWidth(20);
+            saveButton.setGraphic(imageView);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         // Button untuk kembali ke scene sebelumnya
         Button backButton = new Button("");
@@ -185,7 +209,7 @@ public class InputJadwal {
         tombol.setAlignment(Pos.CENTER);
 
         // VBox untuk mengatur seluruh layout
-        VBox layout = new VBox(12, labelBox, jPbutton, detailVBox, tombol);
+        VBox layout = new VBox(15, labelBox, jPbutton, detailVBox, tombol);
         layout.setPadding(new Insets(20));
         layout.setAlignment(Pos.TOP_LEFT);
         layout.setId("lyt-jadwal");

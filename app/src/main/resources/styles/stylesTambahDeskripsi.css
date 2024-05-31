@@ -1,5 +1,5 @@
 #popup-describe {
-    -fx-background-color: #e3f2fd;
+    -fx-background-color: #97ccf1 ;
     -fx-font-size: 25px;
 }
 
@@ -8,14 +8,20 @@
     -fx-background-color: white;
     -fx-text-fill: black;
     -fx-font-size: 15px;
+    -fx-background-radius: 5;
+    -fx-border-color: black;
+    -fx-border-radius: 5;
 }
 
 #save-button, #back-button {
     -fx-font-size: 15px;
+    -fx-background-radius: 20;
+    -fx-border-color: black;
+    -fx-border-radius: 20;
 }
 
 
 #popup-lyt{
--fx-background-color: #e3f2fd ; 
--fx-font-size: 25px
+    -fx-background-color: #b7dffd ;
+    -fx-font-size: 25px
 }

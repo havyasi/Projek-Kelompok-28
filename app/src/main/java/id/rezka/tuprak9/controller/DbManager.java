@@ -153,14 +153,12 @@ public class DbManager {
     List<String[]> resultList = new ArrayList<>();
 
     //Definisikan variabel sql dengan query SQL untuk memuat semua data dari tabel Pengingat.
-    String sql = "SELECT * FROM Pengingat WHERE judul LIKE? OR deskripsi LIKE ? OR jenis_Prioritas LIKE ?";
+    String sql = "SELECT * FROM Pengingat WHERE judul LIKE?";
     try (Connection connection = DatabaseConnection.connect();
         PreparedStatement statement = connection.prepareStatement(sql)) {
 
             String cariKeyword = "%" + keyword + "%";
             statement.setString(1, cariKeyword);
-            statement.setString(2, cariKeyword);
-            statement.setString(3, cariKeyword);
             ResultSet resultSet = statement.executeQuery();
 
             int cekColumn =  resultSet.getMetaData().getColumnCount();

@@ -18,13 +18,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -35,7 +31,6 @@ public class DaftarPengingatHarian {
     private static boolean popupmuncul = false;
     private static Stage popup;
     private static Label scheduleLabel;
-    private static String[] scheduleDetails;
 
     // Metode untuk membuat scene detail untuk sebuah jadwal
     public static Scene detailScene(Stage primaryStage, String[] scheduleDetails, Scene previousScene) {
@@ -57,14 +52,8 @@ public class DaftarPengingatHarian {
         scheduleLabel.setPrefHeight(400);
         scheduleLabel.setWrapText(true);
         scheduleLabel.setAlignment(Pos.TOP_LEFT);
-        scheduleLabel.setPadding(new Insets(20));
-
-
-        BackgroundFill backgroundFill = new BackgroundFill(Color.WHITE, new CornerRadii(10), Insets.EMPTY);
-        Background background = new Background(backgroundFill);
-        scheduleLabel.setBackground(background);
+        scheduleLabel.setPadding(new Insets(10));
         scheduleLabel.setId("label-schedule");  // Setel ID untuk CSS styling
-
 
         // Tombol kembali untuk kembali ke scene sebelumnya
         Button backButton = new Button();
@@ -88,53 +77,53 @@ public class DaftarPengingatHarian {
             e.printStackTrace();
         }
 
-        // Perbarui daftar jadwal di scene sebelumnya
-        Button deleteButton = new Button("");
-        deleteButton.setMaxWidth(40);
-        deleteButton.setMaxHeight(40);
-        deleteButton.setId("delete-btn");
-        deleteButton.setOnAction(e -> {
-            int id = Integer.parseInt(scheduleDetails[0]); // Ambil ID jadwal dari array
-            DbManager.removeData(id); // Hapus jadwal dari database
-            primaryStage.setScene(previousScene); // Kembali ke scene sebelumnya
+        // // Perbarui daftar jadwal di scene sebelumnya
+        // Button deleteButton = new Button("");
+        // deleteButton.setMaxWidth(40);
+        // deleteButton.setMaxHeight(40);
+        // deleteButton.setId("delete-btn");
+        // deleteButton.setOnAction(e -> {
+        //     int id = Integer.parseInt(scheduleDetails[0]); // Ambil ID jadwal dari array
+        //     DbManager.removeData(id); // Hapus jadwal dari database
+        //     primaryStage.setScene(previousScene); // Kembali ke scene sebelumnya
 
-            // Perbarui daftar jadwal di scene sebelumnya
-            MyList.upadateList(primaryStage);
+        //     // Perbarui daftar jadwal di scene sebelumnya
+        //     MyList.upadateList(primaryStage);
 
-            // Jika scene sebelumnya adalah scene pencarian, perbarui juga hasil pencarian
-            String rootid = previousScene.getRoot().getId();
-            if (rootid != null && rootid.equals("search-box")) {
-                VBox searchBox = (VBox) ((ScrollPane) previousScene.lookup("#scroll-pane")).getContent();
-                SearchScene.updateSearchResults(searchBox, "", primaryStage);
-            }
-        });
+        //     // Jika scene sebelumnya adalah scene pencarian, perbarui juga hasil pencarian
+        //     String rootid = previousScene.getRoot().getId();
+        //     if (rootid != null && rootid.equals("search-box")) {
+        //         VBox searchBox = (VBox) ((ScrollPane) previousScene.lookup("#scroll-pane")).getContent();
+        //         SearchScene.updateSearchResults(searchBox, "", primaryStage);
+        //     }
+        // });
 
-        try {
-             // Setel ikon tombol hapus
-            FileInputStream iconStream = new FileInputStream("src/main/resources/image/delete (2).png");
-            Image icon = new Image(iconStream);
+        // try {
+        //      // Setel ikon tombol hapus
+        //     FileInputStream iconStream = new FileInputStream("src/main/resources/image/delete (2).png");
+        //     Image icon = new Image(iconStream);
 
-            ImageView imageView = new ImageView(icon);
-            imageView.setFitHeight(20);
-            imageView.setFitWidth(20);
-            deleteButton.setGraphic(imageView);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        //     ImageView imageView = new ImageView(icon);
+        //     imageView.setFitHeight(20);
+        //     imageView.setFitWidth(20);
+        //     deleteButton.setGraphic(imageView);
+        // } catch (FileNotFoundException e) {
+        //     e.printStackTrace();
+        // }
 
-        Button editButton = new Button("Edit");
-        editButton.setMaxWidth(40);
-        editButton.setMaxHeight(40);
-        editButton.setId("edit-btn");
-        editButton.setOnAction(e -> {
-            Scene editScene = EditScene.createEditScene(primaryStage, scheduleDetails, detailScene(primaryStage, scheduleDetails, previousScene));
-            primaryStage.setScene(editScene);
-        });
+        // Button editButton = new Button("Edit");
+        // editButton.setMaxWidth(40);
+        // editButton.setMaxHeight(40);
+        // editButton.setId("edit-btn");
+        // editButton.setOnAction(e -> {
+        //     Scene editScene = EditScene.createEditScene(primaryStage, scheduleDetails, detailScene(primaryStage, scheduleDetails, previousScene));
+        //     primaryStage.setScene(editScene);
+        // });
 
         // Menambahkan ComboBox untuk tindakan delete dan edit
         ComboBox<String> actionComboBox = new ComboBox<>();
         actionComboBox.getItems().addAll("Edit", "Delete");
-        actionComboBox.setMaxWidth(100);
+        actionComboBox.setMaxWidth(50);
         actionComboBox.setId("action-combo");
 
         actionComboBox.setOnAction(e -> {
@@ -165,15 +154,15 @@ public class DaftarPengingatHarian {
 
         // Kotak tengah yang berisi judul dan informasi jadwal
         VBox centerBox = new VBox(10, titleLabel, scheduleLabel);
+        VBox.setMargin(titleLabel, new Insets(0,0,10,0));
+        VBox.setMargin(scheduleLabel, new Insets(0,0,10,0));
         centerBox.setAlignment(Pos.TOP_CENTER);
-        VBox.setMargin(titleLabel, new Insets(20, 20, 10, 20));
-        VBox.setMargin(scheduleLabel, new Insets(10, 20, 20, 20));
 
         //menandai tugas selesai
         String taskStatus = scheduleDetails[6]; 
 
         Button completeButton = new Button("Mark as Completed");
-        completeButton.setMaxWidth(300);
+        completeButton.setMaxWidth(400);
         completeButton.setMaxHeight(100);
         completeButton.setId("complete-btn");
         completeButton.setOnAction(e -> {
@@ -194,12 +183,15 @@ public class DaftarPengingatHarian {
         layout.setTop(buttonBox);
         layout.setCenter(centerBox);
         BorderPane.setAlignment(buttonBox, Pos.TOP_CENTER);
-        BorderPane.setMargin(buttonBox, new Insets(20, 20, 20, 20));
+        BorderPane.setMargin(buttonBox, new Insets(20, 20, 0, 20));
+        BorderPane.setMargin(centerBox, new Insets(0, 20, 20, 20));
 
         //kondisi untuk menampilkan button  meyelesaikan tugas
         if (!"1".equals(taskStatus)) {
             layout.setBottom(completeButton);
             BorderPane.setAlignment(completeButton, Pos.BOTTOM_CENTER);
+            BorderPane.setMargin(buttonBox, new Insets(20, 20, 20, 20));
+
         }
         detailJadwal.getChildren().add(layout); // Tambahkan layout ke VBox utama
 
@@ -214,7 +206,6 @@ public class DaftarPengingatHarian {
 
     // buat tampilan isi detail
     public static void updateDetails(String[] updatedDetails) {
-        scheduleDetails = updatedDetails;
         String description = updatedDetails[5];
         if (description == null || description.isEmpty()) {
             description = "No Description";
@@ -228,7 +219,6 @@ public class DaftarPengingatHarian {
             "Description\t\t:\n\t " + description
             
         );
-        scheduleLabel.setId("label-schedule");
     }
     
 

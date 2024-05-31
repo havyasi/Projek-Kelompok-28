@@ -9,6 +9,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -26,7 +27,7 @@ public class SearchScene {
         backButton.setMaxHeight(40);
         backButton.setId("bck-bttn");
         backButton.setOnAction(e -> primaryStage.setScene(appInstance.createMainScene(primaryStage)));
-         try {
+        try {
              // Setel ikon tombol kembali
             FileInputStream iconStream = new FileInputStream("src/main/resources/image/back-arrow.png");
             Image icon = new Image(iconStream);
@@ -42,6 +43,7 @@ public class SearchScene {
         // Membuat kolom pencarian
         TextField searchField = new TextField();
         searchField.setPromptText("Search");
+        searchField.setPrefWidth(400);
         searchField.setId("search-field");
 
         // Membuat ScrollPane
@@ -56,9 +58,9 @@ public class SearchScene {
         scroll.setContent(searchBox);
 
         // Mengatur tata letak utama scene
-        VBox layout2 = new VBox(10, backButton, searchField, scroll);
+        VBox layout2 = new VBox(10, searchField, scroll, backButton);
         layout2.setPadding(new javafx.geometry.Insets(20));
-        layout2.setAlignment(Pos.TOP_LEFT);
+        layout2.setAlignment(Pos.TOP_CENTER);
         layout2.setId("search-box");
 
         // Memuat data awal
@@ -80,7 +82,7 @@ public class SearchScene {
         searchBox.getChildren().clear();
 
         for (String[] result : searchResults) {
-            Label resultLabel = new Label(result[3] + " - " + result[1]);
+            Label resultLabel = new Label(result[3] + "\t" + result[1]);
             resultLabel.setPrefWidth(400);
             resultLabel.setId("result-label");
             
