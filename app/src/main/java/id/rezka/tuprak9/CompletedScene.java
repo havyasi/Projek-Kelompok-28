@@ -66,8 +66,8 @@ public class CompletedScene {
         completedLayout.setTop(completedLabel);
         BorderPane.setAlignment(completedLabel, Pos.TOP_CENTER);
         completedLayout.setCenter(scrollPane);
-        BorderPane.setAlignment(completedLabel, Pos.TOP_CENTER);
         BorderPane.setMargin(completedLabel, new Insets(20, 0, 20, 0));
+        BorderPane.setMargin(scrollPane, new Insets(0, 20, 0, 20));
         completedLayout.setId("completed-lyt");
         
         // Tombol "Back" ditambahkan untuk kembali ke halaman utama.

@@ -77,52 +77,21 @@ public class DaftarPengingatHarian {
             e.printStackTrace();
         }
 
-        // // Perbarui daftar jadwal di scene sebelumnya
-        // Button deleteButton = new Button("");
-        // deleteButton.setMaxWidth(40);
-        // deleteButton.setMaxHeight(40);
-        // deleteButton.setId("delete-btn");
-        // deleteButton.setOnAction(e -> {
-        //     int id = Integer.parseInt(scheduleDetails[0]); // Ambil ID jadwal dari array
-        //     DbManager.removeData(id); // Hapus jadwal dari database
-        //     primaryStage.setScene(previousScene); // Kembali ke scene sebelumnya
-
-        //     // Perbarui daftar jadwal di scene sebelumnya
-        //     MyList.upadateList(primaryStage);
-
-        //     // Jika scene sebelumnya adalah scene pencarian, perbarui juga hasil pencarian
-        //     String rootid = previousScene.getRoot().getId();
-        //     if (rootid != null && rootid.equals("search-box")) {
-        //         VBox searchBox = (VBox) ((ScrollPane) previousScene.lookup("#scroll-pane")).getContent();
-        //         SearchScene.updateSearchResults(searchBox, "", primaryStage);
-        //     }
-        // });
-
-        // try {
-        //      // Setel ikon tombol hapus
-        //     FileInputStream iconStream = new FileInputStream("src/main/resources/image/delete (2).png");
-        //     Image icon = new Image(iconStream);
-
-        //     ImageView imageView = new ImageView(icon);
-        //     imageView.setFitHeight(20);
-        //     imageView.setFitWidth(20);
-        //     deleteButton.setGraphic(imageView);
-        // } catch (FileNotFoundException e) {
-        //     e.printStackTrace();
-        // }
-
-        // Button editButton = new Button("Edit");
-        // editButton.setMaxWidth(40);
-        // editButton.setMaxHeight(40);
-        // editButton.setId("edit-btn");
-        // editButton.setOnAction(e -> {
-        //     Scene editScene = EditScene.createEditScene(primaryStage, scheduleDetails, detailScene(primaryStage, scheduleDetails, previousScene));
-        //     primaryStage.setScene(editScene);
-        // });
-
+        VBox centerBox = new VBox(10, titleLabel, scheduleLabel);
+        VBox.setMargin(titleLabel, new Insets(0,0,10,0));
+        VBox.setMargin(scheduleLabel, new Insets(0,0,10,0));
+        centerBox.setAlignment(Pos.TOP_CENTER);
+        
+        //menandai tugas selesai
+        String taskStatus = scheduleDetails[6]; 
+        
         // Menambahkan ComboBox untuk tindakan delete dan edit
         ComboBox<String> actionComboBox = new ComboBox<>();
-        actionComboBox.getItems().addAll("Edit", "Delete");
+        if("1".equals(taskStatus)){
+            actionComboBox.getItems().addAll("Delete");
+        }else{
+            actionComboBox.getItems().addAll("Edit", "Delete");
+        }
         actionComboBox.setMaxWidth(50);
         actionComboBox.setId("action-combo");
 
@@ -148,18 +117,6 @@ public class DaftarPengingatHarian {
             }
         });
           // Kotak untuk menempatkan tombol-tombol
-        HBox buttonBox = new HBox(400, backButton, actionComboBox);
-
-
-
-        // Kotak tengah yang berisi judul dan informasi jadwal
-        VBox centerBox = new VBox(10, titleLabel, scheduleLabel);
-        VBox.setMargin(titleLabel, new Insets(0,0,10,0));
-        VBox.setMargin(scheduleLabel, new Insets(0,0,10,0));
-        centerBox.setAlignment(Pos.TOP_CENTER);
-
-        //menandai tugas selesai
-        String taskStatus = scheduleDetails[6]; 
 
         Button completeButton = new Button("Mark as Completed");
         completeButton.setMaxWidth(400);
@@ -178,11 +135,12 @@ public class DaftarPengingatHarian {
             }
         });
 
+        HBox buttonBox = new HBox(400, backButton, actionComboBox);
         // Layout BorderPane yang menempatkan semua komponen
         BorderPane layout = new BorderPane();
         layout.setTop(buttonBox);
         layout.setCenter(centerBox);
-        BorderPane.setAlignment(buttonBox, Pos.TOP_CENTER);
+        BorderPane.setAlignment(buttonBox, Pos.TOP_LEFT);
         BorderPane.setMargin(buttonBox, new Insets(20, 20, 0, 20));
         BorderPane.setMargin(centerBox, new Insets(0, 20, 20, 20));
 
@@ -211,10 +169,10 @@ public class DaftarPengingatHarian {
             description = "No Description";
         }
         scheduleLabel.setText(
-            "Details\n------------------------------------------------------------------------\n" +
-            "Date\t\t\t: " + updatedDetails[3] + "\n" + 
-            "Time\t\t\t: " + updatedDetails[4] + "\n" +
-            "Title\t\t\t: " + updatedDetails[1] + "\n" +
+            "Details\n---------------------------------------------------------------------------\n" +
+            "Date\t\t\t\t: " + updatedDetails[3] + "\n" + 
+            "Time\t\t\t\t: " + updatedDetails[4] + "\n" +
+            "Title\t\t\t\t: " + updatedDetails[1] + "\n" +
             "Type Of Priority\t: " + updatedDetails[2] + "\n" + 
             "Description\t\t:\n\t " + description
             

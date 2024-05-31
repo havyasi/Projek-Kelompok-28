@@ -14,8 +14,10 @@
     -fx-font-size: 15px; 
     -fx-text-fill: black;
     -fx-background-color: rgb(255, 255, 255);
-    -fx-font-family: 'Book Antiqua';
-    -fx-background-radius: 10
+    -fx-font-family: 'Arial';
+    -fx-background-radius: 20;
+    -fx-border-color: black;
+    -fx-border-radius: 20;
     
 }
 
