@@ -14,7 +14,9 @@
 
 #btnback{
     -fx-background-color: white; 
-    -fx-background-radius: 20
+    -fx-background-radius: 20;
+    -fx-border-color: black;
+    -fx-border-radius: 20
 }
 
 
@@ -22,82 +24,53 @@
     -fx-font-size: 12px; 
     -fx-background-color: #a5d6a7; 
     -fx-text-fill: black; 
-    -fx-background-radius: 5;
+    -fx-background-radius: 20;
+    -fx-border-color: black;
+    -fx-border-radius: 20;
 }
 
 #click-rendah{
     -fx-font-size: 12px; 
     -fx-background-color: #66bb64; 
     -fx-text-fill: white; 
-    -fx-background-radius: 5;
-}
-
-#click-sedang{
-    -fx-font-size: 12px; 
-    -fx-background-color: #ffe082; 
-    -fx-text-fill: black; 
-    -fx-background-radius: 5;
-}
-
-#click-tinggi{
-    -fx-font-size: 12px; 
-    -fx-background-color: #ffab91; 
-    -fx-text-fill: black; 
-    -fx-background-radius: 5;
+    -fx-background-radius: 20;
+    -fx-border-color: black;
+    -fx-border-radius: 20;
 }
 
 #btn-sedang{
     -fx-font-size: 12px; 
     -fx-background-color: #ffe082; 
     -fx-text-fill: black; 
-    -fx-background-radius: 5;
+    -fx-background-radius: 20;
+    -fx-border-color: black;
+    -fx-border-radius: 20;
 }
 
-#click2-rendah{
-    -fx-font-size: 12px; 
-    -fx-background-color: #a5d6a7; 
-    -fx-text-fill: black; 
-    -fx-background-radius: 5;
-}
-
-#click2-sedang{
+#click-sedang{
     -fx-font-size: 12px; 
     -fx-background-color: #ffca28; 
     -fx-text-fill: white; 
-    -fx-background-radius: 5;
+    -fx-background-radius: 20;
+    -fx-border-color: black;
+    -fx-border-radius: 20;
 }
 
-#click2-tinggi{
-    -fx-font-size: 12px; 
-    -fx-background-color: #ffab91; 
-    -fx-text-fill: black; 
-    -fx-background-radius: 5;
-}
 
 #btn-tinggi{
     -fx-font-size: 12px; 
     -fx-background-color: #ffab91; 
     -fx-text-fill: black; 
-    -fx-background-radius: 5;
+    -fx-background-radius: 20;
+    -fx-border-color: black;
+    -fx-border-radius: 20;
 }
 
-#click3-rendah{
-    -fx-font-size: 12px; 
-    -fx-background-color: #a5d6a7; 
-    -fx-text-fill: black; 
-    -fx-background-radius: 5;
-}
-
-#click3-sedang{
-    -fx-font-size: 12px; 
-    -fx-background-color: #ffe082; 
-    -fx-text-fill: black; 
-    -fx-background-radius: 5;
-}
-
-#click3-tinggi{
+#click-tinggi{
     -fx-font-size: 12px; 
     -fx-background-color: #ff7043; 
     -fx-text-fill: white; 
-    -fx-background-radius: 5;
+    -fx-background-radius: 20;
+    -fx-border-color: black;
+    -fx-border-radius: 20;
 }

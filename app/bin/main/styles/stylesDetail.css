@@ -3,16 +3,22 @@
 }
 
 #label-detail{
-    -fx-font-size: 20px; 
+    -fx-font-size: 24px; 
     -fx-text-fill: black; 
     -fx-font-weight: bold;
     -fx-background-color: #90caf9;
+    -fx-font-family: 'Arial';
 }
 
 #label-schedule{
     -fx-font-size: 15px; 
     -fx-text-fill: black;
-    -fx-background-color: #88c9fd;
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-font-family: 'Arial';
+    -fx-background-radius: 20;
+    -fx-border-color: black;
+    -fx-border-radius: 20;
+    
 }
 
 #bck-bttn{

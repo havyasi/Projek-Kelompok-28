@@ -4,8 +4,12 @@
 
 #save-btn, #back-btn{
     -fx-font-size: 12px;
+    -fx-background-color: #ffffff ;
+    -fx-background-radius: 20;
+    -fx-border-color: black;
+    -fx-border-radius: 20;
 }
 
 #tambahTgl-wkt{
-    -fx-background-color: #e3f2fd ;
+    -fx-background-color: #b7dffd ;
 }

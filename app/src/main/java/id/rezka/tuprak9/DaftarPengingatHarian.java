@@ -14,6 +14,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -25,6 +26,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import javafx.scene.control.ListCell;
+import id.rezka.tuprak9.utils.CustomItem;; 
 
 public class DaftarPengingatHarian {
 
@@ -86,18 +89,77 @@ public class DaftarPengingatHarian {
         String taskStatus = scheduleDetails[6]; 
         
         // Menambahkan ComboBox untuk tindakan delete dan edit
-        ComboBox<String> actionComboBox = new ComboBox<>();
-        if("1".equals(taskStatus)){
-            actionComboBox.getItems().addAll("Delete");
-        }else{
-            actionComboBox.getItems().addAll("Edit", "Delete");
+        ComboBox<CustomItem> actionComboBox = new ComboBox<>();
+        try {
+            Image editImage = new Image(new FileInputStream("src/main/resources/image/edit.png"));
+            Image deleteImage = new Image(new FileInputStream("src/main/resources/image/deletee.png"));
+
+            if ("1".equals(taskStatus)) {
+                actionComboBox.getItems().add(new CustomItem("Delete", deleteImage));
+            } else {
+                actionComboBox.getItems().addAll(
+                    new CustomItem("Edit",editImage),
+                    new CustomItem("Delete", deleteImage)
+                );
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
-        actionComboBox.setMaxWidth(50);
+      
+        actionComboBox.setPrefWidth(5);
+        actionComboBox.setPrefHeight(5);
+    
         actionComboBox.setId("action-combo");
 
+        actionComboBox.setCellFactory(param  -> new ListCell<CustomItem>() {
+            private final ImageView imageView = new ImageView();
+            @Override
+            protected void updateItem(CustomItem item, boolean empty){
+                super.updateItem(item, empty);
+                if(empty || item == null ){
+                    setGraphic(null);
+                    setText(null);
+                }else {
+                    imageView.setImage(item.getImage());
+                    imageView.setFitHeight(20);
+                    imageView.setFitWidth(20);
+                    setMinHeight(5);
+                    setMaxHeight(5);
+                    setGraphic(imageView);
+                    HBox hboxforimage = new HBox(imageView); // <<-- Tambahkan ini untuk mengatur posisi
+                    hboxforimage.setAlignment(Pos.CENTER);
+                    hboxforimage.setPrefHeight(10);
+                    setText(null);
+                }
+            }
+            });
+
+            actionComboBox.setButtonCell(new ListCell<CustomItem>(){
+                private final ImageView imageView = new ImageView();
+                
+                @Override
+                protected void updateItem(CustomItem item, boolean empty){
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        setGraphic(null);
+                        setText(null);
+                    }else {
+                        imageView.setImage(item.getImage());
+                        // imageView.setFitHeight(5);
+                        // imageView.setFitWidth(5);
+                        HBox hboxforimage = new HBox(imageView); // <<-- Tambahkan ini untuk mengatur posisi
+                        hboxforimage.setAlignment(Pos.CENTER);
+                        hboxforimage.setPrefHeight(10);
+                        setGraphic(imageView);
+                        setText(item.getText());
+                    }
+                }
+
+                });
+
         actionComboBox.setOnAction(e -> {
-            String action = actionComboBox.getValue();
-            if ("Delete".equals(action)) {
+            CustomItem action = actionComboBox.getValue();
+            if ("Delete".equals(action.getText())) {
                 int id = Integer.parseInt(scheduleDetails[0]); // Ambil ID jadwal dari array
                 DbManager.removeData(id); // Hapus jadwal dari database
                 primaryStage.setScene(previousScene); // Kembali ke scene sebelumnya
@@ -111,7 +173,7 @@ public class DaftarPengingatHarian {
                     VBox searchBox = (VBox) ((ScrollPane) previousScene.lookup("#scroll-pane")).getContent();
                     SearchScene.updateSearchResults(searchBox, "", primaryStage);
                 }
-            } else if ("Edit".equals(action)) {
+            } else if ("Edit".equals(action.getText())) {
                 Scene editScene = EditScene.createEditScene(primaryStage, scheduleDetails, DaftarPengingatHarian.detailScene(primaryStage, scheduleDetails, previousScene));
                 primaryStage.setScene(editScene);
             }
