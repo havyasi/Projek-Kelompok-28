@@ -27,6 +27,13 @@
 }
 
 #back-btn{
+    -fx-background-color: #ffffff;
+    -fx-font-size: 15px; 
+    -fx-font-weight: bold;
+}
+
+#back-btn:hover{
+    -fx-background-color: #868686;
     -fx-font-size: 15px; 
     -fx-font-weight: bold;
 }

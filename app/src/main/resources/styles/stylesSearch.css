@@ -1,4 +1,11 @@
 #back-button {
+    -fx-background-color: #ffffff;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+#back-button:hover {
+    -fx-background-color: #868686;
     -fx-font-size: 13px;
     -fx-font-weight: bold;
 }
